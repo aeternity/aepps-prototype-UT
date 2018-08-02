@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
     <router-view/>
   </div>
 </template>
@@ -10,14 +9,25 @@ export default {
   name: 'App'
 }
 </script>
+<style src="@/assets/fonts/InterUI/inter-ui.css"></style>
+<style src="@/assets/fonts/aeternity-mono-master/WEB/aeternity-mono.css"></style>
 
 <style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: 'Inter UI';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+}
+body {
+  margin: 0;
+  padding: 0;
+}
+p {
+  padding: 0;
+}
+.router-link-exact-active {
+  opacity: .5;
 }
 </style>
