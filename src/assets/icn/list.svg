@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="18px" height="16px" viewBox="0 0 18 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.1 (57501) - http://www.bohemiancoding.com/sketch -->
+    <title>icon/ui/chevron-right copy</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M7.77777778,19 C7.34822297,19 7,18.5522847 7,18 C7,17.4477153 7.34822297,17 7.77777778,17 L20.2222222,17 C20.651777,17 21,17.4477153 21,18 C21,18.5522847 20.651777,19 20.2222222,19 L7.77777778,19 Z M7.77777778,7 C7.34822297,7 7,6.55228475 7,6 C7,5.44771525 7.34822297,5 7.77777778,5 L20.2222222,5 C20.651777,5 21,5.44771525 21,6 C21,6.55228475 20.651777,7 20.2222222,7 L7.77777778,7 Z M7.77777778,13 C7.34822297,13 7,12.5522847 7,12 C7,11.4477153 7.34822297,11 7.77777778,11 L20.2222222,11 C20.651777,11 21,11.4477153 21,12 C21,12.5522847 20.651777,13 20.2222222,13 L7.77777778,13 Z M4.2,7.2 C3.5372583,7.2 3,6.6627417 3,6 C3,5.3372583 3.5372583,4.8 4.2,4.8 C4.8627417,4.8 5.4,5.3372583 5.4,6 C5.4,6.6627417 4.8627417,7.2 4.2,7.2 Z M4.2,13.2 C3.5372583,13.2 3,12.6627417 3,12 C3,11.3372583 3.5372583,10.8 4.2,10.8 C4.8627417,10.8 5.4,11.3372583 5.4,12 C5.4,12.6627417 4.8627417,13.2 4.2,13.2 Z M4.2,19.2 C3.5372583,19.2 3,18.6627417 3,18 C3,17.3372583 3.5372583,16.8 4.2,16.8 C4.8627417,16.8 5.4,17.3372583 5.4,18 C5.4,18.6627417 4.8627417,19.2 4.2,19.2 Z" id="path-1"></path>
+    </defs>
+    <g id="Transfer_refined" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="03.02-accounts" transform="translate(-292.000000, -49.000000)">
+            <g id="atoms/icons/ui/list" transform="translate(289.000000, 45.000000)">
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <use id="Mask" fill="#000000" fill-rule="nonzero" xlink:href="#path-1"></use>
+                <g id="fill/neutral/N-3" mask="url(#mask-2)" fill="#203040" fill-rule="evenodd">
+                    <rect id="Rectangle-Copy-20" x="0" y="0" width="24" height="24"></rect>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
