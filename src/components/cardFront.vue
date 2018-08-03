@@ -32,8 +32,9 @@
         <img src="@/assets/icn/edit-light.svg" alt="">
         rename
       </div>
-      <div class="item">
-        <img src="@/assets/icn/copy-light.svg" alt="">
+      <div class="item" @click=doCopy>
+         <input type="hidden" v-model="account.address">
+        <img src="@/assets/icn/copy-light.svg" alt="" >
         copy
       </div>
       <div class="item">
@@ -63,6 +64,20 @@ export default {
         }
       }
     }
+  },
+  methods: {
+    doCopy: function () {
+      this.$copyText(this.account.address).then(
+        function (e) {
+          console.log('success')
+          console.log(e)
+        },
+        function (e) {
+          console.log('can not make copy')
+          console.log(e)
+        }
+      )
+    }
   }
 }
 </script>
@@ -75,21 +90,21 @@ export default {
   background: #ff0d6a;
   color: #ffffff;
   border-radius: 8px;
-  box-shadow: 0 0 16px 0px rgba(26,68,121,.2);
+  box-shadow: 0 0 16px 0px rgba(26, 68, 121, 0.2);
   .row {
     display: flex;
     align-items: center;
     font-size: 17px;
     &.heading {
       .item {
-        flex:2;
+        flex: 2;
         .avatar {
           width: 32px;
           height: 32px;
         }
       }
       .item:first-child {
-        flex:1;
+        flex: 1;
       }
       .item:nth-child(2) {
         text-align: left;
@@ -101,7 +116,7 @@ export default {
         display: flex;
       }
       .item:first-child {
-        flex:2;
+        flex: 2;
       }
     }
     &.address {
@@ -116,18 +131,18 @@ export default {
         }
       }
       .item:nth-child(2) {
-        font-family: 'aeternity mono';
+        font-family: "aeternity mono";
         p {
           letter-spacing: 1.1px;
         }
       }
     }
     .item {
-      flex:1;
+      flex: 1;
       padding: 5px 0 0;
     }
     &.actions {
-      background: rgba(0,0,0,.2);
+      background: rgba(0, 0, 0, 0.2);
       padding: 9px;
       font-size: 11px;
       text-transform: uppercase;
