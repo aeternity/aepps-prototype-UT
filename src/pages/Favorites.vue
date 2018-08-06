@@ -2,7 +2,11 @@
   <div class="favorites">
     <Header>
       <template slot="page-name">
-        {{this.$route.name}}
+        <div>
+          <!-- {{this.$route.name}} -->
+          <input type="url" v-model="urlAddress" placeholder="Type URL …" @keyup.enter="isBrowseEnable = true">
+        </div>
+        <!-- <input type="url" v-model="urlAddress" placeholder="text"> -->
       </template>
       <template slot="nav">
         <router-link to="settings">
@@ -263,6 +267,7 @@ export default {
   cursor: pointer;
 }
 .options .option {
+  cursor: pointer;
   display: flex;
   justify-content: flex-start;
   padding: 5px;
@@ -304,14 +309,22 @@ export default {
     iframe {
       height: 100%;
       background: white;
-      overflow-y: scroll;
+      cursor: pointer;
+      -webkit-overflow-scrolling: touch;
     }
-    input {
+    // input {
+    //   background: transparent;
+    //   box-shadow: none;
+    //   border:0;
+    //   color: #203040;
+    //   font-size: 17px;
+    // }
+  }
+  input {
       background: transparent;
       box-shadow: none;
       border:0;
       color: #203040;
       font-size: 17px;
     }
-  }
 </style>

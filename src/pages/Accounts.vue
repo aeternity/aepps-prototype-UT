@@ -19,7 +19,7 @@
     </Header>
     <div class="top">
       <div class="container">
-        <swipe class="swipe" :auto="0" :continuous="false" :showIndicators="false"  ref="swipe">
+        <swipe class="swipe" :auto="0" :continuous="false" :showIndicators="true"  ref="swipe">
           <swipe-item>
             <cardFront></cardFront>
           </swipe-item>
@@ -27,14 +27,14 @@
             <cardBack></cardBack>
           </swipe-item>
         </swipe>
-        <div class="nav">
+        <!-- <div class="nav">
           <span @click="prev">
             prev
           </span>
           <span @click="next">
             next
           </span>
-        </div>
+        </div> -->
       </div>
     </div>
     <div class="container">
@@ -199,3 +199,14 @@ export default {
        transform: transalteY(4vh) !important;
       }
 </style>
+<style lang="scss">
+.swipe {
+  .mint-swipe-indicators {
+    bottom: -29px;
+    .mint-swipe-indicator.is-active {
+      background: red;
+    }
+  }
+}
+</style>
+

@@ -19,7 +19,7 @@
     </Header>
     <div class="top">
       <div class="container">
-        <swipe class="swipe" :auto="0" :continuous="false" :showIndicators="false"  ref="swipe">
+        <swipe class="swipe" :auto="0" :continuous="false" :showIndicators="true"  ref="swipe">
           <swipe-item>
             <cardFront :account="this.$route.params.account"></cardFront>
           </swipe-item>
@@ -27,14 +27,6 @@
             <cardBack :account="this.$route.params.account"></cardBack>
           </swipe-item>
         </swipe>
-        <div class="nav">
-          <span @click="prev">
-            prev
-          </span>
-          <span @click="next">
-            next
-          </span>
-        </div>
       </div>
     </div>
     <div class="container">
@@ -115,6 +107,7 @@ export default {
   .top {
     height: 30vh;
     background-color: #edf3f7;
+    margin-bottom: 10vh;
     .swipe {
       height: 200px;
     }
@@ -147,6 +140,17 @@ export default {
   .avatar div {
     width: 24px;
     height: 24px;
+  }
+}
+</style>
+<style lang="scss">
+.swipe {
+  overflow: visible;
+  .mint-swipe-indicators {
+    bottom: -29px;
+    .mint-swipe-indicator.is-active {
+      background: red;
+    }
   }
 }
 </style>

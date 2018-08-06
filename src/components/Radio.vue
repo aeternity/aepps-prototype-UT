@@ -41,7 +41,8 @@ export default {
     display: inline-block;
     cursor: pointer;
     background-color: white;
-    box-shadow: 0 0 6px 0px grey;
+    box-shadow: 0 0 16px 0px rgba(27, 68, 121, .15);;
+    
 
     .indicator {
       display: block;
