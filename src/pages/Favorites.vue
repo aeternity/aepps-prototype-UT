@@ -24,7 +24,7 @@
       </h1>
       <ul class="bookmarkList" v-for="Bookmark in Bookmarks" :key="Bookmark.name">
         <li class="bookmarListItem">
-          <div class="logo">
+          <div class="logo" @click=loadUrl(Bookmark.url)>
             <div class="cirle" :class="Bookmark.name">
             </div>
           </div>
@@ -59,6 +59,30 @@
         </li>
       </ul>
     </div>
+    <div class="iframe" v-if="isBrowseEnable">
+      <Header>
+        <template slot="page-name">
+        <!-- {{this.$route.name}} -->
+        <!-- {{urlAddress}} -->
+        <input type="url" v-model="urlAddress">
+      </template>
+      <template slot="nav">
+        <router-link to="settings">
+          <img src="@/assets/icn/settings.svg" alt="">
+        </router-link>
+        <router-link to="/">
+          <img src="@/assets/icn/list.svg" alt="">
+        </router-link>
+        <router-link class="avatar" to="accounts">
+          <ae-identity-avatar address='ak$G2CCeMjQffK5K21lIun3GzAuN13vhAfcKBrUPSKhSQ8RcgHP1e'>
+          </ae-identity-avatar>
+        </router-link>
+      </template>
+      </Header>
+      <iframe :src=urlChange frameborder="0" width="100%">
+
+      </iframe>
+    </div>
   </div>
 </template>
 
@@ -71,11 +95,14 @@ export default {
   },
   data () {
     return {
+      urlAddress: '',
+      isBrowseEnable: false,
       Bookmarks: [
         {
           iconPath: 'expandList.svg',
           name: 'Transfer',
-          url: 'transfer.aepps.com',
+          // url: 'transfer.aepps.com',
+          url: 'gong.bg',
           drop: false
         },
         {
@@ -119,6 +146,16 @@ export default {
       inp.select()
       document.execCommand('copy', false)
       inp.remove()
+    },
+    loadUrl: function (url) {
+      this.isBrowseEnable = true
+      // this.urlAddress = `http://${url}`
+      this.urlAddress = url
+    }
+  },
+  computed: {
+    urlChange: function () {
+      return `http://${this.urlAddress}`
     }
   }
 }
@@ -253,5 +290,28 @@ export default {
           width: 24px;
           height: 24px;
         }
+  }
+  .iframe {
+    cursor: pointer;
+    position: fixed;
+    top:0;
+    height: 100vh;
+    left: 0;
+    width: 100vw;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+    z-index: 22;
+    iframe {
+      height: 100%;
+      background: white;
+      overflow-y: scroll;
+    }
+    input {
+      background: transparent;
+      box-shadow: none;
+      border:0;
+      color: #203040;
+      font-size: 17px;
+    }
   }
 </style>
