@@ -11,8 +11,8 @@
             <mask id="mask-2" fill="white">
                 <use xlink:href="#path-1"></use>
             </mask>
-            <use id="Combined-Shape" fill="transparent" transform="translate(11.500002, 11.998912) scale(-1, 1) translate(-11.500002, -11.998912) " xlink:href="#path-1"></use>
-            <g id="fill/neutral/N-3" mask="url(#mask-2)" fill="#fff">
+            <use id="Combined-Shape" fill="#fff" transform="translate(11.500002, 11.998912) scale(-1, 1) translate(-11.500002, -11.998912) " xlink:href="#path-1"></use>
+            <g id="fill/neutral/N-3" mask="url(#mask-2)" fill="transparent">
                 <rect id="Rectangle-Copy-20" x="0" y="0" width="24" height="24"></rect>
             </g>
         </g>
