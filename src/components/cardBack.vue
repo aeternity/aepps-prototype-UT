@@ -13,7 +13,7 @@
     </div>
     <div class="row actions">
       <div class="item"></div>
-      <div class="item">
+      <div class="item" @click="doCopy(account.address)">
         <img src="@/assets/icn/copy-light.svg" alt="">
         copy
       </div>
@@ -39,6 +39,15 @@ export default {
           unit: 'AE'
         }
       }
+    }
+  },
+  methods: {
+    doCopy: function (text) {
+      this.$copyText(text).then(function (e) {
+        console.log(e)
+      }, function (e) {
+        console.log(e)
+      })
     }
   },
   computed: {

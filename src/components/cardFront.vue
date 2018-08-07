@@ -5,7 +5,8 @@
         <ae-identity-avatar class="avatar" :address="account.address"></ae-identity-avatar>
       </div>
       <div class="item">
-        {{account.name}}
+        <span v-if="!editMode">{{account.name}}</span>
+        <input type="text" v-if="editMode" v-model="account.name">
       </div>
       <div class="item">
         {{`${account.balance} ${account.unit}`}}
@@ -28,11 +29,15 @@
       </div>
     </div>
     <div class="row actions">
-      <div class="item">
+      <div class="item" @click="edit" v-if="!editMode">
         <img src="@/assets/icn/edit-light.svg" alt="">
         rename
       </div>
-      <div class="item">
+      <div class="item" @click="save" v-if="editMode">
+        <img src="@/assets/icn/save-light.svg" alt="">
+        save
+      </div>
+      <div class="item" @click="doCopy(account.address)">
         <img src="@/assets/icn/copy-light.svg" alt="">
         copy
       </div>
@@ -64,6 +69,26 @@ export default {
         }
       }
     }
+  },
+  data () {
+    return {
+      editMode: false
+    }
+  },
+  methods: {
+    edit: function () {
+      this.editMode = true
+    },
+    save: function () {
+      this.editMode = false
+    },
+    doCopy: function (text) {
+      this.$copyText(text).then(function (e) {
+        console.log(e)
+      }, function (e) {
+        console.log(e)
+      })
+    }
   }
 }
 </script>
@@ -84,13 +109,23 @@ export default {
     &.heading {
       .item {
         flex:2;
+        input {
+          font-size: 17px;
+          display: inline-block;
+          background: transparent;
+          color: white;
+          box-shadow: 0;
+          border: 0;
+          width: 100%;
+          border-bottom: 1px solid white;
+        }
         .avatar {
           width: 32px;
           height: 32px;
         }
       }
       .item:first-child {
-        flex:1;
+        flex:.7;
       }
       .item:nth-child(2) {
         text-align: left;
