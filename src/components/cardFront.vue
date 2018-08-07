@@ -1,5 +1,5 @@
 <template>
-  <div class="card-front">
+  <div class="card-front" :class="account.prior">
     <div class="row heading">
       <div class="item">
         <ae-identity-avatar class="avatar" :address="account.address"></ae-identity-avatar>
@@ -59,7 +59,8 @@ export default {
           address: '0x2x3121231230x2x312123123',
           balance: 0,
           words: 'test test test',
-          unit: 'AE'
+          unit: 'AE',
+          prior: 'main'
         }
       }
     }
@@ -145,6 +146,12 @@ export default {
       font-size: 11px !important;
       letter-spacing: 1.1px;
     }
+  }
+}
+.card-front.daily {
+  background-color: #6948a1;
+  .address .item {
+    color: #442873;
   }
 }
 </style>

@@ -102,21 +102,24 @@ export default {
           address: 'ak$G2CCeMjQffK5K21lIun3GzAuN13vhAfcKBrUPSKhSQ8RcgHP1e',
           words: 'alive fussy bluetonguelizard',
           balance: 24.65,
-          unit: 'AE'
+          unit: 'AE',
+          prior: 'main'
         },
         {
           name: 'Daily Account',
           address: 'ak$fcKBrUPSKhSQ8RcgHP1eG2CCeMjQffK5K21lIun3GzAuN13vhA',
           words: 'sport bitbucket tiger',
           balance: 20.65,
-          unit: 'AE'
+          unit: 'AE',
+          prior: 'daily'
         },
         {
           name: 'Trading Account',
           address: 'ak$G2CCeMjUPSKhSQ8RcgHP1eK21lIun3GzAQffK5hAfcKBruN13v',
           words: 'dead edge seal',
           balance: 40.65,
-          unit: 'AE'
+          unit: 'AE',
+          prior: 'trading'
         }
       ],
       swipeOptions: {
@@ -160,7 +163,7 @@ export default {
 .row {
     display: flex;
     align-items: center;
-    border-bottom: 1px solid #edf3f7;
+    border-top: 1px solid #edf3f7;
     .icn {
       width: 32px;
       height: 32px;

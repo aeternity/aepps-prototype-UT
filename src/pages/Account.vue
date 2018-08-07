@@ -117,13 +117,17 @@ export default {
     margin: 0 auto;
     .row {
       text-align: left;
+      border-top: 1px solid #edf3f7;
+      margin: 20px 0;
+      padding: 10px 0;
       h3 {
         font-size: 13px;
         color: #76818c;
+        text-transform: capitalize;
       }
       .words{
         display: grid;
-        grid-template-columns: 20% 20% 20% 20% 20%;
+        grid-template-columns: 16.6% 16.6% 16.6% 16.6% 16.6% 16.6%;
         font-family: 'aeternity mono';
         color: #203040;
         letter-spacing: 1.8px;
