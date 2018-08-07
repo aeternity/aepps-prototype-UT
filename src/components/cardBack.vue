@@ -27,20 +27,6 @@
 
 <script>
 export default {
-  props: {
-    account: {
-      type: Object,
-      default: function () {
-        return {
-          name: 'Daily',
-          address: 'ak$G2CCeMjQffK5K21lIun3GzAuN13vhAfcKBrUPSKhSQ8RcgHP1e',
-          balance: 0,
-          words: 'test test test',
-          unit: 'AE'
-        }
-      }
-    }
-  },
   methods: {
     doCopy: function (text) {
       this.$copyText(text).then(function (e) {
@@ -50,7 +36,10 @@ export default {
       })
     }
   },
-  computed: {
+   computed: {
+    account(){
+      return this.$store.getters.account;
+    },
     chunkAddress () {
       return this.account.address.match(/.{1,3}/g)
     }

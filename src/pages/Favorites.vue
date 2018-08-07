@@ -26,30 +26,30 @@
         <img src="@/assets/icn/bookmark.svg" alt="">
         Favorites
       </h1>
-      <ul class="bookmarkList" v-for="Bookmark in Bookmarks" :key="Bookmark.name">
+      <ul class="bookmarkList" v-for="bookmark in bookmarks" :key="bookmark.name">
         <li class="bookmarListItem">
-          <div class="logo" @click=loadUrl(Bookmark.url)>
-            <div class="cirle" :class="Bookmark.name">
+          <div class="logo" @click=loadUrl(bookmark.url)>
+            <div class="cirle" :class="bookmark.name">
             </div>
           </div>
           <div class="content">
             <p class="title">
-              {{Bookmark.name}}
+              {{bookmark.name}}
             </p>
             <p class="url">
-              {{Bookmark.url}}
+              {{bookmark.url}}
             </p>
           </div>
-          <div class="options" @click="toggleOption(Bookmark)">
+          <div class="options" @click="toggleOption(bookmark)">
             <div class="optionsIcn">
               <img src="@/assets/icn/expandList.svg" alt="">
             </div>
-            <div class="optionsDrop" v-if="Bookmark.drop === true">
-              <!-- <div class="option"  @click="copy2Clip(Bookmark.url)"> -->
-              <div class="option" @clipboard:copy="Bookmark.url" @click="doCopy(Bookmark.url)">
+            <div class="optionsDrop" v-if="bookmark.drop === true">
+              <!-- <div class="option"  @click="copy2Clip(bookmark.url)"> -->
+              <div class="option" @clipboard:copy="bookmark.url" @click="doCopy(bookmark.url)">
                 <img src="@/assets/icn/copy.svg" alt="">
                 <p>Copy URL</p>
-                <input type="hidden" v-model="Bookmark.url">
+                <input type="hidden" v-model="bookmark.url">
               </div>
 
               <div class="option">
@@ -120,46 +120,47 @@ export default {
     return {
       urlAddress: '',
       isBrowseEnable: false,
-      dropNav: false,
-      Bookmarks: [
-        {
-          iconPath: 'expandList.svg',
-          name: 'Transfer',
-          url: 'transfer.aepps.com',
-          drop: false
-        },
-        {
-          iconPath: '',
-          name: 'Transactions',
-          url: 'transactions.aepps.com',
-          drop: false
-        },
-        {
-          iconPath: '',
-          name: 'Contacts',
-          url: 'contacts.aepps.com',
-          drop: false
-        },
-        {
-          iconPath: '',
-          name: 'Messages',
-          url: 'messages.aepps.com',
-          drop: false
-        },
-        {
-          iconPath: '',
-          name: 'Registrar',
-          url: 'registrar.aepps.com',
-          drop: false
-        }
-      ]
+      dropNav: false
+      // ,
+      // Bookmarks: [
+      //   {
+      //     iconPath: 'expandList.svg',
+      //     name: 'Transfer',
+      //     url: 'transfer.aepps.com',
+      //     drop: false
+      //   },
+      //   {
+      //     iconPath: '',
+      //     name: 'Transactions',
+      //     url: 'transactions.aepps.com',
+      //     drop: false
+      //   },
+      //   {
+      //     iconPath: '',
+      //     name: 'Contacts',
+      //     url: 'contacts.aepps.com',
+      //     drop: false
+      //   },
+      //   {
+      //     iconPath: '',
+      //     name: 'Messages',
+      //     url: 'messages.aepps.com',
+      //     drop: false
+      //   },
+      //   {
+      //     iconPath: '',
+      //     name: 'Registrar',
+      //     url: 'registrar.aepps.com',
+      //     drop: false
+      //   }
+      // ]
     }
   },
   methods: {
     toggleOption: function (el) {
       el.drop = !el.drop
-      this.Bookmark = el
-      return this.Bookmark
+      this.bookmark = el
+      return this.bookmark
     },
     doCopy: function (text) {
       this.$copyText(text).then(function (e) {
@@ -178,6 +179,9 @@ export default {
     }
   },
   computed: {
+    bookmarks(){
+      return this.$store.getters.bookmarks;
+    },
     urlChange: function () {
       return `http://${this.urlAddress}`
     }

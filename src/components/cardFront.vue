@@ -55,20 +55,10 @@ export default {
   components: {
     AeIdentityAvatar
   },
-  props: {
-    account: {
-      type: Object,
-      default: function () {
-        return {
-          name: 'Daily',
-          address: '0x2x3121231230x2x312123123',
-          balance: 0,
-          words: 'test test test',
-          unit: 'AE',
-          prior: 'main'
-        }
-      }
-    }
+  computed:{
+   account(){
+     return this.$store.getters.account;
+   } 
   },
   data () {
     return {

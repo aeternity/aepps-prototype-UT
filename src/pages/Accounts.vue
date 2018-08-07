@@ -98,35 +98,14 @@ export default {
         unit: 'AE',
         prior: 'main'
       },
-      accounts: [
-        {
-          name: 'Main Account',
-          address: 'ak$G2CCeMjQffK5K21lIun3GzAuN13vhAfcKBrUPSKhSQ8RcgHP1e',
-          words: 'alive fussy bluetonguelizard',
-          balance: 24.65,
-          unit: 'AE',
-          prior: 'main'
-        },
-        {
-          name: 'Daily Account',
-          address: 'ak$fcKBrUPSKhSQ8RcgHP1eG2CCeMjQffK5K21lIun3GzAuN13vhA',
-          words: 'sport bitbucket tiger',
-          balance: 20.65,
-          unit: 'AE',
-          prior: 'daily'
-        },
-        {
-          name: 'Trading Account',
-          address: 'ak$G2CCeMjUPSKhSQ8RcgHP1eK21lIun3GzAQffK5hAfcKBruN13v',
-          words: 'dead edge seal',
-          balance: 40.65,
-          unit: 'AE',
-          prior: 'trading'
-        }
-      ],
       swipeOptions: {
         auto: 0
       }
+    }
+  },
+  computed:{
+    accounts(){
+      return this.$store.getters.accounts;
     }
   },
   methods: {
