@@ -21,20 +21,12 @@
       <div class="container">
         <swipe class="swipe" :auto="0" :continuous="false" :showIndicators="true"  ref="swipe">
           <swipe-item>
-            <cardFront></cardFront>
+            <cardFront :account="activeId"></cardFront>
           </swipe-item>
           <swipe-item>
-            <cardBack></cardBack>
+            <cardBack :account="activeId"></cardBack>
           </swipe-item>
         </swipe>
-        <!-- <div class="nav">
-          <span @click="prev">
-            prev
-          </span>
-          <span @click="next">
-            next
-          </span>
-        </div> -->
       </div>
     </div>
     <div class="container">
@@ -65,7 +57,7 @@
             </p>
           </div>
           <div class="radio">
-            <Radio name="account"></Radio>
+            <Radio name="account" @change="activeAcc(index)"></Radio>
           </div>
         </div>
       </div>
@@ -76,7 +68,6 @@
 <script>
 import { AeIdentityAvatar } from '@aeternity/aepp-components'
 import Header from '@/components/Header'
-
 import Radio from '@/components/Radio'
 import CardFront from '@/components/cardFront'
 import CardBack from '@/components/cardBack'
@@ -96,6 +87,14 @@ export default {
   data () {
     return {
       balance: 0,
+      activeId: {
+        name: 'Main Account',
+        address: 'ak$G2CCeMjQffK5K21lIun3GzAuN13vhAfcKBrUPSKhSQ8RcgHP1e',
+        words: 'alive fussy bluetonguelizard',
+        balance: 24.65,
+        unit: 'AE',
+        prior: 'main'
+      },
       accounts: [
         {
           name: 'Main Account',
@@ -136,6 +135,9 @@ export default {
     },
     accountIn: function (arg) {
       this.$router.push({ name: 'account', params: {account: arg} })
+    },
+    activeAcc: function (i = 0) {
+      this.activeId = this.accounts[i]
     }
   }
 }
@@ -190,26 +192,23 @@ export default {
     }
   }
   .avatar {
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        div {
-          width: 24px;
-          height: 24px;
-        }
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    div {
+      width: 24px;
+      height: 24px;
+    }
   }
-  .mint-swipe-indicators {
-       transform: transalteY(4vh) !important;
-      }
 </style>
 <style lang="scss">
 .swipe {
   .mint-swipe-indicators {
     bottom: -29px;
     .mint-swipe-indicator.is-active {
-      background: red;
+      background: #ff0d6a;
+      opacity: 1;
     }
   }
 }
 </style>
-

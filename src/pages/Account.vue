@@ -153,7 +153,8 @@ export default {
   .mint-swipe-indicators {
     bottom: -29px;
     .mint-swipe-indicator.is-active {
-      background: red;
+      background: #ff0d6a;
+      opacity: 1;
     }
   }
 }
