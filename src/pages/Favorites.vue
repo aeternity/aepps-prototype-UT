@@ -45,9 +45,11 @@
               <img src="@/assets/icn/expandList.svg" alt="">
             </div>
             <div class="optionsDrop" v-if="Bookmark.drop === true">
-              <div class="option"  @click="copy2Clip(Bookmark.url)">
+              <!-- <div class="option"  @click="copy2Clip(Bookmark.url)"> -->
+              <div class="option" @clipboard:copy="Bookmark.url" @click="doCopy(Bookmark.url)">
                 <img src="@/assets/icn/copy.svg" alt="">
                 <p>Copy URL</p>
+                <input type="hidden" v-model="Bookmark.url">
               </div>
 
               <div class="option">
@@ -93,6 +95,7 @@
 <script>
 import { AeIdentityAvatar } from '@aeternity/aepp-components'
 import Header from '@/components/Header'
+
 export default {
   components: {
     Header, AeIdentityAvatar
@@ -151,6 +154,13 @@ export default {
       document.execCommand('copy', false)
       inp.remove()
     },
+      doCopy: function (text) {
+        this.$copyText(text).then(function (e) {
+          console.log(e)
+        }, function (e) {
+          console.log(e)
+        })
+      },
     loadUrl: function (url) {
       this.isBrowseEnable = true
       // this.urlAddress = `http://${url}`
