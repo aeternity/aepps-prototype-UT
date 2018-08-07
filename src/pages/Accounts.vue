@@ -30,6 +30,9 @@
       </div>
     </div>
     <div class="container">
+      <div class="rectangle">
+        +
+      </div>
       <div class="bottom">
         <div class="row">
           <div class="icn">
@@ -199,6 +202,22 @@ export default {
       width: 24px;
       height: 24px;
     }
+  }
+  .rectangle {
+    color: white;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: #ff0d6a;
+    padding: 10px;
+    width: 30px;
+    height: 30px;
+    font-size: 22px;
+    font-weight: 400;
+    border-radius: 50%;
+    position: fixed;
+    top: 42vh;
+    right: 5vw;
   }
 </style>
 <style lang="scss">
