@@ -24,8 +24,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-// @import "~@aeternity/aepp-components/dist/variables.scss";
-
 .ae-radio {
   input {
     display: none;
@@ -41,9 +39,7 @@ export default {
     display: inline-block;
     cursor: pointer;
     background-color: white;
-    box-shadow: 0 0 16px 0px rgba(27, 68, 121, .15);;
-    
-
+    box-shadow: 0 0 16px 0px rgba(27, 68, 121, .15);
     .indicator {
       display: block;
       width: 16px;

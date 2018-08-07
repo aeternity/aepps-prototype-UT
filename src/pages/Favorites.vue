@@ -65,17 +65,33 @@
         </li>
       </ul>
     </div>
-    <div class="iframe" v-if="isBrowseEnable">
+    <div class="iframe" id="iframe" v-if="isBrowseEnable">
       <Header>
         <template slot="page-name">
-        <!-- {{this.$route.name}} -->
-        <!-- {{urlAddress}} -->
         <input type="url" v-model="urlAddress">
       </template>
       <template slot="nav">
-        <router-link to="settings">
-          <img src="@/assets/icn/settings.svg" alt="">
-        </router-link>
+        <div class="contextMenu" @click="dropNav = true">
+          <img src="@/assets/icn/dots3.svg" alt="">
+        </div>
+        <div class="dropNav" v-if="dropNav" @click="dropNav = false">
+          <div class="option" @click="reload(urlAddress)">
+            <img src="@/assets/icn/reload-dark.svg" alt="">
+            <p>Reload</p>
+          </div>
+          <div class="option" @click="doCopy(urlAddress)">
+            <img src="@/assets/icn/copy.svg" alt="">
+            <p>Copy URL</p>
+          </div>
+          <div class="option">
+            <img src="@/assets/icn/bookmark-save.svg" alt="">
+            <p>Save</p>
+          </div>
+          <div class="option">
+            <img src="@/assets/icn/share.svg" alt="">
+            <p>Share</p>
+          </div>
+        </div>
         <router-link to="/">
           <img src="@/assets/icn/list.svg" alt="">
         </router-link>
@@ -104,6 +120,7 @@ export default {
     return {
       urlAddress: '',
       isBrowseEnable: false,
+      dropNav: false,
       Bookmarks: [
         {
           iconPath: 'expandList.svg',
@@ -145,26 +162,20 @@ export default {
       this.Bookmark = el
       return this.Bookmark
     },
-    copy2Clip: function (text) {
-      console.log(text)
-      var inp = document.createElement('input')
-      document.body.appendChild(inp)
-      inp.value = text
-      inp.select()
-      document.execCommand('copy', false)
-      inp.remove()
+    doCopy: function (text) {
+      this.$copyText(text).then(function (e) {
+        console.log(e)
+      }, function (e) {
+        console.log(e)
+      })
     },
-      doCopy: function (text) {
-        this.$copyText(text).then(function (e) {
-          console.log(e)
-        }, function (e) {
-          console.log(e)
-        })
-      },
     loadUrl: function (url) {
       this.isBrowseEnable = true
-      // this.urlAddress = `http://${url}`
       this.urlAddress = url
+    },
+    reload: function (url) {
+      this.dropNav = false
+      this.loadUrl(url)
     }
   },
   computed: {
@@ -298,14 +309,14 @@ export default {
   font-size: 13px;
 }
 .avatar {
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        div {
-          width: 24px;
-          height: 24px;
-        }
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  div {
+    width: 24px;
+    height: 24px;
   }
+}
   .iframe {
     cursor: pointer;
     position: fixed;
@@ -316,19 +327,35 @@ export default {
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
     z-index: 22;
+    .contextMenu {
+      display: flex;
+    }
+    .dropNav {
+      position: absolute;
+      top: 4vh;
+      padding-left: 5vw;
+      z-index: 22;
+      left: 50vw;
+      width: 40%;
+      background-color: white;
+      box-shadow: 0px 0px 4px 0px #c3c3c3;
+      cursor: pointer;
+      .option {
+        display: flex;
+        align-items: center;
+        font-size: 15px;
+        img {
+          width: 24px;
+          height: 24px;
+        }
+      }
+    }
     iframe {
       height: 100%;
       background: white;
       cursor: pointer;
       -webkit-overflow-scrolling: touch;
     }
-    // input {
-    //   background: transparent;
-    //   box-shadow: none;
-    //   border:0;
-    //   color: #203040;
-    //   font-size: 17px;
-    // }
   }
   input {
       background: transparent;
