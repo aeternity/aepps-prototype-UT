@@ -125,8 +125,7 @@ export default {
         {
           iconPath: 'expandList.svg',
           name: 'Transfer',
-          // url: 'transfer.aepps.com',
-          url: 'gong.bg',
+          url: 'transfer.aepps.com',
           drop: false
         },
         {
