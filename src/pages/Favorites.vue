@@ -3,18 +3,40 @@
     <Header>
       <template slot="page-name">
         <div>
-          <!-- {{this.$route.name}} -->
           <input type="url" v-model="urlAddress" placeholder="Type URL …" @keyup.enter="isBrowseEnable = true">
         </div>
-        <!-- <input type="url" v-model="urlAddress" placeholder="text"> -->
       </template>
       <template slot="nav">
-        <router-link to="settings">
+        <div class="contextMenu" v-if="isBrowseEnable" @click="dropNav = true">
+          <img src="@/assets/icn/dots3.svg" alt="">
+        </div>
+        <div class="dropNav" v-if="dropNav" @click="dropNav = false">
+          <div class="option" @click="reload(urlAddress)">
+            <img src="@/assets/icn/reload-dark.svg" alt="">
+            <p>Reload</p>
+          </div>
+          <div class="option" @click="doCopy(urlAddress)">
+            <img src="@/assets/icn/copy.svg" alt="">
+            <p>Copy URL</p>
+          </div>
+          <div class="option">
+            <img src="@/assets/icn/bookmark-save.svg" alt="">
+            <p>Save</p>
+          </div>
+          <div class="option">
+            <img src="@/assets/icn/share.svg" alt="">
+            <p>Share</p>
+          </div>
+        </div>
+        <router-link to="settings" v-if="!isBrowseEnable">
           <img src="@/assets/icn/settings.svg" alt="">
         </router-link>
-        <router-link to="/">
+        <div v-if="!isBrowserMin" @click="minimaze">
           <img src="@/assets/icn/list.svg" alt="">
-        </router-link>
+        </div>
+        <div v-if="isBrowserMin" @click="isBrowserMin = false">
+          <img src="@/assets/icn/arrow-up.svg" alt="">
+        </div>
         <router-link class="avatar" to="accounts">
           <ae-identity-avatar address='ak$G2CCeMjQffK5K21lIun3GzAuN13vhAfcKBrUPSKhSQ8RcgHP1e'>
           </ae-identity-avatar>
@@ -65,45 +87,8 @@
         </li>
       </ul>
     </div>
-    <div class="iframe" id="iframe" v-if="isBrowseEnable">
-      <Header>
-        <template slot="page-name">
-        <input type="url" v-model="urlAddress">
-      </template>
-      <template slot="nav">
-        <div class="contextMenu" @click="dropNav = true">
-          <img src="@/assets/icn/dots3.svg" alt="">
-        </div>
-        <div class="dropNav" v-if="dropNav" @click="dropNav = false">
-          <div class="option" @click="reload(urlAddress)">
-            <img src="@/assets/icn/reload-dark.svg" alt="">
-            <p>Reload</p>
-          </div>
-          <div class="option" @click="doCopy(urlAddress)">
-            <img src="@/assets/icn/copy.svg" alt="">
-            <p>Copy URL</p>
-          </div>
-          <div class="option">
-            <img src="@/assets/icn/bookmark-save.svg" alt="">
-            <p>Save</p>
-          </div>
-          <div class="option">
-            <img src="@/assets/icn/share.svg" alt="">
-            <p>Share</p>
-          </div>
-        </div>
-        <router-link to="/">
-          <img src="@/assets/icn/list.svg" alt="">
-        </router-link>
-        <router-link class="avatar" to="accounts">
-          <ae-identity-avatar address='ak$G2CCeMjQffK5K21lIun3GzAuN13vhAfcKBrUPSKhSQ8RcgHP1e'>
-          </ae-identity-avatar>
-        </router-link>
-      </template>
-      </Header>
-      <iframe :src=urlChange frameborder="0" width="100%">
-
-      </iframe>
+    <div :class="{minimaze: isBrowserMin}" class="iframe" id="iframe" v-if="isBrowseEnable">
+      <iframe :src=urlChange frameborder="0" width="100%"></iframe>
     </div>
   </div>
 </template>
@@ -121,6 +106,7 @@ export default {
       urlAddress: '',
       isBrowseEnable: false,
       dropNav: false,
+      isBrowserMin: false,
       Bookmarks: [
         {
           iconPath: 'expandList.svg',
@@ -170,11 +156,15 @@ export default {
     },
     loadUrl: function (url) {
       this.isBrowseEnable = true
+      this.isBrowserMin = false
       this.urlAddress = url
     },
     reload: function (url) {
       this.dropNav = false
       this.loadUrl(url)
+    },
+    minimaze: function () {
+      this.isBrowserMin = true
     }
   },
   computed: {
@@ -205,6 +195,16 @@ export default {
     width: 90%;
     margin: 0 auto;
    }
+  }
+  .content {
+    flex: 3;
+    p {
+      margin: 0;
+    }
+    p.title {
+      color: #203040;
+      font-weight: 500;
+    }
   }
  }
 }
@@ -247,16 +247,16 @@ export default {
     padding: 2px;
   }
 }
-.content {
-  flex: 3;
-}
-.content p {
-  margin: 0;
-}
-.content p.title {
-  color: #203040;
-  font-weight: 500;
-}
+// .content {
+//   flex: 3;
+// }
+// .content p {
+//   margin: 0;
+// }
+// .content p.title {
+//   color: #203040;
+//   font-weight: 500;
+// }
 .options {
   display: flex;
   flex-direction: row;
@@ -319,15 +319,38 @@ export default {
   .iframe {
     cursor: pointer;
     position: fixed;
-    top:0;
+    top:58px;
     height: 100vh;
     left: 0;
     width: 100vw;
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
-    z-index: 22;
+    z-index: 3;
+    transition: all 3s ease;
     .contextMenu {
       display: flex;
+    }
+    
+    iframe {
+      height: 100%;
+      background: white;
+      cursor: pointer;
+      -webkit-overflow-scrolling: touch;
+    }
+  }
+  input {
+      background: transparent;
+      box-shadow: none;
+      border:0;
+      color: #203040;
+      font-size: 17px;
+    }
+    .minimaze {
+      .header {
+        display: none;
+      }
+      top: 100vh;
+      transition: all 3s ease;
     }
     .dropNav {
       position: absolute;
@@ -348,19 +371,5 @@ export default {
           height: 24px;
         }
       }
-    }
-    iframe {
-      height: 100%;
-      background: white;
-      cursor: pointer;
-      -webkit-overflow-scrolling: touch;
-    }
-  }
-  input {
-      background: transparent;
-      box-shadow: none;
-      border:0;
-      color: #203040;
-      font-size: 17px;
     }
 </style>
