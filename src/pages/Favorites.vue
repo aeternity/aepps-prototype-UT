@@ -3,75 +3,11 @@
     <Header>
       <template slot="page-name">
         <div>
-          <!-- {{this.$route.name}} -->
           <input type="url" v-model="urlAddress" placeholder="Type URL …" @keyup.enter="isBrowseEnable = true">
         </div>
-        <!-- <input type="url" v-model="urlAddress" placeholder="text"> -->
       </template>
       <template slot="nav">
-        <router-link to="settings">
-          <img src="@/assets/icn/settings.svg" alt="">
-        </router-link>
-        <router-link to="/">
-          <img src="@/assets/icn/list.svg" alt="">
-        </router-link>
-        <router-link class="avatar" to="accounts">
-          <ae-identity-avatar address='ak$G2CCeMjQffK5K21lIun3GzAuN13vhAfcKBrUPSKhSQ8RcgHP1e'>
-          </ae-identity-avatar>
-        </router-link>
-      </template>
-    </Header>
-    <div class="container">
-      <h1 class="title">
-        <img src="@/assets/icn/bookmark.svg" alt="">
-        Favorites
-      </h1>
-      <ul class="bookmarkList" v-for="bookmark in bookmarks" :key="bookmark.name">
-        <li class="bookmarListItem">
-          <div class="logo" @click=loadUrl(bookmark.url)>
-            <div class="cirle" :class="bookmark.name">
-            </div>
-          </div>
-          <div class="content">
-            <p class="title">
-              {{bookmark.name}}
-            </p>
-            <p class="url">
-              {{bookmark.url}}
-            </p>
-          </div>
-          <div class="options" @click="toggleOption(bookmark)">
-            <div class="optionsIcn">
-              <img src="@/assets/icn/expandList.svg" alt="">
-            </div>
-            <div class="optionsDrop" v-if="bookmark.drop === true">
-              <!-- <div class="option"  @click="copy2Clip(bookmark.url)"> -->
-              <div class="option" @clipboard:copy="bookmark.url" @click="doCopy(bookmark.url)">
-                <img src="@/assets/icn/copy.svg" alt="">
-                <p>Copy URL</p>
-                <input type="hidden" v-model="bookmark.url">
-              </div>
-
-              <div class="option">
-                <img src="@/assets/icn/delete.svg" alt="">
-                <p>Delete</p>
-              </div>
-              <div class="option">
-                <img src="@/assets/icn/share.svg" alt="">
-                <p>Share</p>
-              </div>
-            </div>
-          </div>
-        </li>
-      </ul>
-    </div>
-    <div class="iframe" id="iframe" v-if="isBrowseEnable">
-      <Header>
-        <template slot="page-name">
-        <input type="url" v-model="urlAddress">
-      </template>
-      <template slot="nav">
-        <div class="contextMenu" @click="dropNav = true">
+        <div class="contextMenu" v-if="isBrowseEnable" @click="dropNav = true">
           <img src="@/assets/icn/dots3.svg" alt="">
         </div>
         <div class="dropNav" v-if="dropNav" @click="dropNav = false">
@@ -92,18 +28,69 @@
             <p>Share</p>
           </div>
         </div>
-        <router-link to="/">
+        <router-link to="settings" v-if="!isBrowseEnable">
+          <img src="@/assets/icn/settings.svg" alt="">
+        </router-link>
+        <router-link to="/" v-if="!isBrowseEnable">
           <img src="@/assets/icn/list.svg" alt="">
         </router-link>
+        <div v-if="!isBrowserMin && isBrowseEnable" @click="minimaze">
+          <img src="@/assets/icn/list.svg" alt="">
+        </div>
+        <div v-if="isBrowserMin" @click="isBrowserMin = false">
+          <img src="@/assets/icn/arrow-up.svg" alt="">
+        </div>
         <router-link class="avatar" to="accounts">
           <ae-identity-avatar address='ak$G2CCeMjQffK5K21lIun3GzAuN13vhAfcKBrUPSKhSQ8RcgHP1e'>
           </ae-identity-avatar>
         </router-link>
       </template>
-      </Header>
-      <iframe :src=urlChange frameborder="0" width="100%">
+    </Header>
+    <div class="container">
+      <h1 class="title">
+        <img src="@/assets/icn/bookmark.svg" alt="">
+        Favorites
+      </h1>
+      <ul class="bookmarkList" v-for="bookmark in Bookmarks" :key="bookmark.name">
+        <li class="bookmarListItem">
+          <div class="logo" @click=loadUrl(bookmark.url)>
+            <div class="cirle" :class="bookmark.name">
+            </div>
+          </div>
+          <div class="content">
+            <p class="title">
+              {{bookmark.name}}
+            </p>
+            <p class="url">
+              {{bookmark.url}}
+            </p>
+          </div>
+          <div class="options" @click="toggleOption(bookmark)">
+            <div class="optionsIcn">
+              <img src="@/assets/icn/expandList.svg" alt="">
+            </div>
+            <div class="optionsDrop" v-if="bookmark.drop === true">
+              <div class="option" @clipboard:copy="bookmark.url" @click="doCopy(bookmark.url)">
+                <img src="@/assets/icn/copy.svg" alt="">
+                <p>Copy URL</p>
+                <input type="hidden" v-model="bookmark.url">
+              </div>
 
-      </iframe>
+              <div class="option">
+                <img src="@/assets/icn/delete.svg" alt="">
+                <p>Delete</p>
+              </div>
+              <div class="option">
+                <img src="@/assets/icn/share.svg" alt="">
+                <p>Share</p>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div :class="{minimaze: isBrowserMin}" class="iframe" id="iframe" v-if="isBrowseEnable">
+      <iframe :src=urlChange frameborder="0" width="100%"></iframe>
     </div>
   </div>
 </template>
@@ -120,7 +107,40 @@ export default {
     return {
       urlAddress: '',
       isBrowseEnable: false,
-      dropNav: false
+      dropNav: false,
+      isBrowserMin: false,
+      Bookmarks: [
+        {
+          iconPath: 'expandList.svg',
+          name: 'Transfer',
+          url: 'transfer.aepps.com',
+          drop: false
+        },
+        {
+          iconPath: '',
+          name: 'Transactions',
+          url: 'transactions.aepps.com',
+          drop: false
+        },
+        {
+          iconPath: '',
+          name: 'Contacts',
+          url: 'contacts.aepps.com',
+          drop: false
+        },
+        {
+          iconPath: '',
+          name: 'Messages',
+          url: 'messages.aepps.com',
+          drop: false
+        },
+        {
+          iconPath: '',
+          name: 'Registrar',
+          url: 'registrar.aepps.com',
+          drop: false
+        }
+      ]
     }
   },
   methods: {
@@ -136,18 +156,22 @@ export default {
         console.log(e)
       })
     },
-    loadUrl(url) {
-      this.$store.dispatch('getUrl',url);
+    // loadUrl(url) {
+    //   this.$store.dispatch('getUrl',url);
+    loadUrl: function (url) {
+      this.isBrowseEnable = true
+      this.isBrowserMin = false
+      this.urlAddress = url
     },
     reload: function (url) {
       this.dropNav = false
       this.loadUrl(url)
+    },
+    minimaze: function () {
+      this.isBrowserMin = true
     }
   },
   computed: {
-    bookmarks(){
-      return this.$store.getters.bookmarks;
-    },
     urlChange: function () {
       return `http://${this.urlAddress}`
     }
@@ -176,9 +200,25 @@ export default {
     margin: 0 auto;
    }
   }
+  .content {
+    flex: 3;
+    p {
+      margin: 0;
+    }
+    p.title {
+      color: #203040;
+      font-weight: 500;
+    }
+  }
  }
+ input {
+   background: transparent;
+   box-shadow: none;
+   border:0;
+   color: #203040;
+   font-size: 17px;
+  }
 }
-
 .logo,
 .options {
   flex: 1;
@@ -194,7 +234,6 @@ export default {
   width: 32px;
   height: 32px;
 }
-
 .cirle {
   &.Transactions {
     background: #e72b6e url('../assets/icn/reload.svg') no-repeat 50% 50%;
@@ -217,16 +256,6 @@ export default {
     padding: 2px;
   }
 }
-.content {
-  flex: 3;
-}
-.content p {
-  margin: 0;
-}
-.content p.title {
-  color: #203040;
-  font-weight: 500;
-}
 .options {
   display: flex;
   flex-direction: row;
@@ -241,7 +270,6 @@ export default {
   position: absolute;
   right: 0;
   top: 0;
-  /* height: 100%; */
   background: white;
   z-index: 2;
   text-align: center;
@@ -286,51 +314,52 @@ export default {
     height: 24px;
   }
 }
-  .iframe {
+.iframe {
+  cursor: pointer;
+  position: fixed;
+  top:58px;
+  height: 100vh;
+  left: 0;
+  width: 100vw;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+  z-index: 3;
+  transition: all 3s ease;
+  .contextMenu {
+    display: flex;
+  }
+  iframe {
+    height: 100%;
+    background: white;
     cursor: pointer;
-    position: fixed;
-    top:0;
-    height: 100vh;
-    left: 0;
-    width: 100vw;
-    overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
-    z-index: 22;
-    .contextMenu {
-      display: flex;
-    }
-    .dropNav {
-      position: absolute;
-      top: 4vh;
-      padding-left: 5vw;
-      z-index: 22;
-      left: 50vw;
-      width: 40%;
-      background-color: white;
-      box-shadow: 0px 0px 4px 0px #c3c3c3;
-      cursor: pointer;
-      .option {
-        display: flex;
-        align-items: center;
-        font-size: 15px;
-        img {
-          width: 24px;
-          height: 24px;
-        }
-      }
-    }
-    iframe {
-      height: 100%;
-      background: white;
-      cursor: pointer;
-      -webkit-overflow-scrolling: touch;
+  }
+}
+.minimaze {
+  top: 100vh;
+  transition: all 3s ease;
+  .header {
+    display: none;
+  }
+}
+.dropNav {
+  position: absolute;
+  top: 4vh;
+  padding-left: 5vw;
+  z-index: 22;
+  left: 50vw;
+  width: 40%;
+  background-color: white;
+  box-shadow: 0px 0px 4px 0px #c3c3c3;
+  cursor: pointer;
+  .option {
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+    img {
+      width: 24px;
+      height: 24px;
     }
   }
-  input {
-      background: transparent;
-      box-shadow: none;
-      border:0;
-      color: #203040;
-      font-size: 17px;
-    }
+}
 </style>
