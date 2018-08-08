@@ -103,9 +103,12 @@ export default {
       }
     }
   },
-  computed:{
-    accounts(){
-      return this.$store.getters.accounts;
+  mounted () {
+    this.activeAcc()
+  },
+  computed: {
+    accounts () {
+      return this.$store.getters.accounts
     }
   },
   methods: {

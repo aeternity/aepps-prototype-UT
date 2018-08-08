@@ -1,10 +1,10 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
+import Vue from 'vue'
+import Vuex from 'vuex'
 
-Vue.use(Vuex);
+Vue.use(Vuex)
 
 export const store = new Vuex.Store({
-  state:{
+  state: {
     accounts: [
       {
         name: 'Main Account',
@@ -13,7 +13,7 @@ export const store = new Vuex.Store({
         balance: 24.65,
         unit: 'AE',
         prior: 'main',
-        editMode: false
+        id: 0
       },
       {
         name: 'Daily Account',
@@ -22,7 +22,7 @@ export const store = new Vuex.Store({
         balance: 20.65,
         unit: 'AE',
         prior: 'daily',
-        editMode: false
+        id: 1
       },
       {
         name: 'Trading Account',
@@ -31,7 +31,7 @@ export const store = new Vuex.Store({
         balance: 40.65,
         unit: 'AE',
         prior: 'trading',
-        editMode: false
+        id: 2
       }
     ],
     bookmarks: [
@@ -67,35 +67,40 @@ export const store = new Vuex.Store({
       }
     ]
   },
-  getters:{
-    accounts(state){
-      return state.accounts;
+  getters: {
+    accounts (state) {
+      return state.accounts
     },
-    bookmarks(state){
-      return state.bookmarks;
+    bookmarks (state) {
+      return state.bookmarks
     }
   },
-  mutations:{
-    rename(state,accountName){
-      var account = state.accounts.find( account => {
-        return account.name == accountName;
-      });
-      account.editMode = true;
-      //const renaming={
-        //name: account.name
-      //};
-      //state.accounts.push(renaming);
+  mutations: {
+    rename (state, accountName) {
+      let account = state.accounts.find(account => {
+        return account.name === accountName
+      })
+      account.editMode = true
     },
-    getUrl(state,bookmarkUrl){
-      var bookmark = state.bookmarks.find( bookmark => {
-        return bookmark.urlAddress == bookmarkUrl
-      }); 
-      this.isBrowseEnable = true;
+    Rename_Acc (state, {id, name}) {
+      state.accounts.find(account => {
+        return account.id === id
+      }).name = name
+    },
+    getUrl (state, bookmarkUrl) {
+      let bookmark = state.bookmarks.find(bookmark => {
+        return bookmark.urlAddress === bookmarkUrl
+      })
+      console.log(bookmark)
+      this.isBrowseEnable = true
     }
   },
-  actions:{
-    rename({ commit },accountName){
-        commit('rename', accountName)
+  actions: {
+    rename ({ commit }, accountName) {
+      commit('rename', accountName)
+    },
+    renameAcc: (context, {id, name}) => {
+      context.commit('Rename_Acc', {id, name})
     }
   }
-});
+})
