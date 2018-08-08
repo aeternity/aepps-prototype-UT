@@ -121,39 +121,6 @@ export default {
       urlAddress: '',
       isBrowseEnable: false,
       dropNav: false
-      // ,
-      // Bookmarks: [
-      //   {
-      //     iconPath: 'expandList.svg',
-      //     name: 'Transfer',
-      //     url: 'transfer.aepps.com',
-      //     drop: false
-      //   },
-      //   {
-      //     iconPath: '',
-      //     name: 'Transactions',
-      //     url: 'transactions.aepps.com',
-      //     drop: false
-      //   },
-      //   {
-      //     iconPath: '',
-      //     name: 'Contacts',
-      //     url: 'contacts.aepps.com',
-      //     drop: false
-      //   },
-      //   {
-      //     iconPath: '',
-      //     name: 'Messages',
-      //     url: 'messages.aepps.com',
-      //     drop: false
-      //   },
-      //   {
-      //     iconPath: '',
-      //     name: 'Registrar',
-      //     url: 'registrar.aepps.com',
-      //     drop: false
-      //   }
-      // ]
     }
   },
   methods: {
@@ -169,9 +136,8 @@ export default {
         console.log(e)
       })
     },
-    loadUrl: function (url) {
-      this.isBrowseEnable = true
-      this.urlAddress = url
+    loadUrl(url) {
+      this.$store.dispatch('getUrl',url);
     },
     reload: function (url) {
       this.dropNav = false

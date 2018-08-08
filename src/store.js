@@ -12,7 +12,8 @@ export const store = new Vuex.Store({
         words: 'alive fussy bluetonguelizard',
         balance: 24.65,
         unit: 'AE',
-        prior: 'main'
+        prior: 'main',
+        editMode: false
       },
       {
         name: 'Daily Account',
@@ -20,7 +21,8 @@ export const store = new Vuex.Store({
         words: 'sport bitbucket tiger',
         balance: 20.65,
         unit: 'AE',
-        prior: 'daily'
+        prior: 'daily',
+        editMode: false
       },
       {
         name: 'Trading Account',
@@ -28,16 +30,10 @@ export const store = new Vuex.Store({
         words: 'dead edge seal',
         balance: 40.65,
         unit: 'AE',
-        prior: 'trading'
+        prior: 'trading',
+        editMode: false
       }
     ],
-    account: {
-          name: 'Daily',
-          address: 'ak$G2CCeMjQffK5K21lIun3GzAuN13vhAfcKBrUPSKhSQ8RcgHP1e',
-          balance: 0,
-          words: 'test test test',
-          unit: 'AE'
-    },
     bookmarks: [
       {
         iconPath: 'expandList.svg',
@@ -75,11 +71,31 @@ export const store = new Vuex.Store({
     accounts(state){
       return state.accounts;
     },
-    account(state){
-      return state.account;
-    },
     bookmarks(state){
       return state.bookmarks;
+    }
+  },
+  mutations:{
+    rename(state,accountName){
+      var account = state.accounts.find( account => {
+        return account.name == accountName;
+      });
+      account.editMode = true;
+      //const renaming={
+        //name: account.name
+      //};
+      //state.accounts.push(renaming);
+    },
+    getUrl(state,bookmarkUrl){
+      var bookmark = state.bookmarks.find( bookmark => {
+        return bookmark.urlAddress == bookmarkUrl
+      }); 
+      this.isBrowseEnable = true;
+    }
+  },
+  actions:{
+    rename({ commit },accountName){
+        commit('rename', accountName)
     }
   }
 });

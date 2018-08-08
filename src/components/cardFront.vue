@@ -5,8 +5,8 @@
         <ae-identity-avatar class="avatar" :address="account.address"></ae-identity-avatar>
       </div>
       <div class="item">
-        <span v-if="!editMode">{{account.name}}</span>
-        <input type="text" v-if="editMode" v-model="account.name">
+        <span v-if="!account.editMode">{{account.name}}</span>
+        <input type="text" v-if="account.editMode" v-model="account.name">
       </div>
       <div class="item">
         {{`${account.balance} ${account.unit}`}}
@@ -29,11 +29,11 @@
       </div>
     </div>
     <div class="row actions">
-      <div class="item" @click="edit" v-if="!editMode">
+      <div class="item" @click="edit(account)" v-if="!account.editMode">
         <img src="@/assets/icn/edit-light.svg" alt="">
         rename
       </div>
-      <div class="item" @click="save" v-if="editMode">
+      <div class="item" @click="save" v-if="account.editMode">
         <img src="@/assets/icn/save-light.svg" alt="">
         save
       </div>
@@ -51,14 +51,26 @@
 
 <script>
 import { AeIdentityAvatar } from '@aeternity/aepp-components'
+
 export default {
   components: {
     AeIdentityAvatar
   },
-  computed:{
-   account(){
-     return this.$store.getters.account;
-   } 
+  props: {
+    account: Object
+    // account: {
+    //   type: Object,
+    //   default: function () {
+    //     return {
+    //       name: 'Daily',
+    //       address: '0x2x3121231230x2x312123123',
+    //       balance: 0,
+    //       words: 'test test test',
+    //       unit: 'AE',
+    //       prior: 'main'
+    //     }
+    //   }
+    // }
   },
   data () {
     return {
@@ -66,8 +78,8 @@ export default {
     }
   },
   methods: {
-    edit: function () {
-      this.editMode = true
+    edit(account) {
+      this.$store.dispatch('rename',account.name);
     },
     save: function () {
       this.editMode = false
