@@ -3,75 +3,118 @@
     <div class="modal-wrapper">
       <div class="modal-container">
         <div class="modal-header">
+          <div class="icn">
+            ↪
+          </div>
+          <h1 class="modal-title">Name your
+            <span class="modal-title__secondary">new account</span>
+          </h1>
         </div>
         <div class="modal-body">
-          <slot name="body">
-            <div>
-              <input type="text">
-            </div>
-          </slot>
+          <div>
+            <input type="text" value="Name*">
+          </div>
         </div>
         <div class="modal-footer">
-          <slot name="footer">
-            <button @click="$emit('close')">
-              ok
-            </button>
-          </slot>
+          <div class="btn"> Create account </div>
         </div>
       </div>
     </div>
   </div>
 </template>
 <script>
-  export default {
-    props: {
-      name: { type: String, default: '' },
-      value: { type: [String, Number, Boolean], default: '' }
-    }
+export default {
+  props: {
+    name: { type: String, default: '' },
+    value: { type: [String, Number, Boolean], default: '' }
   }
+}
 </script>
 <style lang="scss" scoped>
-  .modal {
+  .modal-wrapper {
+    width: 85vw;
+    margin: 0 auto;
     position: fixed;
     z-index: 9998;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: table;
-    transition: opacity 0.3s ease;
+    top: 15%;
+    border-radius: 4px;
+    box-shadow: 0 0 8px 0 rgba(27, 68, 121, 0.15);
   }
 
   .modal-wrapper {
-    display: table-cell;
-    vertical-align: middle;
+    margin: 0 auto;
+  }
+
+  .modal-header {
+    display: flex;
+    justify-content: space-evenly;
+  }
+
+  .modal-title {
+    width: 90%;
+    height: 56px;
+    font-size: 23px;
+    font-weight: 500;
+    line-height: 1.22;
+    letter-spacing: -0.5px;
+    color: #203040;
+  }
+
+  .modal-title__secondary {
+    color: #ff0070;
   }
 
   .modal-container {
-    margin: 0px auto;
-    padding: 20px 30px;
-    background-color: #ff0d6a;
-    transition: all 0.3s ease;
+    height: 311px;
+    background-color: #ffffff;
+    box-shadow: 0 0 8px 0 rgba(27, 68, 121, 0.15);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
   }
 
-  .modal-body {
-    margin: 20px 0;
-  }
-
-  .modal-container,
-  .modal-container {
-    -webkit-transform: scale(1.1);
-    transform: scale(1.1);
+  .icn {
+    padding-top: 20px;
+    width: 17px;
+    height: 24px;
+    object-fit: contain;
+    font-size: 17px;
+    font-weight: bold;
+    line-height: 1.41;
+    letter-spacing: normal;
+    color: #203040;
   }
 
   input {
+    width: 271px;
+    height: 64px;
+    background-color: #f7fafc;
     font-size: 17px;
     display: inline-block;
-    background: transparent;
-    color: white;
-    box-shadow: 0;
     border: 0;
-    width: 100%;
-    border-bottom: 1px solid white;
+    border-radius: 5px;
+    color: #76818c;
+    line-height: 1.41;
+  }
+
+  .modal-footer {
+    width: 269px;
+    height: 56px;
+    opacity: 0.2;
+    border-radius: 32px;
+    background-color: #ff0d6a;
+    box-shadow: 0 0 16px 0 rgba(27, 68, 121, 0.15);
+  }
+
+  .btn {
+    padding-top: 20px;
+    height: 16px;
+    opacity: 0.2;
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 1.23;
+    letter-spacing: 1.3px;
+    color: #ffffff;
   }
 </style>
