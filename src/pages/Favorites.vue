@@ -47,12 +47,40 @@
       </template>
     </Header>
     <div class="container">
+      <div class="top">
+        <div class="row call-to-action">
+          <div class="img">
+            <div class="cirle Transfer"></div>
+          </div>
+          <div class="content">
+            <p class="title">
+              Transfer
+            </p>
+            <p>
+              send and request funds
+            </p>
+          </div>
+        </div>
+        <div class="row call-to-action">
+          <div class="img">
+            <div class="cirle Transactions"></div>
+          </div>
+          <div class="content">
+            <p class="title">
+              Transactions
+            </p>
+            <p>
+              view past transactions
+            </p>
+          </div>
+        </div>
+      </div>
       <h1 class="title">
         <img src="@/assets/icn/bookmark.svg" alt="">
         Favorites
       </h1>
-      <ul class="bookmarkList" v-for="bookmark in Bookmarks" :key="bookmark.name">
-        <li class="bookmarListItem">
+      <div class="bookmarkList" v-for="bookmark in Bookmarks" :key="bookmark.name">
+        <div class="bookmarListItem">
           <div class="logo" @click=loadUrl(bookmark.url)>
             <div class="cirle" :class="bookmark.name">
             </div>
@@ -86,8 +114,8 @@
               </div>
             </div>
           </div>
-        </li>
-      </ul>
+        </div>
+      </div>
     </div>
     <div :class="{minimaze: isBrowserMin}" class="iframe" id="iframe" v-if="isBrowseEnable">
       <iframe :src=urlChange frameborder="0" width="100%"></iframe>
@@ -110,18 +138,6 @@ export default {
       dropNav: false,
       isBrowserMin: false,
       Bookmarks: [
-        {
-          iconPath: 'expandList.svg',
-          name: 'Transfer',
-          url: 'transfer.aepps.com',
-          drop: false
-        },
-        {
-          iconPath: '',
-          name: 'Transactions',
-          url: 'transactions.aepps.com',
-          drop: false
-        },
         {
           iconPath: '',
           name: 'Contacts',
@@ -156,8 +172,6 @@ export default {
         console.log(e)
       })
     },
-    // loadUrl(url) {
-    //   this.$store.dispatch('getUrl',url);
     loadUrl: function (url) {
       this.isBrowseEnable = true
       this.isBrowserMin = false
@@ -181,52 +195,64 @@ export default {
 
 <style lang="scss" scoped>
 .favorites {
+  .top {
+    margin: 5vh 0;
+  }
   .container {
-  width: 85vw;
+  width: 80vw;
   margin: 0 auto;
   text-align: left;
   h1 {
-  font-size: 23px;
-  color: #ff0070;
-  display: flex;
+    font-size: 23px;
+    color: #ff0070;
+    display: flex;
+    font-weight: normal;
+    position: relative;
+    left: -5vw;
+    align-items: center;
+    img {
+      height: 16px;
+      width: 16px;
+    }
   }
   .bookmarkList {
     list-style: none;
     padding: 0;
-    li {
-    display: flex;
-    flex-direction: row;
-    width: 90%;
-    margin: 0 auto;
-   }
-  }
-  .content {
-    flex: 3;
-    p {
-      margin: 0;
+    &> div {
+      display: flex;
+      flex-direction: row;
+      padding: 20px 0;
+      border-top: 2px solid #edf3f7;
+      }
     }
-    p.title {
-      color: #203040;
-      font-weight: 500;
+    .content {
+      flex: 2;
+      p {
+        margin: 0;
+      }
+      p.title {
+        color: #203040;
+        font-weight: 500;
+        font-size: 15px;
+      }
     }
   }
- }
- input {
-   background: transparent;
-   box-shadow: none;
-   border:0;
-   color: #203040;
-   font-size: 17px;
+  input {
+    background: transparent;
+    box-shadow: none;
+    border:0;
+    color: #203040;
+    font-size: 17px;
   }
 }
 .logo,
 .options {
-  flex: 1;
+  flex: .35;
 }
 .logo {
   display: flex;
   align-items: center;
-  flex-direction: row-reverse;
+  flex-direction: row;
   margin-right: 10px;
 }
 .logo .cirle{
@@ -238,27 +264,32 @@ export default {
   &.Transactions {
     background: #e72b6e url('../assets/icn/reload.svg') no-repeat 50% 50%;
     padding: 2px;
+    background-size: 50%;
   }
   &.Transfer {
     background: #09bfad url('../assets/icn/contacts.svg') no-repeat 50% 50%;
     padding: 2px;
+    background-size: 50%;
   }
   &.Contacts {
     background: #6948a0 url('../assets/icn/contacts.svg') no-repeat 50% 50%;
     padding: 2px;
+    background-size: 50%;
   }
   &.Messages {
     background: #b300ff url('../assets/icn/chat.svg') no-repeat 50% 50%;
     padding: 2px;
+    background-size: 50%;
   }
   &.Registrar {
     background: #929ca6 url('../assets/icn/globe.svg') no-repeat 50% 50%;
     padding: 2px;
+    background-size: 50%;
   }
 }
 .options {
   display: flex;
-  flex-direction: row;
+  flex-direction: row-reverse;
   align-items: center;
   position: relative;
   cursor: pointer;
@@ -280,9 +311,9 @@ export default {
   width: 24px;
   height: 24px;
   vertical-align: middle;
-  margin: 0 auto;
   display: flex;
   cursor: pointer;
+  flex-direction: row-reverse;
 }
 .options .option {
   cursor: pointer;
@@ -359,6 +390,34 @@ export default {
     img {
       width: 24px;
       height: 24px;
+    }
+  }
+}
+.call-to-action {
+  display: flex;
+  background-color: #edf3f7;
+  margin: 2vh 0;
+  padding: 11px 0 11px 9px;
+  border-radius: 4px;
+  .img {
+    flex: .38;
+    .cirle {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+    }
+  }
+  .content {
+    flex: 3;
+    h3 {
+    color: #203040;
+    margin: 0;
+    font-size: 15px;
+    font-weight: 50;
+    }
+    p {
+    color: #76818c;
+    font-size: 13px;
     }
   }
 }
