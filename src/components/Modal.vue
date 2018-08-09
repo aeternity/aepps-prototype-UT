@@ -31,15 +31,25 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+.modal {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  flex-direction: column;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 22;
+  justify-content: space-around;
+  background-image: linear-gradient(rgba(237,243,247,.9), rgba(237,243,247,.9));
+}
   .modal-wrapper {
     width: 85vw;
     margin: 0 auto;
-    position: fixed;
     z-index: 9;
-    top: 15%;
     border-radius: 4px;
-    box-shadow: 0 0 100vh 100vw rgba(255,255,255,.7);
-    
+    box-shadow: 0 0 8px 0 rgba(27, 68, 121, 0.15);
   }
 
   .modal-wrapper {
