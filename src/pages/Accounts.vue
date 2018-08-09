@@ -34,7 +34,6 @@
       <div class="rectangle" @click="showModal = true">
         +
       </div>
-      <button id="show-modal" @click="showModal = true">new account</button>
       <modal v-if="showModal" @close="showModal = false">
         <h3 slot="header">header</h3>
       </modal>
