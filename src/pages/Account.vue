@@ -19,14 +19,15 @@
     </Header>
     <div class="top">
       <div class="container">
-        <swipe class="swipe" :auto="0" :continuous="false" :showIndicators="true"  ref="swipe">
-          <swipe-item>
+        <swiper :options="swipeOptions">
+          <swiper-slide>
             <cardFront :account="this.$route.params.account"></cardFront>
-          </swipe-item>
-          <swipe-item>
+          </swiper-slide>
+          <swiper-slide>
             <cardBack :account="this.$route.params.account"></cardBack>
-          </swipe-item>
-        </swipe>
+          </swiper-slide>
+          <div class="swiper-pagination" slot="pagination"></div>
+        </swiper>
       </div>
     </div>
     <div class="container">
@@ -57,17 +58,17 @@
 <script>
 import Header from '@/components/Header'
 import { AeIdentityAvatar } from '@aeternity/aepp-components'
-import { Swipe, SwipeItem } from 'vue-swipe'
 import cardFront from '@/components/cardFront'
 import cardBack from '@/components/cardBack'
-require('vue-swipe/dist/vue-swipe.css')
+import { swiper, swiperSlide } from 'vue-awesome-swiper'
+import 'swiper/dist/css/swiper.css'
 
 export default {
   components: {
     Header,
     AeIdentityAvatar,
-    'swipe': Swipe,
-    'swipe-item': SwipeItem,
+    swiper,
+    'swiper-slide': swiperSlide,
     cardFront,
     cardBack
   },
@@ -81,6 +82,16 @@ export default {
           balance: 0,
           words: 'test test test',
           unit: 'AE'
+        }
+      }
+    }
+  },
+  data () {
+    return {
+      swipeOptions: {
+        effect: 'flip',
+        pagination: {
+          el: '.swiper-pagination'
         }
       }
     }
@@ -108,9 +119,6 @@ export default {
     height: 30vh;
     background-color: #edf3f7;
     margin-bottom: 10vh;
-    .swipe {
-      height: 200px;
-    }
   }
   .container {
     width: 85%;
@@ -148,13 +156,11 @@ export default {
 }
 </style>
 <style lang="scss">
-.swipe {
-  overflow: visible;
-  .mint-swipe-indicators {
-    bottom: -29px;
-    .mint-swipe-indicator.is-active {
+.swiper-container {
+  .swiper-pagination-bullets {
+    bottom: -5vh;
+    .swiper-pagination-bullet-active {
       background: #ff0d6a;
-      opacity: 1;
     }
   }
 }
