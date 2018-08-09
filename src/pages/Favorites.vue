@@ -136,8 +136,8 @@ export default {
         console.log(e)
       })
     },
-    loadUrl(url) {
-      this.$store.dispatch('getUrl',url);
+    loadUrl (url) {
+      this.$store.dispatch('getUrl', url)
     },
     reload: function (url) {
       this.dropNav = false
@@ -145,8 +145,8 @@ export default {
     }
   },
   computed: {
-    bookmarks(){
-      return this.$store.getters.bookmarks;
+    bookmarks () {
+      return this.$store.getters.bookmarks
     },
     urlChange: function () {
       return `http://${this.urlAddress}`

@@ -26,7 +26,7 @@
 
 <script>
 export default {
-   props: {
+  props: {
     account: {
       type: Object,
       default: function () {
@@ -49,7 +49,7 @@ export default {
       })
     }
   },
-   computed: {
+  computed: {
     chunkAddress () {
       return this.account.address.match(/.{1,3}/g)
     }

@@ -1,10 +1,10 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
+import Vue from 'vue'
+import Vuex from 'vuex'
 
-Vue.use(Vuex);
+Vue.use(Vuex)
 
 export const store = new Vuex.Store({
-  state:{
+  state: {
     accounts: [
       {
         name: 'Main Account',
@@ -67,35 +67,31 @@ export const store = new Vuex.Store({
       }
     ]
   },
-  getters:{
-    accounts(state){
-      return state.accounts;
+  getters: {
+    accounts (state) {
+      return state.accounts
     },
-    bookmarks(state){
-      return state.bookmarks;
+    bookmarks (state) {
+      return state.bookmarks
     }
   },
-  mutations:{
-    rename(state,accountName){
-      var account = state.accounts.find( account => {
-        return account.name == accountName;
-      });
-      account.editMode = true;
-      //const renaming={
-        //name: account.name
-      //};
-      //state.accounts.push(renaming);
+  mutations: {
+    rename (state, accountName) {
+      var account = state.accounts.find(account => {
+        return account.name === accountName
+      })
+      account.editMode = true
     },
-    getUrl(state,bookmarkUrl){
-      var bookmark = state.bookmarks.find( bookmark => {
-        return bookmark.urlAddress == bookmarkUrl
-      }); 
-      this.isBrowseEnable = true;
+    getUrl (state, bookmarkUrl) {
+      var bookmark = state.bookmarks.find(bookmark => {
+        return bookmark.urlAddress === bookmarkUrl
+      })
+      this.isBrowseEnable = true
     }
   },
-  actions:{
-    rename({ commit },accountName){
-        commit('rename', accountName)
+  actions: {
+    rename ({ commit }, accountName) {
+      commit('rename', accountName)
     }
   }
-});
+})

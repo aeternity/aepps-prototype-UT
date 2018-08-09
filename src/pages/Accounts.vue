@@ -33,6 +33,12 @@
       <div class="rectangle">
         +
       </div>
+      <div class="modal">
+        <button id="show-modal" @click="showModal = true">new account</button>
+        <modal v-if="showModal" @close="showModal = false">
+          <h3 slot="header">header</h3>
+        </modal>
+  </div>
       <div class="bottom">
         <div class="row">
           <div class="icn">
@@ -75,6 +81,7 @@ import Radio from '@/components/Radio'
 import CardFront from '@/components/cardFront'
 import CardBack from '@/components/cardBack'
 import { Swipe, SwipeItem } from 'vue-swipe'
+import Modal from '@/components/Modal'
 require('vue-swipe/dist/vue-swipe.css')
 
 export default {
@@ -85,10 +92,12 @@ export default {
     CardFront,
     CardBack,
     'swipe': Swipe,
-    'swipe-item': SwipeItem
+    'swipe-item': SwipeItem,
+    Modal
   },
   data () {
     return {
+      showModal: false,
       balance: 0,
       activeId: {
         name: 'Main Account',
@@ -103,9 +112,9 @@ export default {
       }
     }
   },
-  computed:{
-    accounts(){
-      return this.$store.getters.accounts;
+  computed: {
+    accounts () {
+      return this.$store.getters.accounts
     }
   },
   methods: {

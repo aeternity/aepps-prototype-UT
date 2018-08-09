@@ -58,19 +58,6 @@ export default {
   },
   props: {
     account: Object
-    // account: {
-    //   type: Object,
-    //   default: function () {
-    //     return {
-    //       name: 'Daily',
-    //       address: '0x2x3121231230x2x312123123',
-    //       balance: 0,
-    //       words: 'test test test',
-    //       unit: 'AE',
-    //       prior: 'main'
-    //     }
-    //   }
-    // }
   },
   data () {
     return {
@@ -78,8 +65,8 @@ export default {
     }
   },
   methods: {
-    edit(account) {
-      this.$store.dispatch('rename',account.name);
+    edit (account) {
+      this.$store.dispatch('rename', account.name)
     },
     save: function () {
       this.editMode = false
