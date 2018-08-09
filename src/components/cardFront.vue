@@ -33,7 +33,7 @@
         <img src="@/assets/icn/edit-light.svg" alt="">
         rename
       </div>
-      <div class="item" @click="save" v-if="editMode">
+      <div class="item" @click="save(account.id, account.name)" v-if="editMode">
         <img src="@/assets/icn/save-light.svg" alt="">
         save
       </div>
@@ -51,24 +51,13 @@
 
 <script>
 import { AeIdentityAvatar } from '@aeternity/aepp-components'
+
 export default {
   components: {
     AeIdentityAvatar
   },
   props: {
-    account: {
-      type: Object,
-      default: function () {
-        return {
-          name: 'Daily',
-          address: '0x2x3121231230x2x312123123',
-          balance: 0,
-          words: 'test test test',
-          unit: 'AE',
-          prior: 'main'
-        }
-      }
-    }
+    account: Object
   },
   data () {
     return {
@@ -79,7 +68,8 @@ export default {
     edit: function () {
       this.editMode = true
     },
-    save: function () {
+    save: function (id, name) {
+      this.$store.dispatch('renameAcc', {id, name})
       this.editMode = false
     },
     doCopy: function (text) {
@@ -96,7 +86,6 @@ export default {
 <style lang="scss" scoped>
 .card-front {
   max-width: 312px;
-  // max-height: 192px;
   margin: 0 auto;
   background: #ff0d6a;
   color: #ffffff;

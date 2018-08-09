@@ -8,7 +8,6 @@
         <span v-for="chunk in chunkAddress" :key="chunk">
           {{chunk}}
         </span>
-
       </div>
     </div>
     <div class="row actions">
@@ -28,18 +27,7 @@
 <script>
 export default {
   props: {
-    account: {
-      type: Object,
-      default: function () {
-        return {
-          name: 'Daily',
-          address: 'ak$G2CCeMjQffK5K21lIun3GzAuN13vhAfcKBrUPSKhSQ8RcgHP1e',
-          balance: 0,
-          words: 'test test test',
-          unit: 'AE'
-        }
-      }
-    }
+    account: Object
   },
   methods: {
     doCopy: function (text) {
