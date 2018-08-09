@@ -5,8 +5,8 @@
         <ae-identity-avatar class="avatar" :address="account.address"></ae-identity-avatar>
       </div>
       <div class="item">
-        <span v-if="!account.editMode">{{account.name}}</span>
-        <input type="text" v-if="account.editMode" v-model="account.name">
+        <span v-if="!editMode">{{account.name}}</span>
+        <input type="text" v-if="editMode" v-model="account.name">
       </div>
       <div class="item">
         {{`${account.balance} ${account.unit}`}}
@@ -29,11 +29,11 @@
       </div>
     </div>
     <div class="row actions">
-      <div class="item" @click="edit(account)" v-if="!account.editMode">
+      <div class="item" @click="edit" v-if="!editMode">
         <img src="@/assets/icn/edit-light.svg" alt="">
         rename
       </div>
-      <div class="item" @click="save" v-if="account.editMode">
+      <div class="item" @click="save(account.id, account.name)" v-if="editMode">
         <img src="@/assets/icn/save-light.svg" alt="">
         save
       </div>
@@ -65,10 +65,11 @@ export default {
     }
   },
   methods: {
-    edit (account) {
-      this.$store.dispatch('rename', account.name)
+    edit: function () {
+      this.editMode = true
     },
-    save: function () {
+    save: function (id, name) {
+      this.$store.dispatch('renameAcc', {id, name})
       this.editMode = false
     },
     doCopy: function (text) {
@@ -85,7 +86,6 @@ export default {
 <style lang="scss" scoped>
 .card-front {
   max-width: 312px;
-  // max-height: 192px;
   margin: 0 auto;
   background: #ff0d6a;
   color: #ffffff;

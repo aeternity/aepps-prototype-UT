@@ -35,10 +35,11 @@ export default {
     width: 85vw;
     margin: 0 auto;
     position: fixed;
-    z-index: 9998;
+    z-index: 9;
     top: 15%;
     border-radius: 4px;
-    box-shadow: 0 0 8px 0 rgba(27, 68, 121, 0.15);
+    box-shadow: 0 0 100vh 100vw rgba(255,255,255,.7);
+    
   }
 
   .modal-wrapper {
@@ -58,6 +59,7 @@ export default {
     line-height: 1.22;
     letter-spacing: -0.5px;
     color: #203040;
+    text-align: left;
   }
 
   .modal-title__secondary {

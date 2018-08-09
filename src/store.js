@@ -13,7 +13,7 @@ export const store = new Vuex.Store({
         balance: 24.65,
         unit: 'AE',
         prior: 'main',
-        editMode: false
+        id: 0
       },
       {
         name: 'Daily Account',
@@ -22,7 +22,7 @@ export const store = new Vuex.Store({
         balance: 20.65,
         unit: 'AE',
         prior: 'daily',
-        editMode: false
+        id: 1
       },
       {
         name: 'Trading Account',
@@ -31,7 +31,7 @@ export const store = new Vuex.Store({
         balance: 40.65,
         unit: 'AE',
         prior: 'trading',
-        editMode: false
+        id: 2
       }
     ],
     bookmarks: [
@@ -77,21 +77,30 @@ export const store = new Vuex.Store({
   },
   mutations: {
     rename (state, accountName) {
-      var account = state.accounts.find(account => {
+      let account = state.accounts.find(account => {
         return account.name === accountName
       })
       account.editMode = true
     },
+    Rename_Acc (state, {id, name}) {
+      state.accounts.find(account => {
+        return account.id === id
+      }).name = name
+    },
     getUrl (state, bookmarkUrl) {
-      var bookmark = state.bookmarks.find(bookmark => {
+      let bookmark = state.bookmarks.find(bookmark => {
         return bookmark.urlAddress === bookmarkUrl
       })
+      console.log(bookmark)
       this.isBrowseEnable = true
     }
   },
   actions: {
     rename ({ commit }, accountName) {
       commit('rename', accountName)
+    },
+    renameAcc: (context, {id, name}) => {
+      context.commit('Rename_Acc', {id, name})
     }
   }
 })

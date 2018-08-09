@@ -19,26 +19,25 @@
     </Header>
     <div class="top">
       <div class="container">
-        <swipe class="swipe" :auto="0" :continuous="false" :showIndicators="true"  ref="swipe">
-          <swipe-item>
+        <swiper :options="swipeOptions">
+          <swiper-slide>
             <cardFront :account="activeId"></cardFront>
-          </swipe-item>
-          <swipe-item>
+          </swiper-slide>
+          <swiper-slide>
             <cardBack :account="activeId"></cardBack>
-          </swipe-item>
-        </swipe>
+          </swiper-slide>
+          <div class="swiper-pagination" slot="pagination"></div>
+        </swiper>
       </div>
     </div>
     <div class="container">
-      <div class="rectangle">
+      <div class="rectangle" @click="showModal = true">
         +
       </div>
-      <div class="modal">
-        <button id="show-modal" @click="showModal = true">new account</button>
-        <modal v-if="showModal" @close="showModal = false">
-          <h3 slot="header">header</h3>
-        </modal>
-  </div>
+      <button id="show-modal" @click="showModal = true">new account</button>
+      <modal v-if="showModal" @close="showModal = false">
+        <h3 slot="header">header</h3>
+      </modal>
       <div class="bottom">
         <div class="row">
           <div class="icn">
@@ -80,9 +79,9 @@ import Header from '@/components/Header'
 import Radio from '@/components/Radio'
 import CardFront from '@/components/cardFront'
 import CardBack from '@/components/cardBack'
-import { Swipe, SwipeItem } from 'vue-swipe'
 import Modal from '@/components/Modal'
-require('vue-swipe/dist/vue-swipe.css')
+import { swiper, swiperSlide } from 'vue-awesome-swiper'
+import 'swiper/dist/css/swiper.css'
 
 export default {
   components: {
@@ -91,9 +90,9 @@ export default {
     Header,
     CardFront,
     CardBack,
-    'swipe': Swipe,
-    'swipe-item': SwipeItem,
-    Modal
+    Modal,
+    swiper,
+    'swiper-slide': swiperSlide
   },
   data () {
     return {
@@ -108,9 +107,15 @@ export default {
         prior: 'main'
       },
       swipeOptions: {
-        auto: 0
+        effect: 'flip',
+        pagination: {
+          el: '.swiper-pagination'
+        }
       }
     }
+  },
+  mounted () {
+    this.activeAcc()
   },
   computed: {
     accounts () {
@@ -135,86 +140,75 @@ export default {
 </script>
 <style lang="scss" scoped>
 .top {
-    height: 180px;
-    background-color: #edf3f7;
-    margin-bottom: 10vh;
-    .mint-swipe,
-    .mint-swipe-items-wrap {
-      overflow: visible !important;
-    }
-  }
+  height: 180px;
+  background-color: #edf3f7;
+  margin-bottom: 10vh;
+}
 .container {
   width: 85vw;
   margin: 0 auto;
-  .swipe {
-    height: 200px;
-  }
-  .mint-swipe .mint-swipe-indicators {
-    bottom: -10px !important;
-  }
 }
 .row {
-    display: flex;
-    align-items: center;
-    border-top: 1px solid #edf3f7;
-    .icn {
-      width: 32px;
-      height: 32px;
+  display: flex;
+  align-items: center;
+  border-top: 1px solid #edf3f7;
+  .icn {
+    width: 32px;
+    height: 32px;
+  }
+  .logo > div {
+    width: 32px;
+    height: 32px;
+  }
+  .content {
+    text-indent: 10px;
+    padding: 16px 0;
+    flex:3;
+    text-align:left;
+    h3,p {
+      margin: 0;
     }
-    .logo > div {
-      width: 32px;
-      height: 32px;
-    }
-    .content {
-      text-indent: 10px;
-      padding: 16px 0;
-      flex:3;
-      text-align:left;
-      h3,p {
-        margin: 0;
-      }
-      p {
-        font-size: 13px;
-      }
-    }
-    .radio {
-      flex:1;
-      text-align: right;
+    p {
+      font-size: 13px;
     }
   }
-  .avatar {
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    div {
-      width: 24px;
-      height: 24px;
-    }
+  .radio {
+    flex:1;
+    text-align: right;
   }
-  .rectangle {
-    color: white;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    background-color: #ff0d6a;
-    padding: 10px;
-    width: 30px;
-    height: 30px;
-    font-size: 22px;
-    font-weight: 400;
-    border-radius: 50%;
-    position: fixed;
-    top: 42vh;
-    right: 5vw;
+}
+.avatar {
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  div {
+    width: 24px;
+    height: 24px;
   }
+}
+.rectangle {
+  color: white;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-color: #ff0d6a;
+  padding: 10px;
+  width: 30px;
+  height: 30px;
+  font-size: 22px;
+  font-weight: 400;
+  border-radius: 50%;
+  position: fixed;
+  top: 42vh;
+  right: 5vw;
+}
 </style>
 <style lang="scss">
-.swipe {
-  .mint-swipe-indicators {
-    bottom: -29px;
-    .mint-swipe-indicator.is-active {
+.swiper-container {
+  .swiper-pagination-bullets {
+    bottom: -5vh;
+    .swiper-pagination-bullet-active {
       background: #ff0d6a;
-      opacity: 1;
     }
   }
 }
