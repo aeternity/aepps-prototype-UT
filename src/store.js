@@ -70,40 +70,63 @@ export const store = new Vuex.Store({
       {
         address: 'G2CCeMjQffK5K21lIun3GzAuN13vhAfcKBrUPSKhSQ8RcgHP1e',
         type: 'in',
-        value: 100,
+        value: '90.00',
         unit: 'AE',
         status: 'pending'
       },
       {
         address: 'G2CCK21lIun3GzAuN13vhAfcKBrUPSeMjQffK5KhSQ8RcgHP1e',
         type: 'out',
-        value: 110,
+        value: '60.00',
         unit: 'AE',
         status: 'pending'
       },
       {
         address: 'G2CCK21lAuN13vhAfcKBrUPSeMjQffK5KhSQ8RcgHP1eIun3Gz',
         type: 'in',
-        value: 110,
+        value: '10.00',
         unit: 'AE',
         status: '2018-10-13'
       },
       {
         address: 'G2CCeMjQffK5K21lIun3GzAuN13vhAfcKBrUPSKhSQ8RcgHP1e',
         type: 'in',
-        value: 55,
+        value: '55.00',
         unit: 'AE',
         status: 'pending'
-      }, {
+      },
+      {
         address: 'G2Cun3GzACK21lIuN13vBrUPSeMhAfcKjQffK5KhSQ8RcgHP1e',
         type: 'out',
-        value: 20,
+        value: '20.00',
         unit: 'AE',
         status: 'pending'
-      }, {
+      },
+      {
         address: 'G2CCK2hSQ8Rcg1lAuN13vhAfcKBrUPSeMjQffK5KHP1eIun3Gz',
         type: 'in',
-        value: 310,
+        value: '10.00',
+        unit: 'AE',
+        status: '2018-10-13'
+      },
+      {
+        address: 'G2CCeMjQffK5K21lIun3GzAuN13vhAfcKBrUPSKhSQ8RcgHP1e',
+        type: 'in',
+        value: '55.00',
+        unit: 'AE',
+        status: 'pending'
+      },
+      {
+        address: 'G2Cun3GzACK21lIuN13vBrUPSeMhAfcKjQffK5KhSQ8RcgHP1e',
+        type: 'out',
+        value: '20.00',
+        unit: 'AE',
+        status: 'pending'
+      },
+      {
+        address: 'G2CCK2hSQ8Rcg1lAuN13vhAfcKBrUPSeMjQffK5KHP1eIun3Gz',
+        type: 'in',
+        value: '10.00',
         unit: 'AE',
         status: '2018-10-13'
       }

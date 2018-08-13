@@ -1,7 +1,7 @@
 <template>
   <div class="tx">
     <div class="logo">
-      <ae-identity-avatar></ae-identity-avatar>
+      <ae-identity-avatar :address="tx.address"></ae-identity-avatar>
     </div>
     <div class="content">
       <div class="row">
@@ -56,6 +56,10 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  .logo .avatar{
+    width: 5vh;
+    height: 5vh;
+  }
   .content .row:nth-child(1) {
     font-family: 'aeternity mono';
     font-size: 15px;
