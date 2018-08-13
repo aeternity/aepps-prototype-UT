@@ -61,7 +61,8 @@
             </p>
           </div>
         </div>
-        <div class="row call-to-action">
+        <router-link to="/transactions">
+          <div class="row call-to-action">
           <div class="img">
             <div class="cirle Transactions"></div>
           </div>
@@ -74,6 +75,8 @@
             </p>
           </div>
         </div>
+        </router-link>
+        
       </div>
       <h1 class="title">
         <img src="@/assets/icn/bookmark.svg" alt="">
@@ -197,6 +200,9 @@ export default {
 .favorites {
   .top {
     margin: 5vh 0;
+    a {
+      text-decoration: none;
+    }
   }
   .container {
   width: 80vw;
