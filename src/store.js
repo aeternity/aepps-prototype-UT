@@ -65,6 +65,48 @@ export const store = new Vuex.Store({
         url: 'registrar.aepps.com',
         drop: false
       }
+    ],
+    txs: [
+      {
+        address: 'G2CCeMjQffK5K21lIun3GzAuN13vhAfcKBrUPSKhSQ8RcgHP1e',
+        type: 'in',
+        value: 100,
+        unit: 'AE',
+        status: 'pending'
+      },
+      {
+        address: 'G2CCK21lIun3GzAuN13vhAfcKBrUPSeMjQffK5KhSQ8RcgHP1e',
+        type: 'out',
+        value: 110,
+        unit: 'AE',
+        status: 'pending'
+      },
+      {
+        address: 'G2CCK21lAuN13vhAfcKBrUPSeMjQffK5KhSQ8RcgHP1eIun3Gz',
+        type: 'in',
+        value: 110,
+        unit: 'AE',
+        status: '2018-10-13'
+      },
+      {
+        address: 'G2CCeMjQffK5K21lIun3GzAuN13vhAfcKBrUPSKhSQ8RcgHP1e',
+        type: 'in',
+        value: 55,
+        unit: 'AE',
+        status: 'pending'
+      }, {
+        address: 'G2Cun3GzACK21lIuN13vBrUPSeMhAfcKjQffK5KhSQ8RcgHP1e',
+        type: 'out',
+        value: 20,
+        unit: 'AE',
+        status: 'pending'
+      }, {
+        address: 'G2CCK2hSQ8Rcg1lAuN13vhAfcKBrUPSeMjQffK5KHP1eIun3Gz',
+        type: 'in',
+        value: 310,
+        unit: 'AE',
+        status: '2018-10-13'
+      }
     ]
   },
   getters: {
@@ -73,6 +115,9 @@ export const store = new Vuex.Store({
     },
     bookmarks (state) {
       return state.bookmarks
+    },
+    txs (state) {
+      return state.txs
     }
   },
   mutations: {
