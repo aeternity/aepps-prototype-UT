@@ -7,6 +7,7 @@ import Settings from '@/pages/settings/Settings'
 import SettingsNetwork from '@/pages/settings/SettingsNetwork'
 import SettingsRemoteCon from '@/pages/settings/SettingsRemoteCon'
 import SettingsLang from '@/pages/settings/SettingsLang'
+import Transactions from '@/pages/transactions/Transactions'
 
 import Card from '@/components/cardFront'
 import CardB from '@/components/cardBack'
@@ -60,6 +61,11 @@ export default new Router({
       name: 'account',
       component: Account,
       props: true
+    },
+    {
+      path: '/transactions',
+      name: 'transactions',
+      component: Transactions
     }
   ]
 })
