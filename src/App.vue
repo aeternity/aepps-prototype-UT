@@ -1,12 +1,21 @@
 <template>
   <div id="app">
     <router-view/>
+    <page-home/>
+    <app-modal/>
   </div>
 </template>
 
 <script>
+import AppModal from './components/AppModal'
+import PageHome from './components/PageHome'
+
 export default {
-  name: 'App'
+  name: 'App',
+  components: {
+    AppModal,
+    PageHome
+  }
 }
 </script>
 <style src="@/assets/fonts/InterUI/inter-ui.css"></style>

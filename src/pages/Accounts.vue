@@ -31,12 +31,9 @@
       </div>
     </div>
     <div class="container">
-      <div class="rectangle" @click="showModal = true">
+      <div class="rectangle" @click="showModal('ModalAccount')">
         +
       </div>
-      <modal v-if="showModal" @close="showModal = false">
-        <h3 slot="header">header</h3>
-      </modal>
       <div class="bottom">
         <div class="row">
           <div class="icn">
@@ -78,9 +75,9 @@ import Header from '@/components/Header'
 import Radio from '@/components/Radio'
 import CardFront from '@/components/cardFront'
 import CardBack from '@/components/cardBack'
-import Modal from '@/components/Modal'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
 import 'swiper/dist/css/swiper.css'
+import { mapMutations } from 'vuex'
 
 export default {
   components: {
@@ -89,13 +86,11 @@ export default {
     Header,
     CardFront,
     CardBack,
-    Modal,
     swiper,
     'swiper-slide': swiperSlide
   },
   data () {
     return {
-      showModal: false,
       balance: 0,
       activeId: {
         name: 'Main Account',
@@ -129,11 +124,12 @@ export default {
       this.$refs.swipe.goto(1)
     },
     accountIn: function (arg) {
-      this.$router.push({ name: 'account', params: {account: arg} })
+      this.$router.push({ name: 'account', params: { account: arg } })
     },
     activeAcc: function (i = 0) {
       this.activeId = this.accounts[i]
-    }
+    },
+    ...mapMutations(['showModal'])
   }
 }
 </script>
@@ -143,10 +139,12 @@ export default {
   background-color: #edf3f7;
   margin-bottom: 10vh;
 }
+
 .container {
   width: 85vw;
   margin: 0 auto;
 }
+
 .row {
   display: flex;
   align-items: center;
@@ -162,9 +160,10 @@ export default {
   .content {
     text-indent: 10px;
     padding: 16px 0;
-    flex:3;
-    text-align:left;
-    h3,p {
+    flex: 3;
+    text-align: left;
+    h3,
+    p {
       margin: 0;
     }
     p {
@@ -172,10 +171,11 @@ export default {
     }
   }
   .radio {
-    flex:1;
+    flex: 1;
     text-align: right;
   }
 }
+
 .avatar {
   border-radius: 50%;
   display: flex;
@@ -185,6 +185,7 @@ export default {
     height: 24px;
   }
 }
+
 .rectangle {
   color: white;
   display: flex;
@@ -201,8 +202,7 @@ export default {
   top: 42vh;
   right: 5vw;
 }
-</style>
-<style lang="scss">
+
 .swiper-container {
   .swiper-pagination-bullets {
     bottom: -5vh;

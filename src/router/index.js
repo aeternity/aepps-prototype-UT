@@ -10,7 +10,7 @@ import SettingsLang from '@/pages/settings/SettingsLang'
 
 import Card from '@/components/cardFront'
 import CardB from '@/components/cardBack'
-import Modal from '@/components/Modal'
+import AppModal from '@/components/AppModal'
 
 Vue.use(Router)
 
@@ -61,11 +61,6 @@ export default new Router({
       name: 'account',
       component: Account,
       props: true
-    },
-    {
-      path: '/newAccount',
-      name: 'modal',
-      component: Modal
     }
   ]
 })

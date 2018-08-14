@@ -5,6 +5,8 @@ Vue.use(Vuex)
 
 export const store = new Vuex.Store({
   state: {
+    modalVisible: false,
+    modalComponent: null,
     accounts: [
       {
         name: 'Main Account',
@@ -82,7 +84,7 @@ export const store = new Vuex.Store({
       })
       account.editMode = true
     },
-    Rename_Acc (state, {id, name}) {
+    Rename_Acc (state, { id, name }) {
       state.accounts.find(account => {
         return account.id === id
       }).name = name
@@ -93,14 +95,21 @@ export const store = new Vuex.Store({
       })
       console.log(bookmark)
       this.isBrowseEnable = true
+    },
+    showModal (state, componentName) {
+      state.modalVisible = true
+      state.modalComponent = componentName
+    },
+    closeModal (state) {
+      state.modalVisible = false
     }
   },
   actions: {
     rename ({ commit }, accountName) {
       commit('rename', accountName)
     },
-    renameAcc: (context, {id, name}) => {
-      context.commit('Rename_Acc', {id, name})
+    renameAcc: (context, { id, name }) => {
+      context.commit('Rename_Acc', { id, name })
     }
   }
 })
