@@ -3,7 +3,7 @@
     <transition name="custom-classes-transition">
       <div v-if="visible" class="appModal__content" @click.self="closeModal">
         <div class="appModal__innerContent">
-          <component :is="component" />
+          <modal-account></modal-account>
         </div>
       </div>
     </transition>
@@ -12,26 +12,18 @@
 <script>
 import Vue from 'vue'
 import { mapState, mapMutations } from 'vuex'
+import ModalAccount from '@/components/modal/ModalAccount'
 
 export default {
   name: 'AppModal',
-  data () {
-    return {
-      component: null
-    }
+  components:{
+    ModalAccount
   },
   computed: {
     ...mapState({
       visible: 'modalVisible',
       modalComponent: 'modalComponent'
     })
-  },
-  watch: {
-    modalComponent (componentName) {
-      if (!componentName) return
-      Vue.component(componentName, () => import('./modal/ModalAccount'))
-      this.component = componentName
-    }
   },
   methods: {
     ...mapMutations([
