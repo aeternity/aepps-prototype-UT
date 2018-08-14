@@ -129,6 +129,32 @@ export const store = new Vuex.Store({
         value: '10.00',
         unit: 'AE',
         status: '2018-10-13'
+      },
+      {
+        address: 'G2Cun3GzACK21lIuN13vBrUPSeMhAfcKjQffK5KhSQ8RcgHP1e',
+        type: 'out',
+        value: '20.00',
+        unit: 'AE',
+        status: 'pending'
+      }, {
+        address: 'G2CCK2hSQ8Rcg1lAuN13vhAfcKBrUPSeMjQffK5KHP1eIun3Gz',
+        type: 'in',
+        value: '10.00',
+        unit: 'AE',
+        status: '2018-10-13'
+      },
+      {
+        address: 'G2Cun3GzACK21lIuN1PSeMhA3vBrUfcKjQffK5KhSQ8RcgHP1e',
+        type: 'out',
+        value: '20.00',
+        unit: 'AE',
+        status: 'pending'
+      }, {
+        address: 'G2SQ8RCCK2hcg1lAuN13vhAfcKBrUPSeeIun3MjQffK5KHP1Gz',
+        type: 'in',
+        value: '10.00',
+        unit: 'AE',
+        status: '2018-10-13'
       }
     ]
   },

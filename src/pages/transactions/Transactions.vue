@@ -6,8 +6,8 @@
         {{this.$route.name}}
       </template>
       <template slot="nav">
-        <router-link to="settings">
-          <img src="@/assets/icn/settings.svg" alt="">
+        <router-link to="transactions-filter">
+          <img src="@/assets/icn/filter.svg" alt="">
         </router-link>
         <router-link to="/">
           <img src="@/assets/icn/list.svg" alt="">
