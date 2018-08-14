@@ -34,6 +34,7 @@
       <div class="rectangle" @click="showModal('ModalAccount')">
         +
       </div>
+      <app-modal></app-modal>
       <div class="bottom">
         <div class="row">
           <div class="icn">
@@ -78,6 +79,7 @@ import CardBack from '@/components/cardBack'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
 import 'swiper/dist/css/swiper.css'
 import { mapMutations } from 'vuex'
+import AppModal from '@/components/AppModal'
 
 export default {
   components: {
@@ -87,7 +89,8 @@ export default {
     CardFront,
     CardBack,
     swiper,
-    'swiper-slide': swiperSlide
+    'swiper-slide': swiperSlide,
+    AppModal
   },
   data () {
     return {
@@ -204,6 +207,7 @@ export default {
 }
 
 .swiper-container {
+  z-index:0;
   .swiper-pagination-bullets {
     bottom: -5vh;
     .swiper-pagination-bullet-active {

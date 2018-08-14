@@ -140,6 +140,7 @@ form:hover {
 .modal-header {
   display: flex;
   justify-content: space-evenly;
+  align-items:flex-start;
 }
 
 .modal-title {
@@ -151,6 +152,7 @@ form:hover {
   letter-spacing: -0.5px;
   color: #203040;
   text-align: left;
+  margin:0;
 }
 
 .modal-title__secondary {
@@ -168,7 +170,6 @@ form:hover {
 }
 
 .icn {
-  padding-top: 20px;
   width: 17px;
   height: 24px;
   object-fit: contain;
@@ -192,8 +193,8 @@ input {
 }
 
 .btn {
-  width: 269px;
-  height: 56px;
+  width: 65vw;
+  height: 8vh;
   opacity: 0.2;
   border-radius: 32px;
   background-color: #ff0d6a;
