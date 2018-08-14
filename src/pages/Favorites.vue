@@ -76,7 +76,6 @@
           </div>
         </div>
         </router-link>
-        
       </div>
       <h1 class="title">
         <img src="@/assets/icn/bookmark.svg" alt="">

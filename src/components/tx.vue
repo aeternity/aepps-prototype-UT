@@ -43,12 +43,12 @@
 import { AeIdentityAvatar } from '@aeternity/aepp-components'
 export default {
   components: {
-    AeIdentityAvatar    
+    AeIdentityAvatar
   },
   props: {
     tx: Object
   }
-}  
+}
 </script>
 
 <style lang="scss" scoped>

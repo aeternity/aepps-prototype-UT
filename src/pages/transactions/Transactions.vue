@@ -37,7 +37,7 @@
         </div>
       </div>
     </div>
-    </div>  
+    </div>
     <div class="container">
       <div class="trx-list">
         <tx :tx="tx" v-for="(tx, index) in txs" :key="index"></tx>
@@ -56,19 +56,17 @@ export default {
     AeIdentityAvatar,
     tx
   },
-  data() {
+  data () {
     return {
       selectedType: 'all'
     }
   },
   computed: {
     txs () {
-      console.log(this.selectedType)
-      if(this.selectedType === 'all') {
+      if (this.selectedType === 'all') {
         return this.$store.getters.txs
       } else {
-        return this.$store.getters.txs
-        .filter(tx => tx.type === this.selectedType)  
+        return this.$store.getters.txs.filter(tx => tx.type === this.selectedType)
       }
     }
   }
@@ -112,7 +110,7 @@ export default {
         flex: 1;
         text-align: center;
       }
-    } 
+    }
   }
   .filter-nav .item.active {
     box-shadow: inset 0px -2px 0 0 #ff0d6a;
@@ -129,4 +127,3 @@ export default {
   }
 }
 </style>
-
