@@ -50,13 +50,13 @@
 </template>
 
 <script>
-import { AeIdentityAvatar } from '@aeternity/aepp-components'
 import radio from '@/components/Radio'
 import Header from '@/components/Header'
 
 export default {
   components: {
-    radio, Header, AeIdentityAvatar
+    radio,
+    Header
   }
 }
 </script>

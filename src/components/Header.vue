@@ -8,7 +8,7 @@
     </div>
     <div class="nav">
       <slot name="nav" />
-      <router-link class="avatar activeId" to="accounts">
+      <router-link class="avatar activeId" to="/accounts">
           <ae-identity-avatar :address=activeAccAddress.address>
           </ae-identity-avatar>
       </router-link>

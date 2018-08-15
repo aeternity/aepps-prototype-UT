@@ -10,29 +10,19 @@
         <router-link to="/">
           <img src="@/assets/icn/list.svg" alt="">
         </router-link>
-        <router-link class="avatar" to="accounts">
-          <ae-identity-avatar address="">
-          </ae-identity-avatar>
-        </router-link>
       </template>
     </Header>
 </template>
 <script>
 import Header from '@/components/Header'
-import { AeIdentityAvatar } from '@aeternity/aepp-components'
 export default {
   components: {
-    Header,
-    AeIdentityAvatar
+    Header
   }
 }
 </script>
 <style lang="scss" scoped>
-.avatar div {
-  width: 24px;
-  height: 24px;
-  display: flex;
-}
+
 </style>
 
 

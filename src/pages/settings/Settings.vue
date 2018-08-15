@@ -68,11 +68,9 @@
 
 <script>
 import Header from '@/components/Header'
-import { AeIdentityAvatar } from '@aeternity/aepp-components'
 export default {
   components: {
-    Header,
-    AeIdentityAvatar
+    Header
   }
 }
 </script>

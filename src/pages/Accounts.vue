@@ -11,10 +11,6 @@
         <router-link to="/">
           <img src="@/assets/icn/list.svg" alt="">
         </router-link>
-        <!-- <router-link class="avatar" to="accounts">
-          <ae-identity-avatar :address=activeAccAddress.address>
-          </ae-identity-avatar>
-        </router-link> -->
       </template>
     </Header>
     <div class="top">
@@ -70,23 +66,22 @@
 </template>
 
 <script>
-import { AeIdentityAvatar } from '@aeternity/aepp-components'
 import Header from '@/components/Header'
 import Radio from '@/components/Radio'
 import CardFront from '@/components/cardFront'
 import CardBack from '@/components/cardBack'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
 import 'swiper/dist/css/swiper.css'
-
+import { AeIdentityAvatar } from '@aeternity/aepp-components'
 export default {
   components: {
     Radio,
-    AeIdentityAvatar,
     Header,
     CardFront,
     CardBack,
     swiper,
-    'swiper-slide': swiperSlide
+    'swiper-slide': swiperSlide,
+    AeIdentityAvatar
   },
   data () {
     return {
@@ -126,8 +121,7 @@ export default {
       this.$router.push({ name: 'account', params: {account: arg} })
     },
     activeAcc: function (i = 0) {
-      this.activeId = this.accounts[i]
-      let acc = this.activeId
+      let acc = this.accounts[i]
       this.$store.dispatch('setActiveAccount', acc.id)
     }
   }

@@ -12,10 +12,6 @@
         <router-link to="/">
           <img src="@/assets/icn/list.svg" alt="">
         </router-link>
-        <router-link class="avatar" to="accounts">
-          <ae-identity-avatar address='ak$G2CCeMjQffK5K21lIun3GzAuN13vhAfcKBrUPSKhSQ8RcgHP1e'>
-          </ae-identity-avatar>
-        </router-link>
       </template>
     </Header>
     <div class="filter-nav">
@@ -74,15 +70,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.avatar {
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  div {
-    width: 24px;
-    height: 24px;
-  }
-}
 .container {
   width: 80vw;
   margin: 0 auto;

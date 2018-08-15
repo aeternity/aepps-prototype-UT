@@ -52,10 +52,10 @@
 <script>
 import radio from '@/components/Radio'
 import Header from '@/components/Header'
-import { AeIdentityAvatar } from '@aeternity/aepp-components'
 export default {
   components: {
-    radio, Header, AeIdentityAvatar
+    radio,
+    Header
   }
 }
 </script>
