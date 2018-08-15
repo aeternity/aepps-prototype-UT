@@ -13,7 +13,8 @@ export const store = new Vuex.Store({
         balance: 24.65,
         unit: 'AE',
         prior: 'main',
-        id: 0
+        id: 0,
+        active: true
       },
       {
         name: 'Daily Account',
@@ -22,7 +23,8 @@ export const store = new Vuex.Store({
         balance: 20.65,
         unit: 'AE',
         prior: 'daily',
-        id: 1
+        id: 1,
+        active: false
       },
       {
         name: 'Trading Account',
@@ -31,7 +33,8 @@ export const store = new Vuex.Store({
         balance: 40.65,
         unit: 'AE',
         prior: 'trading',
-        id: 2
+        id: 2,
+        active: false
       }
     ],
     bookmarks: [
@@ -167,15 +170,12 @@ export const store = new Vuex.Store({
     },
     txs (state) {
       return state.txs
+    },
+    activeAcc (state) {
+      return state.accounts.find(acc => { return acc.active === true })
     }
   },
   mutations: {
-    rename (state, accountName) {
-      let account = state.accounts.find(account => {
-        return account.name === accountName
-      })
-      account.editMode = true
-    },
     Rename_Acc (state, {id, name}) {
       state.accounts.find(account => {
         return account.id === id
@@ -187,14 +187,25 @@ export const store = new Vuex.Store({
       })
       console.log(bookmark)
       this.isBrowseEnable = true
+    },
+    disableActiveAccounts (state) {
+      return state.accounts.map(acc => { acc.active = false })
+    },
+    activateAcc (state, id) {
+      console.log(id)
+      let active = state.accounts.find(acc => {
+        return acc.id === id
+      })
+      active.active = true
     }
   },
   actions: {
-    rename ({ commit }, accountName) {
-      commit('rename', accountName)
-    },
     renameAcc: (context, {id, name}) => {
       context.commit('Rename_Acc', {id, name})
+    },
+    setActiveAccount: (context, account) => {
+      context.commit('disableActiveAccounts')
+      context.commit('activateAcc', account)
     }
   }
 })

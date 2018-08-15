@@ -11,10 +11,10 @@
         <router-link to="/">
           <img src="@/assets/icn/list.svg" alt="">
         </router-link>
-        <router-link class="avatar" to="accounts">
-          <ae-identity-avatar address='ak$G2CCeMjQffK5K21lIun3GzAuN13vhAfcKBrUPSKhSQ8RcgHP1e'>
+        <!-- <router-link class="avatar" to="accounts">
+          <ae-identity-avatar :address=activeAccAddress.address>
           </ae-identity-avatar>
-        </router-link>
+        </router-link> -->
       </template>
     </Header>
     <div class="top">
@@ -113,6 +113,9 @@ export default {
   computed: {
     accounts () {
       return this.$store.getters.accounts
+    },
+    activeAccAddress () {
+      return this.$store.getters.activeAcc
     }
   },
   methods: {
@@ -127,6 +130,8 @@ export default {
     },
     activeAcc: function (i = 0) {
       this.activeId = this.accounts[i]
+      let acc = this.activeId
+      this.$store.dispatch('setActiveAccount', acc.id)
     }
   }
 }

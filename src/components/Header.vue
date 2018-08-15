@@ -8,12 +8,26 @@
     </div>
     <div class="nav">
       <slot name="nav" />
+      <router-link class="avatar activeId" to="accounts">
+          <ae-identity-avatar :address=activeAccAddress.address>
+          </ae-identity-avatar>
+      </router-link>
     </div>
   </div>
 </template>
 
 <script>
-export default {}
+import { AeIdentityAvatar } from '@aeternity/aepp-components'
+export default {
+  components: {
+    AeIdentityAvatar
+  },
+  computed: {
+    activeAccAddress () {
+      return this.$store.getters.activeAcc
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -44,15 +58,11 @@ export default {}
       a {
         display: flex;
       }
-      .avatar {
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        div {
-          width: 24px;
-          height: 24px;
-        }
+      .activeId div{
+        width: 24px;
+        height: 24px;
       }
     }
   }
 </style>
+
