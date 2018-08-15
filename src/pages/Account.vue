@@ -11,10 +11,6 @@
         <router-link to="/">
           <img src="@/assets/icn/list.svg" alt="">
         </router-link>
-        <router-link class="avatar" to="accounts">
-          <ae-identity-avatar :address='this.$route.params.account.address'>
-          </ae-identity-avatar>
-        </router-link>
       </template>
     </Header>
     <div class="top">
@@ -148,10 +144,6 @@ export default {
         letter-spacing: 1.8px;
       }
     }
-  }
-  .avatar div {
-    width: 24px;
-    height: 24px;
   }
 }
 </style>

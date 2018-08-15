@@ -40,10 +40,6 @@
         <div v-if="isBrowserMin" @click="isBrowserMin = false">
           <img src="@/assets/icn/arrow-up.svg" alt="">
         </div>
-        <router-link class="avatar" to="accounts">
-          <ae-identity-avatar address='ak$G2CCeMjQffK5K21lIun3GzAuN13vhAfcKBrUPSKhSQ8RcgHP1e'>
-          </ae-identity-avatar>
-        </router-link>
       </template>
     </Header>
     <div class="container">

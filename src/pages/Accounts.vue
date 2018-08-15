@@ -107,9 +107,6 @@ export default {
       }
     }
   },
-  mounted () {
-    this.activeAcc()
-  },
   computed: {
     accounts () {
       return this.$store.getters.accounts
@@ -173,15 +170,6 @@ export default {
   .radio {
     flex:1;
     text-align: right;
-  }
-}
-.avatar {
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  div {
-    width: 24px;
-    height: 24px;
   }
 }
 .rectangle {

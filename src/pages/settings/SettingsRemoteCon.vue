@@ -16,10 +16,6 @@
         <router-link to="/">
           <img src="@/assets/icn/list.svg" alt="">
         </router-link>
-        <router-link class="avatar" to="accounts">
-          <ae-identity-avatar address='ak$G2CCeMjQffK5K21lIun3GzAuN13vhAfcKBrUPSKhSQ8RcgHP1e'>
-          </ae-identity-avatar>
-        </router-link>
       </template>
     </Header>
     <div class="container">
@@ -95,13 +91,4 @@ export default {
     border-bottom: 0;
   }
 }
-.avatar {
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        div {
-          width: 24px;
-          height: 24px;
-        }
-  }
 </style>
