@@ -14,14 +14,14 @@
         <div class="modal-body">
           <form action="">
             <div class="field">
-              <input type="text" name="name" id="name" placeholder="My Play Account" v-on:keyup="enableButton = true">
+              <input type="text" name="name" id="name" placeholder="My Play Account" v-on:keyup="enableButton = true" v-model="account.name">
               <label for="name">Name*</label>
             </div>
           </form>
         </div>
         <div class="modal-footer">
           <div class="btn" :disabled="enableButton">
-            <a href="#" class="btn_link"> Create account </a>
+            <a href="#" class="btn_link" @click="registerAcc(account.name)"> Create account </a>
           </div>
         </div>
         <button class="modalAccount__cancel" @click="closeModal">Cancel</button>
@@ -41,7 +41,16 @@ export default {
     }
   },
   methods: {
-    ...mapMutations(['closeModal'])
+    ...mapMutations(['closeModal']),
+    registerAcc: function (name) {
+      this.$store.dispatch('addNewAcc', name)
+      this.account.name = ''
+    }
+  },
+  computed: {
+    account () {
+      return this.$store.state.account
+    }
   }
 }
 </script>
@@ -132,7 +141,6 @@ form:hover {
 .modal-wrapper {
   width: 85vw;
   margin: 0 auto;
-  z-index: 9;
   border-radius: 4px;
   box-shadow: 0 0 8px 0 rgba(27, 68, 121, 0.15);
 }
@@ -145,7 +153,6 @@ form:hover {
 
 .modal-title {
   width: 90%;
-  height: 56px;
   font-size: 23px;
   font-weight: 500;
   line-height: 1.22;
@@ -160,7 +167,7 @@ form:hover {
 }
 
 .modal-container {
-  height: 311px;
+  min-height: 50vh;
   background-color: #ffffff;
   box-shadow: 0 0 8px 0 rgba(27, 68, 121, 0.15);
   display: flex;
@@ -181,7 +188,6 @@ form:hover {
 }
 
 input {
-  line-height: 1.41;
   background-color: #f7fafc;
   font-size: 17px;
   display: inline-block;

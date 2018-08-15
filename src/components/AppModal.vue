@@ -16,7 +16,7 @@ import ModalAccount from '@/components/modal/ModalAccount'
 
 export default {
   name: 'AppModal',
-  components:{
+  components: {
     ModalAccount
   },
   computed: {

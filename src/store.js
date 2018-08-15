@@ -7,6 +7,15 @@ export const store = new Vuex.Store({
   state: {
     modalVisible: false,
     modalComponent: null,
+    account: {
+      name: '',
+      address: 'ak$G2CCeMjQffK5K21lIun3GzAuN13vhAfcKBrUPSKhSQ8RcgHP1e',
+      words: 'alive fussy bluetonguelizard',
+      balance: 24.65,
+      unit: 'AE',
+      prior: 'main',
+      id: 0
+    },
     accounts: [
       {
         name: 'Main Account',
@@ -102,6 +111,17 @@ export const store = new Vuex.Store({
     },
     closeModal (state) {
       state.modalVisible = false
+    },
+    AddUser (state, payload) {
+      state.accounts.push({
+        name: payload,
+        address: 'adagagdstertPSKhSQ8RcgHP1eK21lIun3GzAQffK5hAfcKBruN',
+        words: 'Lorem ipsum dolor',
+        balance: 20.1,
+        unit: 'AE',
+        prior: 'daily',
+        id: 5
+      })
     }
   },
   actions: {
@@ -110,6 +130,9 @@ export const store = new Vuex.Store({
     },
     renameAcc: (context, { id, name }) => {
       context.commit('Rename_Acc', { id, name })
+    },
+    addNewAcc ({ commit }, data) {
+      commit('AddUser', data)
     }
   }
 })
