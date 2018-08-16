@@ -203,9 +203,9 @@ export const store = new Vuex.Store({
     renameAcc: (context, {id, name}) => {
       context.commit('Rename_Acc', {id, name})
     },
-    setActiveAccount: async (context, id) => {
-      await context.commit('disableActiveAccounts')
-      await context.commit('activateAcc', id)
+    setActiveAccount: (context, id) => {
+      context.commit('disableActiveAccounts')
+      context.commit('activateAcc', id)
     }
   }
 })
