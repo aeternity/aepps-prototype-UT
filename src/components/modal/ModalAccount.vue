@@ -12,12 +12,12 @@
           </h1>
         </div>
         <div class="modal-body">
-          <form action="">
-            <div class="field">
-              <input type="text" name="name" id="name" placeholder="My Play Account" v-on:keyup="enableButton = true" v-model="account.name">
-              <label for="name">Name*</label>
-            </div>
-          </form>
+            <form action="">
+              <div class="field">
+                <input type="text" name="fullname" id="fullname" placeholder="My Play Account" v-on:keyup="enableButton = true" v-model="account.name">
+                <label for="fullname">Name*</label>
+              </div>
+            </form>
         </div>
         <div class="modal-footer">
           <div class="btn" :disabled="enableButton">
@@ -55,20 +55,26 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+
 form {
+  width:65vw;
   height: 10%;
   background-color: #f7fafc;
 }
 
+form:active,
+form:focus,
+form:hover {
+  box-shadow: inset 4px 0px #b300ff;
+}
+
 .field {
-  width: 65vw;
   display: flex;
   flex-flow: column-reverse;
   margin-bottom: 1em;
 }
 
-label,
-input {
+label, input {
   transition: all 0.2s;
   touch-action: manipulation;
 }
@@ -76,34 +82,31 @@ input {
 input {
   font-size: 1.5em;
   border: 0;
-  border-bottom: 1px solid #ccc;
   font-family: inherit;
-  border-radius: 0;
+  border-radius: 5px;
   padding: 0;
   cursor: text;
   caret-color: #ff0d6a;
+  background-color: #f7fafc;
+  display: inline-block;
+  color: #76818c;
+  transform: translate(0, 0.6em);
 }
 
 input:focus {
   outline: 0;
+  margin-left: 4%;
 }
 
 input:placeholder-shown + label {
   cursor: text;
-  transform-origin: right;
+  max-width: 30%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  transform-origin: left bottom;
   transform: translate(0, 1.5rem) scale(1.5);
   color: #76818c;
-}
-
-input:not(:placeholder-shown) + label,
-input:focus + label {
-  transform: translate(-80px, 5px);
-  cursor: pointer;
-  margin: 0;
-  color: #b300ff;
 }
 
 ::placeholder {
@@ -113,6 +116,15 @@ input:focus + label {
 
 input:focus::placeholder {
   opacity: 1;
+}
+
+input:not(:placeholder-shown) + label,
+input:focus + label {
+  transform: translate(0, 0) scale(1);
+  cursor: pointer;
+  margin: 0;
+  margin-right: 11em;
+  color: #b300ff;
 }
 
 form:active,
@@ -185,17 +197,6 @@ form:hover {
   line-height: 1.41;
   letter-spacing: normal;
   color: #203040;
-}
-
-input {
-  background-color: #f7fafc;
-  font-size: 17px;
-  display: inline-block;
-  border: 0;
-  border-radius: 5px;
-  color: #76818c;
-  transform: translate(0, 10px);
-  margin-left: 7%;
 }
 
 .btn {
