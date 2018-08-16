@@ -17,10 +17,10 @@
       <div class="container">
         <swiper :options="swipeOptions">
           <swiper-slide>
-            <cardFront :account="activeId"></cardFront>
+            <cardFront :account="activeAccAddress"></cardFront>
           </swiper-slide>
           <swiper-slide>
-            <cardBack :account="activeId"></cardBack>
+            <cardBack :account="activeAccAddress"></cardBack>
           </swiper-slide>
           <div class="swiper-pagination" slot="pagination"></div>
         </swiper>

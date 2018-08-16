@@ -9,6 +9,7 @@ import SettingsRemoteCon from '@/pages/settings/SettingsRemoteCon'
 import SettingsLang from '@/pages/settings/SettingsLang'
 import Transactions from '@/pages/transactions/Transactions'
 import TransactionsFilter from '@/pages/transactions/TransactionsFilter'
+import Transfer from '@/pages/Transfer'
 import Card from '@/components/cardFront'
 import CardB from '@/components/cardBack'
 
@@ -71,6 +72,11 @@ export default new Router({
       path: '/transactions-filter',
       name: 'transactions-filter',
       component: TransactionsFilter
+    },
+    {
+      path: '/transfer',
+      name: 'transfer',
+      component: Transfer
     }
   ]
 })
