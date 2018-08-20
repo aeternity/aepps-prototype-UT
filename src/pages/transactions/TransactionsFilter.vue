@@ -62,7 +62,7 @@
             Type ak$ address or AENS name, or choose one of your accounts …
           </p>
           <div class="row__btn">
-            <div>
+            <div class="icn">
               <img src="@/assets/icn/share.svg" alt=""> Accounts
             </div>
             <div>
@@ -96,14 +96,14 @@ export default {
     return {
       isBrowseEnable: false,
       isBrowserMin: false,
-      selectedSort: 'Data(descending)',
+      selectedSort: 'Date (descending)',
       selectedDirection: 'Outgoing Transactions',
       firstSelectedRange: 'From',
       secondSelectedRange: 'To',
       selectedAddress: 'Select',
       sortOptions: [
-        { text: 'Data(descending)', value: 'Data(descending)' },
-        { text: 'Data(ascending)', value: 'Data(ascending)' }
+        { text: 'Date (descending)', value: 'Date (descending)' },
+        { text: 'Date (ascending)', value: 'Date(ascending)' }
       ],
       directionOptions: [
         { text: 'Outgoing Transactions', value: 'Outgoing Transactions' },
@@ -129,6 +129,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+
   .container {
     display: flex;
     justify-content: space-evenly;
@@ -147,6 +148,11 @@ export default {
     background-color: #f7fafc;
   }
 
+  .item:nth-child(2),
+  .item:first-child {
+    position: relative;
+  }
+
   .title {
     font-size: 0.8em;
     line-height: 1em;
@@ -155,6 +161,14 @@ export default {
     margin: 0.5em 0 0 1em;
   }
 
+  .item:nth-child(2):after,
+  .item:first-child:after {
+    content: '>';
+    right: 11px;
+    padding: 1.5em 0 0 0;
+    position: absolute;
+    pointer-events: none;
+  }
   .select {
     border: 0;
     background: transparent;
@@ -162,7 +176,15 @@ export default {
     font-size: 1.125em;
     line-height: 1.33;
     margin: 0 1em 0 0.5em;
+    appearance: none;
+    display: block;
+    background-image: none;
+    word-break: normal;
+    width:100%;
     &.bcg {
+      width:30%;
+      margin:0;
+      appearance: menulist-button;
       letter-spacing: 0.3px;
       text-align: right;
       color: #76818c;
@@ -180,10 +202,19 @@ export default {
   }
 
   .itemRow {
+    position: relative;
     display: flex;
-    width: 40%;
+    width: 45%;
     justify-content: space-between;
     background-color: #f7fafc;
+  }
+
+  .itemRow:after {
+    content: '>';
+    right: 11px;
+    padding: 1.5em 0 0 0;
+    position: absolute;
+    pointer-events: none;
   }
 
   .row {
@@ -197,10 +228,14 @@ export default {
     background-color: #edf3f7;
   }
 
+  .icn {
+    flex:2;
+  }
   .text {
     line-height: 1.5em;
     color: #76818c;
     line-height: 1.41;
+    margin: 3vh 0 5vh 2vh;
   }
 
   .btn {
