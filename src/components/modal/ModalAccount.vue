@@ -1,33 +1,33 @@
 <template>
   <div class="modalAccount">
-<div class="modal">
-    <div class="modal-wrapper">
-      <div class="modal-container">
-        <div class="modal-header">
-          <div class="icn">
-            ↪
+    <div class="modal">
+      <div class="modal-wrapper">
+        <div class="modal-container">
+          <div class="modal-header">
+            <div class="icn">
+              ↪
+            </div>
+            <h1 class="modal-title">Name your
+              <span class="modal-title__secondary">new account</span>
+            </h1>
           </div>
-          <h1 class="modal-title">Name your
-            <span class="modal-title__secondary">new account</span>
-          </h1>
-        </div>
-        <div class="modal-body">
+          <div class="modal-body">
             <form action="">
               <div class="field">
                 <input type="text" name="fullname" id="fullname" placeholder="My Play Account" v-on:keyup="enableButton = true" v-model="account.name">
                 <label for="fullname">Name*</label>
               </div>
             </form>
-        </div>
-        <div class="modal-footer">
-          <div class="btn" :disabled="enableButton">
-            <a href="#" class="btn_link" @click="registerAcc(account.name)"> Create account </a>
           </div>
+          <div class="modal-footer">
+            <div class="btn" :disabled="enableButton">
+              <a href="#" class="btn_link" @click="registerAcc(account.name)"> Create account </a>
+            </div>
+          </div>
+          <!-- <button class="modalAccount__cancel" @click="closeModal">Cancel</button> -->
         </div>
-        <button class="modalAccount__cancel" @click="closeModal">Cancel</button>
       </div>
     </div>
-  </div>
   </div>
 </template>
 <script>
@@ -45,6 +45,7 @@ export default {
     registerAcc: function (name) {
       this.$store.dispatch('addNewAcc', name)
       this.account.name = ''
+      this.$store.commit('closeModal')
     }
   },
   computed: {
@@ -60,6 +61,7 @@ form {
   width:65vw;
   height: 10%;
   background-color: #f7fafc;
+  padding: 2vh 0;
 }
 
 form:active,
@@ -130,7 +132,7 @@ input:focus + label {
 form:active,
 form:focus,
 form:hover {
-  box-shadow: inset 4px 0px #b300ff;
+  box-shadow: inset 2px 0px #b300ff;
 }
 
 .modal {
@@ -214,7 +216,6 @@ form:hover {
   text-decoration: none;
   padding-top: 20px;
   height: 16px;
-  opacity: 0.2;
   font-size: 13px;
   font-weight: bold;
   line-height: 1.23;
