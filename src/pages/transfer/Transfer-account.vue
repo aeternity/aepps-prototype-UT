@@ -16,8 +16,8 @@
     <div class="container">
       <div class="step step1" v-if="!isEnterAmountActive">
         <h1>
-          Choose the <strong>recipient</strong> you
-          want to transfer funds to.
+          Choose the
+          <strong>recipient</strong> you want to transfer funds to.
         </h1>
         <h1>
           Your active account is:
@@ -49,23 +49,24 @@
               </div>
             </div>
             <div class="address-input">
-              <textarea name="" id="" placeholder="Type ak$ address or AENS name, or choose one of your accounts …"></textarea>
+              <textarea name="" id="" placeholder="Type ak$ address or AENS name, or choose one of your accounts …" v-model="recipientAddress">
+              </textarea>
             </div>
             <div class="actions">
               <div class="item"></div>
               <div class="item">
-                <img src="@/assets/icn/paste.svg" alt="">
-                paste
+                <img src="@/assets/icn/paste.svg" alt=""> paste
               </div>
               <div class="item">
-                <img src="@/assets/icn/camera.svg" alt="">
-                scan
+                <img src="@/assets/icn/camera.svg" alt=""> scan
               </div>
             </div>
           </div>
         </div>
-        <div class="action" @click="isEnterAmountActive = true">
-          <button>NEXT</button>
+        <div class="action">
+          <router-link to="/transfer-amount">
+            <button @click="setAddress(recipientAddress)" :disabled="!recipientAddress">NEXT</button>
+          </router-link>
         </div>
       </div>
     </div>
@@ -87,9 +88,15 @@ export default {
       return this.activeAccount.address.match(/.{1,3}/g)
     }
   },
-  data() {
+  data () {
     return {
-      isEnterAmountActive: false
+      isEnterAmountActive: false,
+      recipientAddress: null
+    }
+  },
+  methods: {
+    setAddress: function (address) {
+      this.$store.commit('setRecipientAddress', address)
     }
   }
 }
@@ -161,17 +168,6 @@ export default {
         padding: 25px 16px;
       }
     }
-    .address-input.amount {
-      input {
-        width: 100%;
-        font-size: 53px;
-        text-align: center;
-        font-weight: 300;
-        font-family: 'aeternity mono';
-        color: #76818c;
-        letter-spacing: -2.27px;
-      }
-    }
     .actions {
       background-color: #edf3f7;
       display: flex;
@@ -206,74 +202,9 @@ export default {
       width: 90vw;
       border-radius: 32px;
     }
-  }
-  .table-sum {
-    display: flex;
-    flex-direction: column;
-    .row {
-      margin: 1.5vh 0;
-      .item {
-        flex:1;
-        font-size: 13px;
-        font-weight: 500;
-      }
-      .item:nth-child(1) {
-        text-align: left;
-        color: #76818c;
-      }
-      .item:nth-child(2) {
-        text-align: right;
-        color: #203040;
-      }
-    }
-    .total {
-      .item:nth-child(1) {
-        color: #203040;
-      }
-      .item:nth-child(2) {
-        color: #ff0070;
-      }
-    }
-    .hr {
-      height: 2px;
-      background-color: #edf3f7;
+    button:disabled {
+      opacity: .2;
     }
   }
-  .row.chunked {
-      display: flex;
-      flex-direction: column;
-      h3 {
-        width: 100%;
-        text-align: left;
-        color: #76818c;
-        font-weight: 500;
-      }
-    }
-  .words{
-        display: grid;
-        grid-template-columns: 16.6% 16.6% 16.6% 16.6% 16.6% 16.6%;
-        font-family: 'aeternity mono';
-        color: #203040;
-        letter-spacing: 1.8px;
-        font-size: 17px;
-        width: 100%;
-      }
-      .actions.final {
-        display: flex;
-        .item {
-          font-size: 15px;
-          font-weight: 500;
-          flex:1;
-          align-items: center;
-        }
-        .item:nth-child(1) {
-          color: #203040;
-          background-color: #fff;
-        }
-        .item:nth-child(2) {
-          color: #fff;
-          background-color: #ff0d6a;
-        }
-      }
 }
 </style>

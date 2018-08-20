@@ -159,7 +159,9 @@ export const store = new Vuex.Store({
         unit: 'AE',
         status: '2018-10-13'
       }
-    ]
+    ],
+    recipientAddress: null,
+    recipientAmount: 0.00
   },
   getters: {
     accounts (state) {
@@ -173,6 +175,12 @@ export const store = new Vuex.Store({
     },
     activeAcc (state) {
       return state.accounts.find(acc => { return acc.active === true })
+    },
+    recipientAddress (state) {
+      return state.recipientAddress
+    },
+    recipientAmount (state) {
+      return state.recipientAmount
     }
   },
   mutations: {
@@ -197,6 +205,12 @@ export const store = new Vuex.Store({
         return acc.id === id
       })
       active.active = true
+    },
+    setRecipientAddress (state, payroll) {
+      state.recipientAddress = payroll
+    },
+    setRecipientAmount (state, payroll) {
+      state.recipientAmount = payroll
     }
   },
   actions: {
