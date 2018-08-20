@@ -11,20 +11,16 @@
         <router-link to="/">
           <img src="@/assets/icn/list.svg" alt="">
         </router-link>
-        <router-link class="avatar" to="accounts">
-          <ae-identity-avatar address='ak$G2CCeMjQffK5K21lIun3GzAuN13vhAfcKBrUPSKhSQ8RcgHP1e'>
-          </ae-identity-avatar>
-        </router-link>
       </template>
     </Header>
     <div class="top">
       <div class="container">
         <swiper :options="swipeOptions">
           <swiper-slide>
-            <cardFront :account="activeId"></cardFront>
+            <cardFront :account="activeAccAddress"></cardFront>
           </swiper-slide>
           <swiper-slide>
-            <cardBack :account="activeId"></cardBack>
+            <cardBack :account="activeAccAddress"></cardBack>
           </swiper-slide>
           <div class="swiper-pagination" slot="pagination"></div>
         </swiper>
@@ -71,7 +67,6 @@
 </template>
 
 <script>
-import { AeIdentityAvatar } from '@aeternity/aepp-components'
 import Header from '@/components/Header'
 import Radio from '@/components/Radio'
 import CardFront from '@/components/cardFront'
@@ -80,17 +75,18 @@ import { swiper, swiperSlide } from 'vue-awesome-swiper'
 import 'swiper/dist/css/swiper.css'
 import { mapMutations } from 'vuex'
 import AppModal from '@/components/AppModal'
+import { AeIdentityAvatar } from '@aeternity/aepp-components'
 
 export default {
   components: {
     Radio,
-    AeIdentityAvatar,
     Header,
     CardFront,
     CardBack,
     swiper,
     'swiper-slide': swiperSlide,
-    AppModal
+    AppModal,
+    AeIdentityAvatar
   },
   data () {
     return {
@@ -111,26 +107,21 @@ export default {
       }
     }
   },
-  mounted () {
-    this.activeAcc()
-  },
   computed: {
     accounts () {
       return this.$store.getters.accounts
+    },
+    activeAccAddress () {
+      return this.$store.getters.activeAcc
     }
   },
   methods: {
-    prev: function () {
-      this.$refs.swipe.goto(0)
-    },
-    next: function () {
-      this.$refs.swipe.goto(1)
-    },
     accountIn: function (arg) {
       this.$router.push({ name: 'account', params: { account: arg } })
     },
     activeAcc: function (i = 0) {
-      this.activeId = this.accounts[i]
+      let acc = this.accounts[i]
+      this.$store.dispatch('setActiveAccount', acc.id)
     },
     ...mapMutations(['showModal'])
   }
@@ -178,17 +169,6 @@ export default {
     text-align: right;
   }
 }
-
-.avatar {
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  div {
-    width: 24px;
-    height: 24px;
-  }
-}
-
 .rectangle {
   color: white;
   display: flex;

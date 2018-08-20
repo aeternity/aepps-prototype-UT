@@ -40,15 +40,12 @@
         <div v-if="isBrowserMin" @click="isBrowserMin = false">
           <img src="@/assets/icn/arrow-up.svg" alt="">
         </div>
-        <router-link class="avatar" to="accounts">
-          <ae-identity-avatar address='ak$G2CCeMjQffK5K21lIun3GzAuN13vhAfcKBrUPSKhSQ8RcgHP1e'>
-          </ae-identity-avatar>
-        </router-link>
       </template>
     </Header>
     <div class="container">
       <div class="top">
-        <div class="row call-to-action">
+        <router-link to="/transfer">
+          <div class="row call-to-action">
           <div class="img">
             <div class="cirle Transfer"></div>
           </div>
@@ -61,7 +58,9 @@
             </p>
           </div>
         </div>
-        <div class="row call-to-action">
+        </router-link>
+        <router-link to="/transactions">
+          <div class="row call-to-action">
           <div class="img">
             <div class="cirle Transactions"></div>
           </div>
@@ -74,6 +73,7 @@
             </p>
           </div>
         </div>
+        </router-link>
       </div>
       <h1 class="title">
         <img src="@/assets/icn/bookmark.svg" alt="">
@@ -197,6 +197,9 @@ export default {
 .favorites {
   .top {
     margin: 5vh 0;
+    a {
+      text-decoration: none;
+    }
   }
   .container {
   width: 80vw;
