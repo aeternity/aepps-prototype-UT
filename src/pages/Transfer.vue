@@ -14,54 +14,67 @@
       </template>
     </Header>
     <div class="container">
-      <h1>
-        Choose the <strong>recipient</strong> you
-        want to transfer funds to.
-      </h1>
-      <h1>
-        Your active account is:
-      </h1>
-      <div class="row">
-        <div class="logo">
-          <ae-identity-avatar :address="activeAccount.address"></ae-identity-avatar>
+      <div class="step step1">
+        <h1>
+          Choose the <strong>recipient</strong> you
+          want to transfer funds to.
+        </h1>
+        <h1>
+          Your active account is:
+        </h1>
+        <div class="row">
+          <div class="logo">
+            <ae-identity-avatar :address="activeAccount.address"></ae-identity-avatar>
+          </div>
+          <div class="content">
+            <h1>
+              {{activeAccount.name}}
+            </h1>
+          </div>
         </div>
-        <div class="content">
-          <h1>
-            {{activeAccount.name}}
-          </h1>
+        <div class="bottom">
+          <div class="input">
+            <div class="head">
+              <div class="item">
+                <label>
+                  Recipient
+                </label>
+              </div>
+              <div class="item">
+                <select name="" id="">
+                  <option value="">
+                    Select ▾
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="address-input">
+              <textarea name="" id="" placeholder="Type ak$ address or AENS name, or choose one of your accounts …"></textarea>
+            </div>
+            <div class="actions">
+              <div class="item"></div>
+              <div class="item">
+                <img src="@/assets/icn/paste.svg" alt="">
+                paste
+              </div>
+              <div class="item">
+                <img src="@/assets/icn/camera.svg" alt="">
+                scan
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="action">
+          <button>NEXT</button>
         </div>
       </div>
-      <div class="bottom">
-        <div class="input">
-          <div class="head">
-            <div class="item">
-              <label>
-                Recipient
-              </label>
-            </div>
-            <div class="item">
-              <select name="" id="">
-                <option value="">
-                  Select ▾
-                </option>
-              </select>
-            </div>
-          </div>
-          <div class="address-input">
-            <textarea name="" id="" placeholder="Type ak$ address or AENS name, or choose one of your accounts …"></textarea>
-          </div>
-          <div class="actions">
-            <div class="item">
-              <img src="@/assets/icn/paste.svg" alt="">
-              paste
-            </div>
-            <div class="item">
-              <img src="@/assets/icn/camera.svg" alt="">
-              scan
-            </div>
-          </div>
-        </div>
+      <div class="step step2" v-if="isEnterAmountActive">
+
       </div>
+      <div class="step step3">
+
+      </div>
+      
     </div>
   </div>
 </template>
@@ -76,6 +89,11 @@ export default {
   computed: {
     activeAccount: function () {
       return this.$store.getters.activeAcc
+    }
+  },
+  data() {
+    return {
+      isEnterAmountActive: false
     }
   }
 }
@@ -115,7 +133,7 @@ export default {
     }
   }
   .input {
-    margin-top: 15vh;
+    margin-top: 10vh;
     background-color: #f7fafc;
     .head {
       display: flex;
@@ -140,11 +158,29 @@ export default {
     .actions {
       background-color: #edf3f7;
       display: flex;
-      justify-content: space-between;
+      justify-content: flex-end;
       .item {
         display: flex;
         align-items: center;
+        align-self: flex-end;
+        flex:1;
       }
+    }
+  }
+  .action {
+    position: absolute;
+    left: 0;
+    bottom: 5vh;
+    width: 100%;
+    button {
+      text-transform: uppercase;
+      padding: 21px 0 19px 0;
+      font-size: 13px;
+      font-weight: 900;
+      background-color: #ff0d6a;
+      color: #fff;
+      width: 90vw;
+      border-radius: 32px;
     }
   }
 }
