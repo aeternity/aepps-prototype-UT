@@ -73,7 +73,7 @@
             </div>
           </div>
         </div>
-        <div class="item">
+        <div class="item box">
           <div class="btn">
             <a href="#" class="btn__link">
               Apply
@@ -146,6 +146,9 @@ export default {
     justify-content: space-around;
     width: 80vw;
     background-color: #f7fafc;
+    &.box{
+      background-color: unset;
+    }
   }
 
   .item:nth-child(2),
@@ -164,10 +167,12 @@ export default {
   .item:nth-child(2):after,
   .item:first-child:after {
     content: '>';
-    right: 11px;
-    padding: 1.5em 0 0 0;
+    right: 2px;
+    padding: 0 0 0 2em;
     position: absolute;
     pointer-events: none;
+    transform: rotateZ(90deg);
+    font-size:1em;
   }
   .select {
     border: 0;
@@ -211,10 +216,12 @@ export default {
 
   .itemRow:after {
     content: '>';
-    right: 11px;
-    padding: 1.5em 0 0 0;
+    right: -6px;
+    padding: 0 0 0 3em;
     position: absolute;
     pointer-events: none;
+    transform: rotateZ(90deg);
+    font-size: 1em;
   }
 
   .row {
