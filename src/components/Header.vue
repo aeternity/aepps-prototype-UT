@@ -49,6 +49,8 @@ export default {
       font-size: 17px;
       text-transform: capitalize;
       font-weight: 500;
+      display: flex;
+      align-items: baseline;
     }
     .nav {
       display: flex;
@@ -65,4 +67,3 @@ export default {
     }
   }
 </style>
-

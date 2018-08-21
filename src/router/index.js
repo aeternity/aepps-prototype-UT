@@ -69,7 +69,7 @@ export default new Router({
     },
     {
       path: '/transactions-filter',
-      name: 'transactions-filter',
+      name: 'Filter and Sort',
       component: TransactionsFilter
     }
   ]

@@ -2,7 +2,15 @@
   <div class="filter">
     <Header>
       <template slot="page-name">
-        {{this.$route.name}}
+        <router-link to="/transactions">
+          <div class="back-arrow">
+            <ae-icon name="arrow" rotate="180">
+            </ae-icon>
+          </div>
+        </router-link>
+        <div class="name">
+          {{this.$route.name}}
+        </div>
       </template>
       <template slot="nav">
         <router-link to="transactions-filter" v-if="!isBrowseEnable">
@@ -91,6 +99,7 @@
 </template>
 <script>
 import Header from '@/components/Header'
+import {AeIcon} from '@aeternity/aepp-components'
 export default {
   data () {
     return {
@@ -124,11 +133,15 @@ export default {
     }
   },
   components: {
-    Header
+    Header,
+    AeIcon
   }
 }
 </script>
 <style lang="scss" scoped>
+  .back-arrow {
+    margin-right:20px;
+  }
 
   .container {
     display: flex;
