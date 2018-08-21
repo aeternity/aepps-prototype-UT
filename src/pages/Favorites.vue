@@ -44,7 +44,8 @@
     </Header>
     <div class="container">
       <div class="top">
-        <div class="row call-to-action">
+        <router-link to="/transfer">
+          <div class="row call-to-action">
           <div class="img">
             <div class="cirle Transfer"></div>
           </div>
@@ -57,6 +58,7 @@
             </p>
           </div>
         </div>
+        </router-link>
         <router-link to="/transactions">
           <div class="row call-to-action">
           <div class="img">

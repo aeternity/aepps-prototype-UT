@@ -5,6 +5,17 @@ Vue.use(Vuex)
 
 export const store = new Vuex.Store({
   state: {
+    modalVisible: false,
+    modalComponent: null,
+    account: {
+      name: '',
+      address: 'ak$G2CCeMjQffK5K21lIun3GzAuN13vhAfcKBrUPSKhSQ8RcgHP1e',
+      words: 'alive fussy bluetonguelizard',
+      balance: 24.65,
+      unit: 'AE',
+      prior: 'main',
+      id: 0
+    },
     accounts: [
       {
         name: 'Main Account',
@@ -159,7 +170,9 @@ export const store = new Vuex.Store({
         unit: 'AE',
         status: '2018-10-13'
       }
-    ]
+    ],
+    recipientAddress: null,
+    recipientAmount: 0.00
   },
   getters: {
     accounts (state) {
@@ -173,6 +186,12 @@ export const store = new Vuex.Store({
     },
     activeAcc (state) {
       return state.accounts.find(acc => { return acc.active === true })
+    },
+    recipientAddress (state) {
+      return state.recipientAddress
+    },
+    recipientAmount (state) {
+      return state.recipientAmount
     }
   },
   mutations: {
@@ -188,6 +207,25 @@ export const store = new Vuex.Store({
       console.log(bookmark)
       this.isBrowseEnable = true
     },
+    showModal (state, componentName) {
+      state.modalVisible = true
+      state.modalComponent = componentName
+    },
+    closeModal (state) {
+      state.modalVisible = false
+    },
+    AddUser (state, payload) {
+      state.accounts.push({
+        name: payload,
+        address: 'adagagdstertPSKhSQ8RcgHP1eK21lIun3GzAQffK5hAfcKBruN',
+        words: 'Lorem ipsum dolor',
+        balance: 20.1,
+        unit: 'AE',
+        prior: 'daily',
+        id: state.accounts.length,
+        active: false
+      })
+    },
     disableActiveAccounts (state) {
       return state.accounts.map(acc => { acc.active = false })
     },
@@ -197,11 +235,29 @@ export const store = new Vuex.Store({
         return acc.id === id
       })
       active.active = true
+    },
+    setRecipientAddress (state, payroll) {
+      state.recipientAddress = payroll
+    },
+    setRecipientAmount (state, payroll) {
+      state.recipientAmount = payroll
+    },
+    createTransaction (state) {
+      return state.txs.push({
+        address: state.recipientAddress,
+        type: 'in',
+        value: state.recipientAmount,
+        unit: 'AE',
+        status: 'pending'
+      })
     }
   },
   actions: {
-    renameAcc: (context, {id, name}) => {
-      context.commit('Rename_Acc', {id, name})
+    renameAcc: (context, { id, name }) => {
+      context.commit('Rename_Acc', { id, name })
+    },
+    addNewAcc ({ commit }, data) {
+      commit('AddUser', data)
     },
     setActiveAccount: (context, id) => {
       context.commit('disableActiveAccounts')

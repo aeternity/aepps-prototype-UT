@@ -8,6 +8,7 @@
 export default {
   name: 'App'
 }
+
 </script>
 <style src="@/assets/fonts/InterUI/inter-ui.css"></style>
 <style src="@/assets/fonts/aeternity-mono-master/WEB/aeternity-mono.css"></style>

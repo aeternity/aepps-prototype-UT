@@ -17,19 +17,20 @@
       <div class="container">
         <swiper :options="swipeOptions">
           <swiper-slide>
-            <cardFront :account="activeId"></cardFront>
+            <cardFront :account="activeAccAddress"></cardFront>
           </swiper-slide>
           <swiper-slide>
-            <cardBack :account="activeId"></cardBack>
+            <cardBack :account="activeAccAddress"></cardBack>
           </swiper-slide>
           <div class="swiper-pagination" slot="pagination"></div>
         </swiper>
       </div>
     </div>
     <div class="container">
-      <div class="rectangle">
+      <div class="rectangle" @click="showModal('ModalAccount')">
         +
       </div>
+      <app-modal></app-modal>
       <div class="bottom">
         <div class="row">
           <div class="icn">
@@ -72,7 +73,10 @@ import CardFront from '@/components/cardFront'
 import CardBack from '@/components/cardBack'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
 import 'swiper/dist/css/swiper.css'
+import { mapMutations } from 'vuex'
+import AppModal from '@/components/AppModal'
 import { AeIdentityAvatar } from '@aeternity/aepp-components'
+
 export default {
   components: {
     Radio,
@@ -81,6 +85,7 @@ export default {
     CardBack,
     swiper,
     'swiper-slide': swiperSlide,
+    AppModal,
     AeIdentityAvatar
   },
   data () {
@@ -111,19 +116,14 @@ export default {
     }
   },
   methods: {
-    prev: function () {
-      this.$refs.swipe.goto(0)
-    },
-    next: function () {
-      this.$refs.swipe.goto(1)
-    },
     accountIn: function (arg) {
-      this.$router.push({ name: 'account', params: {account: arg} })
+      this.$router.push({ name: 'account', params: { account: arg } })
     },
     activeAcc: function (i = 0) {
       let acc = this.accounts[i]
       this.$store.dispatch('setActiveAccount', acc.id)
-    }
+    },
+    ...mapMutations(['showModal'])
   }
 }
 </script>
@@ -133,10 +133,12 @@ export default {
   background-color: #edf3f7;
   margin-bottom: 10vh;
 }
+
 .container {
   width: 85vw;
   margin: 0 auto;
 }
+
 .row {
   display: flex;
   align-items: center;
@@ -152,9 +154,10 @@ export default {
   .content {
     text-indent: 10px;
     padding: 16px 0;
-    flex:3;
-    text-align:left;
-    h3,p {
+    flex: 3;
+    text-align: left;
+    h3,
+    p {
       margin: 0;
     }
     p {
@@ -162,7 +165,7 @@ export default {
     }
   }
   .radio {
-    flex:1;
+    flex: 1;
     text-align: right;
   }
 }
@@ -182,9 +185,9 @@ export default {
   top: 42vh;
   right: 5vw;
 }
-</style>
-<style lang="scss">
+
 .swiper-container {
+  z-index:0;
   .swiper-pagination-bullets {
     bottom: -5vh;
     .swiper-pagination-bullet-active {
