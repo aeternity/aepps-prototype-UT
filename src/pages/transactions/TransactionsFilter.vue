@@ -139,44 +139,150 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+.page-name {
   .back-arrow {
     margin-right:20px;
   }
-
+}
+.panel {
   .container {
     display: flex;
     justify-content: space-evenly;
     flex-direction: column;
     height: 85vh;
-  }
-
-  .item {
-    margin: 0 auto;
-    min-height: 10vh;
-    display: flex;
-    flex-direction: column;
-    text-align: left;
-    justify-content: space-around;
-    width: 80vw;
-    background-color: #f7fafc;
-    &.box{
-      background-color: unset;
+    .item {
+      margin: 0 auto;
+      min-height: 10vh;
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+      justify-content: space-around;
+      width: 80vw;
+      background-color: #f7fafc;
+      &.box{
+        background-color: unset;
+      }
+      .title {
+        font-size: 0.8em;
+        line-height: 1em;
+        letter-spacing: 0.3px;
+        color: #76818c;
+        margin: 0.5em 0 0 1em;
+      }
+      .select {
+        border: 0;
+        background: transparent;
+        color: #203040;
+        font-size: 1.125em;
+        line-height: 1.33;
+        margin: 0 1em 0 0.5em;
+        appearance: none;
+        display: block;
+        background-image: none;
+        word-break: normal;
+        width:100%;
+        &.bcg {
+          width:30%;
+          margin:0;
+          appearance: menulist-button;
+          letter-spacing: 0.3px;
+          text-align: right;
+          color: #76818c;
+          background-color: #ffffff;
+          border: solid 2px #f7fafc;
+        }
+      }
+      .row {
+        display: flex;
+        justify-content: space-between;
+      }
+      .row__btn {
+        display: flex;
+        justify-content: space-between;
+        background-color: #edf3f7;
+          .icn {
+            flex:2;
+          }
+      }
+      .text {
+        line-height: 1.5em;
+        color: #76818c;
+        line-height: 1.41;
+        margin: 3vh 0 5vh 2vh;
+      }
+      .btn {
+        text-transform: uppercase;
+        height: 8vh;
+        border-radius: 32px;
+        background-color: #ff0d6a;
+        box-shadow: 0 0 16px 0 rgba(27, 68, 121, 0.15);
+        display: flex;
+        justify-content: center;
+      }
+      .btn__link {
+        text-decoration: none;
+        padding-top: 20px;
+        height: 16px;
+        font-size: 13px;
+        font-weight: 900;
+        line-height: 1.23;
+        letter-spacing: 1.3px;
+        color: #ffffff;
+      }
+      .btn__inactive {
+        text-transform: uppercase;
+        font-weight: bold;
+        display: flex;
+        justify-content: center;
+      }
+      .btn__inactive__link {
+        margin-top: 2vh;
+        text-decoration: none;
+        color: #203040;
+        }
+    }
+    .wrapper {
+      display: flex;
+      margin: 0 auto;
+      height: 10vh;
+      width: 80vw;
+      justify-content: space-between;
+      .itemRow {
+        position: relative;
+        display: flex;
+        width: 45%;
+        justify-content: space-between;
+        background-color: #f7fafc;
+        .select {
+          border: 0;
+          background: transparent;
+          color: #203040;
+          font-size: 1.125em;
+          line-height: 1.33;
+          margin: 0 1em 0 0.5em;
+          appearance: none;
+          display: block;
+          background-image: none;
+          word-break: normal;
+          width:100%;
+          }
+        }
+      .itemRow:after {
+        content: '>';
+        right: -6px;
+        padding: 0 0 0 3em;
+        position: absolute;
+        pointer-events: none;
+        transform: rotateZ(90deg);
+        font-size: 1em;
+      }
     }
   }
-
+}
   .item:nth-child(2),
   .item:first-child {
     position: relative;
   }
-
-  .title {
-    font-size: 0.8em;
-    line-height: 1em;
-    letter-spacing: 0.3px;
-    color: #76818c;
-    margin: 0.5em 0 0 1em;
-  }
-
   .item:nth-child(2):after,
   .item:first-child:after {
     content: '>';
@@ -186,109 +292,5 @@ export default {
     pointer-events: none;
     transform: rotateZ(90deg);
     font-size:1em;
-  }
-  .select {
-    border: 0;
-    background: transparent;
-    color: #203040;
-    font-size: 1.125em;
-    line-height: 1.33;
-    margin: 0 1em 0 0.5em;
-    appearance: none;
-    display: block;
-    background-image: none;
-    word-break: normal;
-    width:100%;
-    &.bcg {
-      width:30%;
-      margin:0;
-      appearance: menulist-button;
-      letter-spacing: 0.3px;
-      text-align: right;
-      color: #76818c;
-      background-color: #ffffff;
-      border: solid 2px #f7fafc;
-    }
-  }
-
-  .wrapper {
-    display: flex;
-    margin: 0 auto;
-    height: 10vh;
-    width: 80vw;
-    justify-content: space-between;
-  }
-
-  .itemRow {
-    position: relative;
-    display: flex;
-    width: 45%;
-    justify-content: space-between;
-    background-color: #f7fafc;
-  }
-
-  .itemRow:after {
-    content: '>';
-    right: -6px;
-    padding: 0 0 0 3em;
-    position: absolute;
-    pointer-events: none;
-    transform: rotateZ(90deg);
-    font-size: 1em;
-  }
-
-  .row {
-    display: flex;
-    justify-content: space-between;
-  }
-
-  .row__btn {
-    display: flex;
-    justify-content: space-between;
-    background-color: #edf3f7;
-  }
-
-  .icn {
-    flex:2;
-  }
-  .text {
-    line-height: 1.5em;
-    color: #76818c;
-    line-height: 1.41;
-    margin: 3vh 0 5vh 2vh;
-  }
-
-  .btn {
-    text-transform: uppercase;
-    height: 8vh;
-    border-radius: 32px;
-    background-color: #ff0d6a;
-    box-shadow: 0 0 16px 0 rgba(27, 68, 121, 0.15);
-    display: flex;
-    justify-content: center;
-  }
-
-  .btn__link {
-    text-decoration: none;
-    padding-top: 20px;
-    height: 16px;
-    font-size: 13px;
-    font-weight: 900;
-    line-height: 1.23;
-    letter-spacing: 1.3px;
-    color: #ffffff;
-  }
-
-  .btn__inactive {
-    text-transform: uppercase;
-    font-weight: bold;
-    display: flex;
-    justify-content: center;
-  }
-
-  .btn__inactive__link {
-    margin-top: 2vh;
-    text-decoration: none;
-    color: #203040;
   }
 </style>
