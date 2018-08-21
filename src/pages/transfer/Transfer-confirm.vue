@@ -24,7 +24,7 @@
             Transfer Amount
           </div>
           <div class="item">
-            26.5067 AE
+            {{recipientAmount}} AE
           </div>
         </div>
         <div class="row">
@@ -41,7 +41,7 @@
             Total Amount
           </div>
           <div class="item">
-            26.7067 AE
+            {{recipientAmount + 0.200}} AE
           </div>
         </div>
       </div>
@@ -78,14 +78,18 @@
           account key
         </h3>
         <div class="words">
-          <span v-for="chunk in chunkAddress" :key="chunk">
+          <span v-for="chunk in chunkAddress" :key="`${chunk}`">
             {{chunk}}
           </span>
         </div>
       </div>
       <div class="row actions final">
-        <div class="item">cancel</div>
-        <div class="item">confirm</div>
+        <div class="item">
+          <router-link to="/transfer">
+            Cancel
+          </router-link>
+        </div>
+        <div class="item" @click="createTx">confirm</div>
       </div>
     </div>
   </div>
@@ -110,6 +114,12 @@ export default {
     },
     recipientAmount: function () {
       return this.$store.getters.recipientAmount
+    }
+  },
+  methods: {
+    createTx: function () {
+      this.$store.commit('createTransaction')
+      this.$router.push({name: 'favorites'})
     }
   }
 }
@@ -221,8 +231,11 @@ export default {
         text-transform: uppercase;
       }
       .item:nth-child(1) {
-        color: #203040;
         background-color: #fff;
+        a {
+          text-decoration: none;
+          color: #203040;
+        }
       }
       .item:nth-child(2) {
         color: #fff;

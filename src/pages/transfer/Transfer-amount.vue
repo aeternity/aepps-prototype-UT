@@ -47,7 +47,7 @@
           </div>
         </div>
         <div class="address-input amount">
-          <input type="number" placeholder="0.00" v-model="amount">
+          <input type="number" placeholder="0.00" v-model.number="amount">
         </div>
         <div class="actions">
           <div class="item"></div>

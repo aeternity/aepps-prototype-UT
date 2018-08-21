@@ -241,6 +241,15 @@ export const store = new Vuex.Store({
     },
     setRecipientAmount (state, payroll) {
       state.recipientAmount = payroll
+    },
+    createTransaction (state) {
+      return state.txs.push({
+        address: state.recipientAddress,
+        type: 'in',
+        value: state.recipientAmount,
+        unit: 'AE',
+        status: 'pending'
+      })
     }
   },
   actions: {
