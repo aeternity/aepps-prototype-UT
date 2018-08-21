@@ -82,6 +82,19 @@ export default {
   }
 }
 </script>
+<style>
+.swiper-pagination-bullet-active{
+  background:#ff0d6a;
+}
+@media only screen and (max-width: 340px)  {
+.card-front .row.address .item {
+   letter-spacing: unset!important;
+}
+.rectangle{
+  top: 46vh!important;
+  }
+}
+</style>
 
 <style lang="scss" scoped>
 .card-front {
