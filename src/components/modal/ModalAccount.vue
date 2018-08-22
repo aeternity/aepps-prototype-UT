@@ -196,10 +196,10 @@ export default {
                         letter-spacing: 1.3px;
                         color: #ffffff;
                       }
-            .btn[disabled] {
+          }
+          .btn[disabled] {
               opacity: inherit;
             }
-          }
         }
       }
     }

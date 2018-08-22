@@ -10,7 +10,6 @@
   </div>
 </template>
 <script>
-import Vue from 'vue'
 import { mapState, mapMutations } from 'vuex'
 import ModalAccount from '@/components/modal/ModalAccount'
 
