@@ -24,7 +24,6 @@
               <a href="#" class="btn_link" @click="registerAcc(account.name)"> Create account </a>
             </div>
           </div>
-          <!-- <button class="modalAccount__cancel" @click="closeModal">Cancel</button> -->
         </div>
       </div>
     </div>
@@ -56,7 +55,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.modalAccount{
+.modalAccount {
   .modal {
     display: flex;
     height: 100vh;
@@ -113,7 +112,7 @@ export default {
             }
           }
         }
-        .modal-body{
+        .modal-body {
           .form {
             width:65vw;
             height: 10%;
@@ -127,7 +126,6 @@ export default {
                 transition: all 0.2s;
                 touch-action: manipulation;
               }
-
               .input {
                 font-size: 1.5em;
                 border: 0;
@@ -141,12 +139,10 @@ export default {
                 color: #76818c;
                 transform: translate(0, 0.6em);
               }
-
               .input:focus {
                 outline: 0;
                 margin-left: 4%;
               }
-
               .input:placeholder-shown + .label {
                 cursor: text;
                 max-width: 30%;
@@ -157,16 +153,13 @@ export default {
                 transform: translate(0, 1.5rem) scale(1.5);
                 color: #76818c;
               }
-
               ::placeholder {
                 opacity: 0;
                 transition: inherit;
               }
-
               .input:focus::placeholder {
                 opacity: 1;
               }
-
               .input:not(:placeholder-shown) + .label,
               .input:focus + .label {
                 transform: translate(0, 0) scale(1);
@@ -183,43 +176,33 @@ export default {
             box-shadow: inset 4px 0px #b300ff;
           }
         }
+        .modal-footer {
+          .btn {
+            width: 65vw;
+            height: 8vh;
+            opacity: 0.2;
+            border-radius: 32px;
+            background-color: #ff0d6a;
+            box-shadow: 0 0 16px 0 rgba(27, 68, 121, 0.15);
+            display: flex;
+            flex-direction: column;
+            .btn_link {
+                        text-decoration: none;
+                        padding-top: 20px;
+                        height: 16px;
+                        font-size: 13px;
+                        font-weight: bold;
+                        line-height: 1.23;
+                        letter-spacing: 1.3px;
+                        color: #ffffff;
+                      }
+            .btn[disabled] {
+              opacity: inherit;
+            }
+          }
+        }
       }
     }
   }
-}
-
-
-
-
-
-
-
-
-
-
-
-.btn {
-  width: 65vw;
-  height: 8vh;
-  opacity: 0.2;
-  border-radius: 32px;
-  background-color: #ff0d6a;
-  box-shadow: 0 0 16px 0 rgba(27, 68, 121, 0.15);
-  display: flex;
-  flex-direction: column;
-}
-
-.btn_link {
-  text-decoration: none;
-  padding-top: 20px;
-  height: 16px;
-  font-size: 13px;
-  font-weight: bold;
-  line-height: 1.23;
-  letter-spacing: 1.3px;
-  color: #ffffff;
-}
-.btn[disabled] {
-  opacity: inherit;
 }
 </style>
