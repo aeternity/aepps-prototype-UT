@@ -1,0 +1,66 @@
+<template>
+  <div class="container">
+    <div class="item">
+      <router-link to="/browser">
+        <img src="@/assets/icn/settings.svg" alt="" class="icon">
+        <div>Browser</div>
+      </router-link>
+    </div>
+    <div class="item">
+      <router-link to="/wallet">
+        <img src="@/assets/icn/settings.svg" alt="" class="icon">
+       <div>Wallet</div>
+      </router-link>
+    </div>
+    <div class="item">
+      <router-link to="/accounts">
+      </router-link>
+      <ae-identity-avatar :address=activeAccAddress.address>
+      </ae-identity-avatar>
+    </div>
+    <div class="item">
+      <router-link to="/">
+        <img src="@/assets/icn/list-light.svg" alt="" class="icon">
+         <div>Activity</div>
+      </router-link>
+    </div>
+    <div class="item">
+      <router-link to="/settings">
+        <img src="@/assets/icn/settings-light.svg" alt="" class="icon">
+       <div>Settings</div>
+      </router-link>
+    </div>
+  </div>
+</template>
+<script>
+import { AeIdentityAvatar } from '@aeternity/aepp-components'
+export default {
+  components: {
+    AeIdentityAvatar
+  },
+  computed: {
+    activeAccAddress () {
+      return this.$store.getters.activeAcc
+    }
+  }
+}
+</script>
+<style lang="scss" scoped>
+    .container {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      position:fixed;
+      left:0px;
+      bottom:0px;
+      width:100%;
+      background:#001734;
+    .item {
+      display: flex;
+      a {
+        text-decoration: none;
+        color: #76818d;
+      }
+    }
+  }
+</style>

@@ -14,7 +14,7 @@ import TransferAmount from '@/pages/transfer/Transfer-amount'
 import TransferConfirm from '@/pages/transfer/Transfer-confirm'
 import Card from '@/components/cardFront'
 import CardB from '@/components/cardBack'
-
+import WalletAcc from '@/pages/WalletAccount'
 Vue.use(Router)
 
 export default new Router({
@@ -89,6 +89,11 @@ export default new Router({
       path: '/transfer-confirm',
       name: 'transfer-confirm',
       component: TransferConfirm
+    },
+    {
+      path: '/wallet',
+      name: 'wallet',
+      component: WalletAcc
     }
   ]
 })
