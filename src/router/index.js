@@ -15,6 +15,8 @@ import TransferConfirm from '@/pages/transfer/Transfer-confirm'
 import Card from '@/components/cardFront'
 import CardB from '@/components/cardBack'
 import WalletAcc from '@/pages/WalletAccount'
+import WalletFav from '@/pages/WalletFavourites'
+import WalletAccounts from '@/pages/WalletAccounts'
 Vue.use(Router)
 
 export default new Router({
@@ -94,6 +96,16 @@ export default new Router({
       path: '/wallet',
       name: 'wallet',
       component: WalletAcc
+    },
+    {
+      path: '/walletFav',
+      name: 'Browse Aepps',
+      component: WalletFav
+    },
+    {
+      path: '/walletAccounts',
+      name: 'Accounts',
+      component: WalletAccounts
     }
   ]
 })

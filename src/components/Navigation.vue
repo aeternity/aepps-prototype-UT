@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="footer">
     <div class="item">
       <router-link to="/browser">
         <img src="@/assets/icn/settings.svg" alt="" class="icon">
@@ -46,7 +46,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-    .container {
+    .footer {
       display: flex;
       justify-content: space-around;
       align-items: center;
