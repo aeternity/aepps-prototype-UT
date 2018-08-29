@@ -1,22 +1,22 @@
 <template>
   <div class="footer">
     <div class="item">
-      <router-link to="/browser">
+      <router-link to="/walletFav">
         <img src="@/assets/icn/settings.svg" alt="" class="icon">
         <div>Browser</div>
       </router-link>
     </div>
     <div class="item">
-      <router-link to="/wallet">
+      <router-link to="/walletAccounts">
         <img src="@/assets/icn/settings.svg" alt="" class="icon">
        <div>Wallet</div>
       </router-link>
     </div>
     <div class="item">
-      <router-link to="/accounts">
-      </router-link>
+      <router-link to="/wallet">
       <ae-identity-avatar :address=activeAccAddress.address>
       </ae-identity-avatar>
+      </router-link>
     </div>
     <div class="item">
       <router-link to="/">
