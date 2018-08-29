@@ -120,6 +120,7 @@
     <div :class="{minimaze: isBrowserMin}" class="iframe" id="iframe" v-if="isBrowseEnable">
       <iframe :src=urlChange frameborder="0" width="100%"></iframe>
     </div>
+    <router-link to="/wallet">new version</router-link>
   </div>
 </template>
 
