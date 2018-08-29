@@ -36,24 +36,9 @@
                 {{bookmark.url}}
               </p>
             </div>
-            <div class="options" @click="toggleOption(bookmark)">
+            <div class="options">
               <div class="optionsIcn">
                 <img src="@/assets/icn/expandList.svg" alt="">
-              </div>
-              <div class="optionsDrop" v-if="bookmark.drop === true">
-                <div class="option" @clipboard:copy="bookmark.url" @click="doCopy(bookmark.url)">
-                  <img src="@/assets/icn/copy.svg" alt="">
-                  <p>Copy URL</p>
-                  <input type="hidden" v-model="bookmark.url">
-                </div>
-                <div class="option">
-                  <img src="@/assets/icn/delete.svg" alt="">
-                  <p>Delete</p>
-                </div>
-                <div class="option">
-                  <img src="@/assets/icn/share.svg" alt="">
-                  <p>Share</p>
-                </div>
               </div>
             </div>
           </div>
@@ -106,7 +91,6 @@ export default {
 <style lang="scss" scoped>
 .walletFav {
   background-color: #edf3f7;
-  height: 100vh;
   .header {
     width: 85vw;
     margin: 0 auto;
@@ -157,8 +141,14 @@ export default {
       }
     }
     .bottom {
+      background-color: #fff;
+      border-radius: 10px;
       .item {
+        margin: 5vw;
         .row {
+          display: flex;
+          align-items: center;
+          border-top: 1px solid #edf3f7;
           .logo,
           .options {
             flex: .35;
@@ -168,6 +158,10 @@ export default {
             align-items: center;
             flex-direction: row;
             margin-right: 10px;
+          }
+          .logo > div {
+            width: 32px;
+            height: 32px;
           }
           .logo .cirle {
             border-radius: 50%;
@@ -220,9 +214,7 @@ export default {
             width: 24px;
             height: 24px;
             vertical-align: middle;
-            display: flex;
             cursor: pointer;
-            flex-direction: row-reverse;
           }
           .options .option {
             cursor: pointer;
@@ -238,6 +230,13 @@ export default {
           }
           .content {
             text-align: left;
+            text-indent: 10px;
+            padding: 16px 0;
+            flex: 3;
+              p {
+              margin: 0;
+              font-size: 13px;
+            }
           }
           .content .title {
             font-size: 15px;
@@ -245,6 +244,9 @@ export default {
           .url {
             font-size: 13px;
           }
+        }
+        p {
+          text-align: left;
         }
       }
     }

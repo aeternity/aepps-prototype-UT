@@ -1,30 +1,18 @@
 <template>
   <div class="walletAccounts">
     <div class="container">
-      <!-- <div class="row heading">
-        <div class="item">
+      <div class="row">
+        <div class="logo">
           <ae-identity-avatar class="avatar" :address="account.address">
           </ae-identity-avatar>
         </div>
-        <div class="item">
+        <div class="content">
           <span>{{account.name}}</span>
         </div>
-        <div class="item">
+        <div class="arrow">
           ?
         </div>
-      </div> -->
-            <div class="row">
-                <div class="logo">
-                  <ae-identity-avatar class="avatar" :address="account.address">
-                  </ae-identity-avatar>
-                </div>
-                <div class="content">
-                  <span>{{account.name}}</span>
-                </div>
-                <div class="arrow">
-                  ?
-                </div>
-              </div>
+      </div>
       <div class="row heading">
         <div class="item">
           {{`${account.balance} ${account.unit}`}}
