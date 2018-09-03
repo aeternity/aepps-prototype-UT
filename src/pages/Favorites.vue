@@ -1,12 +1,13 @@
 <template>
-  <div class="favorites">
+  <div class="walletFav">
     <Header>
       <template slot="page-name">
-        <div>
-          <input type="url" v-model="urlAddress" placeholder="Type URL …" @keyup.enter="isBrowseEnable = true">
-        </div>
-      </template>
+        <div v-bind:class="{'is-scrolled' : scroll }"> {{this.$route.name}}</div>
+       </template>
       <template slot="nav">
+         <div v-if="!isBrowserMin && isBrowseEnable" @click="minimaze">
+          <img src="@/assets/icn/list.svg" alt="">
+        </div>
         <div class="contextMenu" v-if="isBrowseEnable" @click="dropNav = true">
           <img src="@/assets/icn/dots3.svg" alt="">
         </div>
@@ -28,14 +29,7 @@
             <p>Share</p>
           </div>
         </div>
-        <router-link to="settings" v-if="!isBrowseEnable">
-          <img src="@/assets/icn/settings.svg" alt="">
-        </router-link>
-        <router-link to="/" v-if="!isBrowseEnable">
-          <img src="@/assets/icn/list.svg" alt="">
-        </router-link>
-        <div v-if="!isBrowserMin && isBrowseEnable" @click="minimaze">
-          <img src="@/assets/icn/list.svg" alt="">
+        <div v-if="!isBrowseEnable" class="icon"> ?
         </div>
         <div v-if="isBrowserMin" @click="isBrowserMin = false">
           <img src="@/assets/icn/arrow-up.svg" alt="">
@@ -43,97 +37,67 @@
       </template>
     </Header>
     <div class="container">
-      <div class="top">
-        <router-link to="/transfer">
-          <div class="row call-to-action">
-          <div class="img">
-            <div class="cirle Transfer"></div>
-          </div>
-          <div class="content">
-            <p class="title">
-              Transfer
-            </p>
-            <p>
-              send and request funds
-            </p>
-          </div>
+      <div class="item">
+        <div class="row favourites">
+          <input type="url" v-model="urlAddress" placeholder="Search or Type URL …" @keyup.enter="isBrowseEnable = true">
         </div>
-        </router-link>
-        <router-link to="/transactions">
-          <div class="row call-to-action">
-          <div class="img">
-            <div class="cirle Transactions"></div>
-          </div>
-          <div class="content">
-            <p class="title">
-              Transactions
-            </p>
-            <p>
-              view past transactions
-            </p>
-          </div>
-        </div>
-        </router-link>
       </div>
-      <h1 class="title">
-        <img src="@/assets/icn/bookmark.svg" alt="">
-        Favorites
-      </h1>
-      <div class="bookmarkList" v-for="bookmark in Bookmarks" :key="bookmark.name">
-        <div class="bookmarListItem">
-          <div class="logo" @click=loadUrl(bookmark.url)>
-            <div class="cirle" :class="bookmark.name">
-            </div>
+      <div class="item">
+        <div class="row">
+          <div class="icn">
+            ↪
           </div>
-          <div class="content">
-            <p class="title">
-              {{bookmark.name}}
-            </p>
-            <p class="url">
-              {{bookmark.url}}
-            </p>
-          </div>
-          <div class="options" @click="toggleOption(bookmark)">
-            <div class="optionsIcn">
-              <img src="@/assets/icn/expandList.svg" alt="">
+          <h1 class="text">
+            Aeternity aepps
+          </h1>
+        </div>
+      </div>
+      <div class="bottom">
+        <div class="item"  v-for="bookmark in Bookmarks" :key="bookmark.name">
+          <div class="row">
+            <div class="logo">
+              <div class="cirle" :class="bookmark.name">
+              </div>
             </div>
-            <div class="optionsDrop" v-if="bookmark.drop === true">
-              <div class="option" @clipboard:copy="bookmark.url" @click="doCopy(bookmark.url)">
-                <img src="@/assets/icn/copy.svg" alt="">
-                <p>Copy URL</p>
-                <input type="hidden" v-model="bookmark.url">
-              </div>
-
-              <div class="option">
-                <img src="@/assets/icn/delete.svg" alt="">
-                <p>Delete</p>
-              </div>
-              <div class="option">
-                <img src="@/assets/icn/share.svg" alt="">
-                <p>Share</p>
+            <div class="content">
+              <p class="title">
+                {{bookmark.name}}
+              </p>
+              <p class="url">
+                {{bookmark.url}}
+              </p>
+            </div>
+            <div class="options">
+              <div class="optionsIcn">
+                <img src="@/assets/icn/expandList.svg" alt="">
               </div>
             </div>
           </div>
+          <p>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Impedit, quod dolorum. Minima quas hic aut modi! Omnis, impedit eius? Eum!
+          </p>
         </div>
       </div>
     </div>
     <div :class="{minimaze: isBrowserMin}" class="iframe" id="iframe" v-if="isBrowseEnable">
       <iframe :src=urlChange frameborder="0" width="100%"></iframe>
     </div>
-    <router-link to="/wallet">new version</router-link>
+<Navigation>
+
+</Navigation>
   </div>
 </template>
-
 <script>
-import { AeIdentityAvatar } from '@aeternity/aepp-components'
 import Header from '@/components/Header'
-
+import Navigation from '@/components/Navigation'
 export default {
   components: {
-    Header, AeIdentityAvatar
+    Header,
+    Navigation
   },
   data () {
     return {
+      scroll: false,
       urlAddress: '',
       isBrowseEnable: false,
       dropNav: false,
@@ -161,6 +125,9 @@ export default {
     }
   },
   methods: {
+    handleScroll (event) {
+      this.scroll = true
+    },
     toggleOption: function (el) {
       el.drop = !el.drop
       this.bookmark = el
@@ -190,164 +157,195 @@ export default {
     urlChange: function () {
       return `http://${this.urlAddress}`
     }
+  },
+  created () {
+    window.addEventListener('scroll', this.handleScroll)
+  },
+  destroyed () {
+    window.removeEventListener('scroll', this.handleScroll)
   }
 }
 </script>
-
 <style lang="scss" scoped>
-.favorites {
-  .top {
-    margin: 5vh 0;
-    a {
-      text-decoration: none;
-    }
+.nav {
+  height: 11%;
+}
+.is-scrolled {
+  display: none;
+}
+.icon {
+  width:40%;
+}
+.walletFav {
+  background-color: #edf3f7;
+  .header {
+    width: 85vw;
+    margin: 0 auto;
+    justify-content: space-between;
   }
   .container {
-  width: 80vw;
-  margin: 0 auto;
-  text-align: left;
-  h1 {
-    font-size: 23px;
-    color: #ff0070;
-    display: flex;
-    font-weight: normal;
-    position: relative;
-    left: -5vw;
-    align-items: center;
-    img {
-      height: 16px;
-      width: 16px;
-    }
-  }
-  .bookmarkList {
-    list-style: none;
-    padding: 0;
-    &> div {
-      display: flex;
-      flex-direction: row;
-      padding: 20px 0;
-      border-top: 2px solid #edf3f7;
+   height: 85vh;
+  //  height: auto;
+  display: inline-block;
+  overflow: auto;
+    .item {
+        margin: 5vh 0;
+      .row {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-evenly;
+        .icn {
+            width: 17px;
+            height: 24px;
+            object-fit: contain;
+            font-size: 17px;
+            font-weight: bold;
+            line-height: 1.41;
+            letter-spacing: normal;
+            color: #ff0070;
+          }
+          .text {
+            width: 90%;
+            font-size: 23px;
+            font-weight: 500;
+            line-height: 1.22;
+            letter-spacing: -0.5px;
+            color: #ff0070;
+            text-align: left;
+            margin: 0;
+          }
+        input {
+          background: transparent;
+          box-shadow: none;
+          border:0;
+          color: #203040;
+          font-size: 17px;
+          margin-left: 10px;
+        }
+      }
+      .favourites {
+          background-color: #f7fafc;
+          height: 10vh;
+          display: flex;
+          align-items: center;
+          border-radius: 5px;
       }
     }
-    .content {
-      flex: 2;
-      p {
-        margin: 0;
-      }
-      p.title {
-        color: #203040;
-        font-weight: 500;
-        font-size: 15px;
+    .bottom {
+      background-color: #fff;
+      border-radius: 10px;
+      .item {
+        margin: 5vw;
+        .row {
+          display: flex;
+          align-items: center;
+          border-top: 1px solid #edf3f7;
+          .logo,
+          .options {
+            flex: .35;
+          }
+          .logo {
+            display: flex;
+            align-items: center;
+            flex-direction: row;
+            margin-right: 10px;
+          }
+          .logo > div {
+            width: 32px;
+            height: 32px;
+          }
+          .logo .cirle {
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+          }
+          .cirle {
+            &.Transactions {
+              background: #e72b6e url('../assets/icn/reload.svg') no-repeat 50% 50%;
+              padding: 2px;
+              background-size: 50%;
+            }
+            &.Contacts {
+              background: #6948a0 url('../assets/icn/contacts.svg') no-repeat 50% 50%;
+              padding: 2px;
+              background-size: 50%;
+            }
+            &.Messages {
+              background: #b300ff url('../assets/icn/chat.svg') no-repeat 50% 50%;
+              padding: 2px;
+              background-size: 50%;
+            }
+            &.Registrar {
+              background: #929ca6 url('../assets/icn/globe.svg') no-repeat 50% 50%;
+              padding: 2px;
+              background-size: 50%;
+            }
+          }
+          .options {
+            display: flex;
+            flex-direction: row-reverse;
+            align-items: center;
+            position: relative;
+            cursor: pointer;
+          }
+          .optionsIcn:hover .optionsDrop {
+            display: block;
+          }
+          .optionsDrop {
+            position: absolute;
+            right: 0;
+            top: 0;
+            background: white;
+            z-index: 2;
+            text-align: center;
+            width: 40vw;
+            box-shadow: 0 0 5px 1px grey;
+          }
+          .options .optionsIcn {
+            width: 24px;
+            height: 24px;
+            vertical-align: middle;
+            cursor: pointer;
+          }
+          .options .option {
+            cursor: pointer;
+            display: flex;
+            justify-content: flex-start;
+            padding: 5px;
+            p {
+              margin: 0;
+            }
+          }
+          .option img {
+            margin-right: 10px;
+          }
+          .content {
+            text-align: left;
+            text-indent: 10px;
+            padding: 16px 0;
+            flex: 3;
+              p {
+              margin: 0;
+              font-size: 13px;
+            }
+          }
+          .content .title {
+            font-size: 15px;
+          }
+          .url {
+            font-size: 13px;
+          }
+        }
+        p {
+          text-align: left;
+        }
       }
     }
   }
-  input {
-    background: transparent;
-    box-shadow: none;
-    border:0;
-    color: #203040;
-    font-size: 17px;
-  }
 }
-.logo,
-.options {
-  flex: .35;
-}
-.logo {
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-  margin-right: 10px;
-}
-.logo .cirle{
-  border-radius: 50%;
-  width: 32px;
-  height: 32px;
-}
-.cirle {
-  &.Transactions {
-    background: #e72b6e url('../assets/icn/reload.svg') no-repeat 50% 50%;
-    padding: 2px;
-    background-size: 50%;
-  }
-  &.Transfer {
-    background: #09bfad url('../assets/icn/contacts.svg') no-repeat 50% 50%;
-    padding: 2px;
-    background-size: 50%;
-  }
-  &.Contacts {
-    background: #6948a0 url('../assets/icn/contacts.svg') no-repeat 50% 50%;
-    padding: 2px;
-    background-size: 50%;
-  }
-  &.Messages {
-    background: #b300ff url('../assets/icn/chat.svg') no-repeat 50% 50%;
-    padding: 2px;
-    background-size: 50%;
-  }
-  &.Registrar {
-    background: #929ca6 url('../assets/icn/globe.svg') no-repeat 50% 50%;
-    padding: 2px;
-    background-size: 50%;
-  }
-}
-.options {
-  display: flex;
-  flex-direction: row-reverse;
-  align-items: center;
-  position: relative;
-  cursor: pointer;
-}
-.optionsIcn:hover .optionsDrop {
-  display: block;
-}
-.optionsDrop {
-  position: absolute;
-  right: 0;
-  top: 0;
-  background: white;
-  z-index: 2;
-  text-align: center;
-  width: 40vw;
-  box-shadow: 0 0 5px 1px grey;
-}
-.options .optionsIcn {
-  width: 24px;
-  height: 24px;
-  vertical-align: middle;
-  display: flex;
-  cursor: pointer;
-  flex-direction: row-reverse;
-}
-.options .option {
-  cursor: pointer;
-  display: flex;
-  justify-content: flex-start;
-  padding: 5px;
-  p {
-    margin: 0;
-  }
-}
-.option img {
-  margin-right: 10px;
-}
-.content {
-  text-align: left;
-}
-.content .title {
-  font-size: 15px;
-}
-.url {
-  font-size: 13px;
-}
-.avatar {
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  div {
-    width: 24px;
-    height: 24px;
-  }
+.container {
+    width: 85vw;
+    margin: 0 auto;
 }
 .iframe {
   cursor: pointer;
@@ -394,34 +392,6 @@ export default {
     img {
       width: 24px;
       height: 24px;
-    }
-  }
-}
-.call-to-action {
-  display: flex;
-  background-color: #edf3f7;
-  margin: 2vh 0;
-  padding: 11px 0 11px 9px;
-  border-radius: 4px;
-  .img {
-    flex: .38;
-    .cirle {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-    }
-  }
-  .content {
-    flex: 3;
-    h3 {
-    color: #203040;
-    margin: 0;
-    font-size: 15px;
-    font-weight: 50;
-    }
-    p {
-    color: #76818c;
-    font-size: 13px;
     }
   }
 }

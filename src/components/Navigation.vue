@@ -1,21 +1,21 @@
 <template>
   <div class="footer">
     <div class="item">
-      <router-link to="/walletFav">
+      <router-link to="/">
         <img src="@/assets/icn/settings.svg" alt="" class="icon">
         <div>Browser</div>
       </router-link>
     </div>
     <div class="item">
-      <router-link to="/walletAccounts">
+      <router-link to="/account/:account">
         <img src="@/assets/icn/settings.svg" alt="" class="icon">
        <div>Wallet</div>
       </router-link>
     </div>
     <div class="item">
-      <router-link to="/wallet">
-      <ae-identity-avatar :address=activeAccAddress.address>
-      </ae-identity-avatar>
+      <router-link class="avatar activeId" to="/accounts">
+          <ae-identity-avatar :address=activeAccAddress.address>
+          </ae-identity-avatar>
       </router-link>
     </div>
     <div class="item">
@@ -25,7 +25,7 @@
       </router-link>
     </div>
     <div class="item">
-      <router-link to="/settings">
+      <router-link to="/">
         <img src="@/assets/icn/settings-light.svg" alt="" class="icon">
        <div>Settings</div>
       </router-link>

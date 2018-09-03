@@ -1,159 +1,182 @@
 <template>
-  <div class="account">
-    <Header>
-      <template slot="page-name">
-        {{this.$route.name}}
-      </template>
-      <template slot="nav">
-        <router-link to="settings">
-          <img src="@/assets/icn/settings.svg" alt="">
-        </router-link>
-        <router-link to="/">
-          <img src="@/assets/icn/list.svg" alt="">
-        </router-link>
-      </template>
-    </Header>
-    <div class="top">
-      <div class="container">
-        <swiper :options="swipeOptions">
-          <swiper-slide>
-            <cardFront :account="this.$route.params.account"></cardFront>
-          </swiper-slide>
-          <swiper-slide>
-            <cardBack :account="this.$route.params.account"></cardBack>
-          </swiper-slide>
-          <div class="swiper-pagination" slot="pagination"></div>
-        </swiper>
+  <div class="walletAccounts">
+    <div class="container">
+      <div class="row">
+        <div class="logo">
+          <ae-identity-avatar class="avatar" :address="account.address">
+          </ae-identity-avatar>
+        </div>
+        <div class="content">
+          <span>{{account.name}}</span>
+        </div>
+        <div class="arrow">
+          ?
+        </div>
+      </div>
+      <div class="row heading">
+        <div class="item">
+          {{`${account.balance} ${account.unit}`}}
+        </div>
       </div>
     </div>
     <div class="container">
-      <div class="bottom">
-        <div class="row">
-          <h3>
-            account key
-          </h3>
-          <div class="words">
-            <span v-for="chunk in chunkAddress" :key="chunk">
-              {{chunk}}
-            </span>
-          </div>
+      <div class="row">
+        <div class="logo">
+          <ae-identity-avatar :address="account.address"></ae-identity-avatar>
         </div>
-        <div class="row">
+        <div class="content">
           <h3>
-            Three Words Identifier
+            Send
           </h3>
           <p>
-            {{this.$route.params.account.words}}
+            Transfer founds
           </p>
+        </div>
+        <div class="arrow">
+          <ae-icon name="chevron" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="logo">
+          <ae-identity-avatar :address="account.address"></ae-identity-avatar>
+        </div>
+        <div class="content">
+          <h3>
+            Recive
+          </h3>
+          <p>
+            Share your address
+          </p>
+        </div>
+        <div class="arrow">
+          <ae-icon name="chevron" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="logo">
+          <ae-identity-avatar :address="account.address"></ae-identity-avatar>
+        </div>
+        <div class="content">
+          <h3>
+            Scan
+          </h3>
+          <p>
+            Pay by scanning a QR code
+          </p>
+        </div>
+        <div class="arrow">
+          <ae-icon name="chevron" />
         </div>
       </div>
     </div>
+    <Navigation>
+    </Navigation>
   </div>
 </template>
-
 <script>
-import Header from '@/components/Header'
-import { AeIdentityAvatar } from '@aeternity/aepp-components'
-import cardFront from '@/components/cardFront'
-import cardBack from '@/components/cardBack'
-import { swiper, swiperSlide } from 'vue-awesome-swiper'
-import 'swiper/dist/css/swiper.css'
+import Navigation from '@/components/Navigation'
+import {AeIdentityAvatar, AeIcon} from '@aeternity/aepp-components'
 
 export default {
   components: {
-    Header,
+    Navigation,
     AeIdentityAvatar,
-    swiper,
-    'swiper-slide': swiperSlide,
-    cardFront,
-    cardBack
+    AeIcon
   },
   props: {
     account: {
       type: Object,
       default: function () {
         return {
-          name: 'Daily',
-          address: 'G2CCeMjQffK5K21lIun3GzAuN13vhAfcKBrUPSKhSQ8RcgHP1e',
-          balance: 0,
-          words: 'test test test',
+          name: 'Main Account',
+          balance: 20.65,
           unit: 'AE'
         }
       }
     }
-  },
-  data () {
-    return {
-      swipeOptions: {
-        effect: 'flip',
-        pagination: {
-          el: '.swiper-pagination'
-        }
-      }
-    }
-  },
-  methods: {
-    prev: function () {
-      this.$refs.swipe.goto(0)
-    },
-    next: function () {
-      this.$refs.swipe.goto(1)
-    }
-  },
-  computed: {
-    chunkAddress () {
-      return this.$route.params.account.address.match(/.{1,3}/g)
-    }
   }
 }
 </script>
-
 <style lang="scss" scoped>
-.account {
-  font-size: 17px;
-  .top {
-    height: 30vh;
-    background-color: #edf3f7;
-    margin-bottom: 10vh;
+.walletAccounts {
+  background-color: #edf3f7;
+  height: 100vh;
+  .container:first-child {
+    margin: 0 auto;
+    width: 100%;
+    background: #ff0d6a;
+    color: #ffffff;
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    .row:first-child {
+      width: 90vw;
+      margin: 0 auto;
+      margin-top: 5vh;
+    }
   }
   .container {
-    width: 85%;
+    width: 85vw;
     margin: 0 auto;
-    .row {
-      text-align: left;
-      border-top: 1px solid #edf3f7;
-      margin: 20px 0;
-      padding: 10px 0;
-      h3 {
-        font-size: 13px;
-        color: #76818c;
-        text-transform: capitalize;
+    .row.heading {
+        display: flex;
+        align-items: center;
+        font-size: 17px;
+        justify-content: flex-end;
+        border: none;
+      .item:first-child {
+        flex: .7;
+        font-size: 3em;
+        margin-bottom: 0.5em;
       }
-      .words{
-        display: grid;
-        grid-template-columns: 16.6% 16.6% 16.6% 16.6% 16.6% 16.6%;
-        font-family: 'aeternity mono';
-        color: #203040;
-        letter-spacing: 1.8px;
+      .item:nth-child(2) {
+        text-align: left;
+        font-weight: 500;
+      }
+      .item {
+        flex: 2;
+        padding: 5px 0 0;
+        .avatar {
+          width: 32px;
+          height: 32px;
+        }
       }
     }
-    .row:nth-child(2) {
-      p {
-        font-family: 'aeternity mono';
-        color: #203040;
-        letter-spacing: 1.8px;
+    .row:first-child {
+      border:none;
+    }
+      .row {
+        display: flex;
+        align-items: center;
+        font-size: 17px;
+        border-top: 1px solid #315872;
+          .icn {
+            width: 32px;
+            height: 32px;
+          }
+          .logo > div {
+            width: 32px;
+            height: 32px;
+          }
+            .content {
+              text-indent: 10px;
+              padding: 16px 0;
+              flex: 3;
+              text-align: left;
+              h3,
+              p {
+                margin: 0;
+              }
+              p {
+                font-size: 13px;
+              }
+            }
+            .arrow {
+              flex: 1;
+              text-align: right;
+            }
       }
-    }
-  }
-}
-</style>
-<style lang="scss">
-.swiper-container {
-  .swiper-pagination-bullets {
-    bottom: -5vh;
-    .swiper-pagination-bullet-active {
-      background: #ff0d6a;
-    }
   }
 }
 </style>

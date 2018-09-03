@@ -9,7 +9,9 @@
         <input type="text" v-if="editMode" v-model="account.name">
       </div>
       <div class="item">
-        {{`${account.balance} ${account.unit}`}}
+      <router-link to="/settings">
+        <img src="@/assets/icn/settings-white.svg" alt="" class="icon">
+      </router-link>
       </div>
     </div>
     <div class="row address">
@@ -29,21 +31,11 @@
       </div>
     </div>
     <div class="row actions">
-      <div class="item" @click="edit" v-if="!editMode">
-        <img src="@/assets/icn/edit-light.svg" alt="">
-        rename
-      </div>
-      <div class="item" @click="save(account.id, account.name)" v-if="editMode">
-        <img src="@/assets/icn/save-light.svg" alt="">
-        save
-      </div>
-      <div class="item" @click="doCopy(account.address)">
-        <img src="@/assets/icn/copy-light.svg" alt="">
-        copy
+      <div class="item">
+        Balance
       </div>
       <div class="item">
-        <img src="@/assets/icn/share-light.svg" alt="">
-        share
+       {{`${account.balance} ${account.unit}`}}
       </div>
     </div>
   </div>
@@ -110,7 +102,7 @@ export default {
     font-size: 17px;
     &.heading {
       .item {
-        flex:2;
+        flex: 0.3;
         input {
           font-size: 17px;
           display: inline-block;
@@ -127,11 +119,12 @@ export default {
         }
       }
       .item:first-child {
-        flex:.7;
+        flex:.3;
       }
       .item:nth-child(2) {
         text-align: left;
         font-weight: 500;
+        flex: 1;
       }
     }
     &.actions {
@@ -139,7 +132,7 @@ export default {
         display: flex;
       }
       .item:first-child {
-        flex:2;
+        flex:3;
       }
     }
     &.address {
@@ -168,8 +161,8 @@ export default {
       background: rgba(0,0,0,.2);
       padding: 9px;
       font-size: 11px;
-      text-transform: uppercase;
       letter-spacing: 1.1px;
+      font-weight: 500;
       img {
         height: 14px;
         width: 14px;

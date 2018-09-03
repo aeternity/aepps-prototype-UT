@@ -1,104 +1,84 @@
 <template>
-  <div class="accounts">
-    <Header>
-      <template slot="page-name">
-        {{this.$route.name}}
-      </template>
-      <template slot="nav">
-        <router-link to="settings">
-          <img src="@/assets/icn/settings.svg" alt="">
-        </router-link>
-        <router-link to="/">
-          <img src="@/assets/icn/list.svg" alt="">
-        </router-link>
-      </template>
-    </Header>
-    <div class="top">
-      <div class="container">
-        <swiper :options="swipeOptions">
-          <swiper-slide>
-            <cardFront :account="activeAccAddress"></cardFront>
-          </swiper-slide>
-          <swiper-slide>
-            <cardBack :account="activeAccAddress"></cardBack>
-          </swiper-slide>
-          <div class="swiper-pagination" slot="pagination"></div>
-        </swiper>
-      </div>
-    </div>
+  <div class="wallet">
     <div class="container">
-      <div class="rectangle" @click="showModal('ModalAccount')">
-        +
-      </div>
-      <app-modal></app-modal>
-      <div class="bottom">
+      <Header>
+        <template slot="nav">
+          <div>
+            +
+          </div>
+          <div>
+            ?
+          </div>
+        </template>
+      </Header>
+      <div class="item">
         <div class="row">
           <div class="icn">
             ↪
           </div>
-          <div class="content">
-            <h3>
-              Total Balance
-            </h3>
-            <p>
-              120 AE
-            </p>
-          </div>
+          <h1 class="text">
+            <span class="text__secondary">Activate the account</span> that you want to use by swiping
+          </h1>
         </div>
-        <div class="row" v-for="(account, index) in accounts" :key="index">
-          <div class="logo" @click="accountIn(account)">
-            <ae-identity-avatar :address="account.address"></ae-identity-avatar>
+      </div>
+      <div class="item">
+        <div class="swipe__container">
+          <swiper :options="swipeOptions">
+            <swiper-slide>
+              <cardFront :account="activeAccAddress"></cardFront>
+            </swiper-slide>
+            <swiper-slide>
+              <cardBack :account="activeAccAddress"></cardBack>
+            </swiper-slide>
+            <div class="swiper-pagination" slot="pagination"></div>
+          </swiper>
+        </div>
+      </div>
+      <div class="item">
+        <div class="bottom">
+          <div class="row">
+            <div class="content">
+              <h3>
+                Get your name.aet
+              </h3>
+              <ae-icon name="chevron" />
+            </div>
           </div>
-          <div class="content">
-            <h3>
-              {{account.name}}
-            </h3>
-            <p>
-              {{account.balance}}
-            </p>
-          </div>
-          <div class="radio">
-            <Radio name="account" @change="activeAcc(index)"></Radio>
+          <div class="row">
+            <div class="content">
+              <h5>Three Words Identifier</h5>
+              <p>alive fussy bluetonguelizard</p>
+            </div>
           </div>
         </div>
       </div>
     </div>
+<Navigation>
+
+</Navigation>
   </div>
 </template>
-
 <script>
 import Header from '@/components/Header'
-import Radio from '@/components/Radio'
+import Navigation from '@/components/Navigation'
 import CardFront from '@/components/cardFront'
 import CardBack from '@/components/cardBack'
+import { AeIcon } from '@aeternity/aepp-components'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
 import 'swiper/dist/css/swiper.css'
-import { mapMutations } from 'vuex'
-import AppModal from '@/components/AppModal'
-import { AeIdentityAvatar } from '@aeternity/aepp-components'
 
 export default {
   components: {
-    Radio,
     Header,
+    Navigation,
     CardFront,
     CardBack,
+    AeIcon,
     swiper,
-    'swiper-slide': swiperSlide,
-    AppModal,
-    AeIdentityAvatar
+    'swiper-slide': swiperSlide
   },
   data () {
     return {
-      balance: 0,
-      activeId: {
-        name: 'Main Account',
-        address: 'ak$G2CCeMjQffK5K21lIun3GzAuN13vhAfcKBrUPSKhSQ8RcgHP1e',
-        words: 'alive fussy bluetonguelizard',
-        balance: 24.65,
-        unit: 'AE',
-        prior: 'main'
-      },
       swipeOptions: {
         effect: 'flip',
         pagination: {
@@ -122,68 +102,79 @@ export default {
     activeAcc: function (i = 0) {
       let acc = this.accounts[i]
       this.$store.dispatch('setActiveAccount', acc.id)
-    },
-    ...mapMutations(['showModal'])
+    }
   }
 }
 </script>
 <style lang="scss" scoped>
-.top {
-  height: 180px;
-  background-color: #edf3f7;
-  margin-bottom: 10vh;
+  .wallet {
+    background-color: #edf3f7;
+    height: 100vh;
+    .container{
+      .item {
+        .row:first-child {
+          width: 80%;
+          margin-bottom: 1em;
+        }
+        .row {
+          display: flex;
+          align-items: flex-start;
+          justify-content: space-evenly;
+          .content {
+            flex: 3;
+            text-align: left;
+            }
+          .icn {
+            width: 17px;
+            height: 24px;
+            object-fit: contain;
+            font-size: 17px;
+            font-weight: bold;
+            line-height: 1.41;
+            letter-spacing: normal;
+            color: #ff0070;
+          }
+          .text {
+            width: 90%;
+            font-size: 23px;
+            font-weight: 500;
+            line-height: 1.22;
+            letter-spacing: -0.5px;
+            color: #203040;
+            text-align: left;
+            margin:0;
+            .text__secondary {
+              color: #ff0070;
+            }
+          }
+        }
+        .bottom {
+          .row {
+            margin: 0 auto;
+            width:100%;
+            align-items: center;
+            border-top: 1px solid black;
+          }
+        }
+        .row:first-child {
+          .content {
+            display: flex;
+            justify-content: space-between;
+            }
+          }
+         .swipe__container {
+            height: 180px;
+            margin-bottom: 10vh;
+          }
+      }
+    }
+  }
+.ae-icon {
+height: unset;
 }
-
 .container {
   width: 85vw;
   margin: 0 auto;
-}
-
-.row {
-  display: flex;
-  align-items: center;
-  border-top: 1px solid #edf3f7;
-  .icn {
-    width: 32px;
-    height: 32px;
-  }
-  .logo > div {
-    width: 32px;
-    height: 32px;
-  }
-  .content {
-    text-indent: 10px;
-    padding: 16px 0;
-    flex: 3;
-    text-align: left;
-    h3,
-    p {
-      margin: 0;
-    }
-    p {
-      font-size: 13px;
-    }
-  }
-  .radio {
-    flex: 1;
-    text-align: right;
-  }
-}
-.rectangle {
-  color: white;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  background-color: #ff0d6a;
-  padding: 10px;
-  width: 30px;
-  height: 30px;
-  font-size: 22px;
-  font-weight: 400;
-  border-radius: 50%;
-  position: fixed;
-  top: 42vh;
-  right: 5vw;
 }
 
 .swiper-container {
