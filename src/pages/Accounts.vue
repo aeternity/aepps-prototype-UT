@@ -15,12 +15,16 @@
     </Header>
     <div class="top">
       <div class="container">
-        <swiper :options="swipeOptions">
-          <swiper-slide>
-            <cardFront :account="activeAccAddress"></cardFront>
-          </swiper-slide>
-          <swiper-slide>
-            <cardBack :account="activeAccAddress"></cardBack>
+        <swiper
+        ref="swiper"
+        :options="swipeOptions"
+        @slideChange="onSwipe"
+        :initialSlide="0"
+        >
+          <swiper-slide v-for="acc in accounts"
+          :key="acc.id"
+          >
+            <cardFront :account="acc" />
           </swiper-slide>
           <div class="swiper-pagination" slot="pagination"></div>
         </swiper>
@@ -113,6 +117,9 @@ export default {
     },
     activeAccAddress () {
       return this.$store.getters.activeAcc
+    },
+    swiperChange () {
+      return this.$refs.swiper.swiper.activeIndex
     }
   },
   methods: {
@@ -123,7 +130,16 @@ export default {
       let acc = this.accounts[i]
       this.$store.dispatch('setActiveAccount', acc.id)
     },
+    itMoves: function () {
+      // console.log('moves')
+    },
+    onSwipe: function () {
+      this.$store.dispatch('setActiveAccount', this.$refs.swiper.swiper.activeIndex)
+    },
     ...mapMutations(['showModal'])
+  },
+  mounted () {
+    this.$refs.swiper.swiper.slideTo(this.activeAccAddress.id)
   }
 }
 </script>
