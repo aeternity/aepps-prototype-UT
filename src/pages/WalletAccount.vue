@@ -3,7 +3,12 @@
     <div class="container">
       <Header>
         <template slot="nav">
-          +
+          <div>
+            +
+          </div>
+          <div>
+            ?
+          </div>
         </template>
       </Header>
       <div class="item">

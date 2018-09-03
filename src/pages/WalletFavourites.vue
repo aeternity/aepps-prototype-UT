@@ -2,8 +2,39 @@
   <div class="walletFav">
     <Header>
       <template slot="page-name">
-        {{this.$route.name}}
+        <div v-bind:class="{'is-scrolled' : scroll }"> {{this.$route.name}}</div>
        </template>
+      <template slot="nav">
+         <div v-if="!isBrowserMin && isBrowseEnable" @click="minimaze">
+          <img src="@/assets/icn/list.svg" alt="">
+        </div>
+        <div class="contextMenu" v-if="isBrowseEnable" @click="dropNav = true">
+          <img src="@/assets/icn/dots3.svg" alt="">
+        </div>
+        <div class="dropNav" v-if="dropNav" @click="dropNav = false">
+          <div class="option" @click="reload(urlAddress)">
+            <img src="@/assets/icn/reload-dark.svg" alt="">
+            <p>Reload</p>
+          </div>
+          <div class="option" @click="doCopy(urlAddress)">
+            <img src="@/assets/icn/copy.svg" alt="">
+            <p>Copy URL</p>
+          </div>
+          <div class="option">
+            <img src="@/assets/icn/bookmark-save.svg" alt="">
+            <p>Save</p>
+          </div>
+          <div class="option">
+            <img src="@/assets/icn/share.svg" alt="">
+            <p>Share</p>
+          </div>
+        </div>
+        <div v-if="!isBrowseEnable" class="icon"> ?
+        </div>
+        <div v-if="isBrowserMin" @click="isBrowserMin = false">
+          <img src="@/assets/icn/arrow-up.svg" alt="">
+        </div>
+      </template>
     </Header>
     <div class="container">
       <div class="item">
@@ -48,6 +79,9 @@
         </div>
       </div>
     </div>
+    <div :class="{minimaze: isBrowserMin}" class="iframe" id="iframe" v-if="isBrowseEnable">
+      <iframe :src=urlChange frameborder="0" width="100%"></iframe>
+    </div>
 <Navigation>
 
 </Navigation>
@@ -63,7 +97,11 @@ export default {
   },
   data () {
     return {
+      scroll: false,
       urlAddress: '',
+      isBrowseEnable: false,
+      dropNav: false,
+      isBrowserMin: false,
       Bookmarks: [
         {
           iconPath: '',
@@ -85,10 +123,59 @@ export default {
         }
       ]
     }
+  },
+  methods: {
+    handleScroll (event) {
+      this.scroll = true
+    },
+    toggleOption: function (el) {
+      el.drop = !el.drop
+      this.bookmark = el
+      return this.bookmark
+    },
+    doCopy: function (text) {
+      this.$copyText(text).then(function (e) {
+        console.log(e)
+      }, function (e) {
+        console.log(e)
+      })
+    },
+    loadUrl: function (url) {
+      this.isBrowseEnable = true
+      this.isBrowserMin = false
+      this.urlAddress = url
+    },
+    reload: function (url) {
+      this.dropNav = false
+      this.loadUrl(url)
+    },
+    minimaze: function () {
+      this.isBrowserMin = true
+    }
+  },
+  computed: {
+    urlChange: function () {
+      return `http://${this.urlAddress}`
+    }
+  },
+  created () {
+    window.addEventListener('scroll', this.handleScroll)
+  },
+  destroyed () {
+    window.removeEventListener('scroll', this.handleScroll)
   }
 }
 </script>
 <style lang="scss" scoped>
+.nav {
+  height: 11%;
+}
+.is-scrolled {
+  display: none;
+}
+.icon {
+  width:40%;
+}
 .walletFav {
   background-color: #edf3f7;
   .header {
@@ -97,6 +184,10 @@ export default {
     justify-content: space-between;
   }
   .container {
+   height: 85vh;
+  //  height: auto;
+  display: inline-block;
+  overflow: auto;
     .item {
         margin: 5vh 0;
       .row {
@@ -255,5 +346,53 @@ export default {
 .container {
     width: 85vw;
     margin: 0 auto;
+}
+.iframe {
+  cursor: pointer;
+  position: fixed;
+  top:58px;
+  height: 100vh;
+  left: 0;
+  width: 100vw;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+  z-index: 3;
+  transition: all 3s ease;
+  .contextMenu {
+    display: flex;
+  }
+  iframe {
+    height: 100%;
+    background: white;
+    cursor: pointer;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+.minimaze {
+  top: 100vh;
+  transition: all 3s ease;
+  .header {
+    display: none;
+  }
+}
+.dropNav {
+  position: absolute;
+  top: 4vh;
+  padding-left: 5vw;
+  z-index: 22;
+  left: 50vw;
+  width: 40%;
+  background-color: white;
+  box-shadow: 0px 0px 4px 0px #c3c3c3;
+  cursor: pointer;
+  .option {
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+    img {
+      width: 24px;
+      height: 24px;
+    }
+  }
 }
 </style>

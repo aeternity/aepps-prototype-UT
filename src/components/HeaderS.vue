@@ -5,10 +5,10 @@
     </div>
     <div class="nav">
       <slot name="nav" />
-      ?
     </div>
   </div>
 </template>
+
 <style lang="scss" scoped>
   .header {
     padding: 15px;
@@ -23,6 +23,7 @@
       align-items: baseline;
     }
     .nav {
+      width:10vw;
       display: flex;
       align-items: center;
       justify-content: space-between;
