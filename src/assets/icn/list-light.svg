@@ -13,7 +13,7 @@
                     <use xlink:href="#path-1"></use>
                 </mask>
                 <use id="Mask" fill="#000000" fill-rule="nonzero" xlink:href="#path-1"></use>
-                <g id="fill/neutral/N-3" mask="url(#mask-2)" fill="#76818d" fill-rule="evenodd">
+                <g id="fill/neutral/N-3" mask="url(#mask-2)" fill="#fff" fill-rule="evenodd">
                     <rect id="Rectangle-Copy-20" x="0" y="0" width="24" height="24"></rect>
                 </g>
             </g>
