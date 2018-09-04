@@ -2,14 +2,18 @@
   <div class="footer">
     <div class="item">
       <router-link to="/">
-        <img src="@/assets/icn/settings.svg" alt="" class="icon">
+        <div>
+          <img src="@/assets/icn/browser-apps.svg" alt="" class="icon">
+        </div>
         <div>Browser</div>
       </router-link>
     </div>
     <div class="item">
-      <router-link to="/account/:account">
-        <img src="@/assets/icn/settings.svg" alt="" class="icon">
-       <div>Wallet</div>
+      <router-link to="/account">
+        <div>
+          <img src="@/assets/icn/card-light.svg" alt="" class="icon">
+        </div>
+        <div>Wallet</div>
       </router-link>
     </div>
     <div class="item">
@@ -19,14 +23,18 @@
       </router-link>
     </div>
     <div class="item">
-      <router-link to="/">
-        <img src="@/assets/icn/list-light.svg" alt="" class="icon">
-         <div>Activity</div>
+      <router-link to="/transactions">
+        <div>
+          <img src="@/assets/icn/list-light.svg" alt="" class="icon">
+        </div>
+        <div>Activity</div>
       </router-link>
     </div>
     <div class="item">
       <router-link to="/settings">
-        <img src="@/assets/icn/settings-light.svg" alt="" class="icon">
+        <div>
+          <img src="@/assets/icn/settings-white.svg" alt="" class="icon">
+        </div>
        <div>Settings</div>
       </router-link>
     </div>
@@ -55,11 +63,24 @@ export default {
       bottom:0px;
       width:100%;
       background:#001734;
+      padding: 8px 0;
     .item {
       display: flex;
       a {
         text-decoration: none;
-        color: #76818d;
+        color: #fff;
+        font-size: 11px;
+        opacity: .5;
+        img {
+          width: 24px;
+          height: 24px;
+        }
+      }
+      .router-link-exact-active {
+        opacity: 1;
+        .avatar {
+          border-color: #ff0d6a;
+        }
       }
     }
   }
