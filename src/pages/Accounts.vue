@@ -1,6 +1,6 @@
 <template>
   <div class="wallet">
-    <div class="container">
+    <div class="container hidden">
       <Header>
         <template slot="nav">
           <div>
@@ -53,9 +53,37 @@
         </div>
       </div>
     </div>
-<Navigation>
-
-</Navigation>
+    <Wallet :color="false">
+      <template slot="title">
+        <h1>
+          <span>
+            ↪
+          </span>
+        </h1>
+        <h1>
+          <span>
+            Activate the account
+          </span>
+          that you want to use 
+          by swiping
+        </h1>
+      </template>
+      <template slot="swipers">
+        <swiper :options="swipeOptions">
+            <swiper-slide>
+              <cardFront :account="activeAccAddress"></cardFront>
+            </swiper-slide>
+            <swiper-slide>
+              <cardBack :account="activeAccAddress"></cardBack>
+            </swiper-slide>
+            <div class="swiper-pagination" slot="pagination"></div>
+          </swiper>
+      </template>
+      <template slot="content">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor, consequatur.
+      </template>
+    </Wallet>
+    <Navigation />
   </div>
 </template>
 <script>
@@ -65,6 +93,7 @@ import CardFront from '@/components/cardFront'
 import CardBack from '@/components/cardBack'
 import { AeIcon } from '@aeternity/aepp-components'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
+import Wallet from '@/layouts/wallet.vue'
 import 'swiper/dist/css/swiper.css'
 
 export default {
@@ -75,7 +104,8 @@ export default {
     CardBack,
     AeIcon,
     swiper,
-    'swiper-slide': swiperSlide
+    'swiper-slide': swiperSlide,
+    Wallet
   },
   data () {
     return {
@@ -185,5 +215,8 @@ height: unset;
       background: #ff0d6a;
     }
   }
+}
+.hidden {
+  display: none;
 }
 </style>
