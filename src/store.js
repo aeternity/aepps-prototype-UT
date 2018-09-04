@@ -175,46 +175,46 @@ export const store = new Vuex.Store({
     recipientAmount: 0.00
   },
   getters: {
-    accounts(state) {
+    accounts (state) {
       return state.accounts
     },
-    bookmarks(state) {
+    bookmarks (state) {
       return state.bookmarks
     },
-    txs(state) {
+    txs (state) {
       return state.txs
     },
-    activeAcc(state) {
+    activeAcc (state) {
       return state.accounts.find(acc => { return acc.active === true })
     },
-    recipientAddress(state) {
+    recipientAddress (state) {
       return state.recipientAddress
     },
-    recipientAmount(state) {
+    recipientAmount (state) {
       return state.recipientAmount
     }
   },
   mutations: {
-    Rename_Acc(state, { id, name }) {
+    Rename_Acc (state, { id, name }) {
       state.accounts.find(account => {
         return account.id === id
       }).name = name
     },
-    getUrl(state, bookmarkUrl) {
+    getUrl (state, bookmarkUrl) {
       let bookmark = state.bookmarks.find(bookmark => {
         return bookmark.urlAddress === bookmarkUrl
       })
       console.log(bookmark)
       this.isBrowseEnable = true
     },
-    showModal(state, componentName) {
+    showModal (state, componentName) {
       state.modalVisible = true
       state.modalComponent = componentName
     },
-    closeModal(state) {
+    closeModal (state) {
       state.modalVisible = false
     },
-    AddUser(state, payload) {
+    AddUser (state, payload) {
       state.accounts.push({
         name: payload,
         address: 'adagagdstertPSKhSQ8RcgHP1eK21lIun3GzAQffK5hAfcKBruN',
@@ -226,23 +226,23 @@ export const store = new Vuex.Store({
         active: false
       })
     },
-    disableActiveAccounts(state) {
+    disableActiveAccounts (state) {
       return state.accounts.map(acc => { acc.active = false })
     },
-    activateAcc(state, id) {
+    activateAcc (state, id) {
       console.log(id)
       let active = state.accounts.find(acc => {
         return acc.id === id
       })
       active.active = true
     },
-    setRecipientAddress(state, payroll) {
+    setRecipientAddress (state, payroll) {
       state.recipientAddress = payroll
     },
-    setRecipientAmount(state, payroll) {
+    setRecipientAmount (state, payroll) {
       state.recipientAmount = payroll
     },
-    createTransaction(state) {
+    createTransaction (state) {
       return state.txs.push({
         address: state.recipientAddress,
         type: 'in',
@@ -256,7 +256,7 @@ export const store = new Vuex.Store({
     renameAcc: (context, { id, name }) => {
       context.commit('Rename_Acc', { id, name })
     },
-    addNewAcc({ commit }, data) {
+    addNewAcc ({ commit }, data) {
       commit('AddUser', data)
     },
     setActiveAccount: (context, id) => {

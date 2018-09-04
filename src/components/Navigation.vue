@@ -25,7 +25,7 @@
       </router-link>
     </div>
     <div class="item">
-      <router-link to="/">
+      <router-link to="/settings">
         <img src="@/assets/icn/settings-light.svg" alt="" class="icon">
        <div>Settings</div>
       </router-link>
