@@ -22,7 +22,7 @@
     <div class="container">
       <div class="row">
         <div class="logo">
-          <ae-identity-avatar :address="account.address"></ae-identity-avatar>
+          <img :src="require('emoji-datasource-apple/img/apple/64/1f4b8.png')" alt="">
         </div>
         <div class="content">
           <h3>
@@ -38,11 +38,12 @@
       </div>
       <div class="row">
         <div class="logo">
-          <ae-identity-avatar :address="account.address"></ae-identity-avatar>
+          <img :src="require('emoji-datasource-apple/img/apple/64/1f4b8.png')" alt="">
         </div>
         <div class="content">
           <h3>
             Recive
+            <!-- <img :src="require('emoji-datasource-apple/img/apple/64/1f446.png')" alt=""> -->
           </h3>
           <p>
             Share your address
@@ -54,7 +55,7 @@
       </div>
       <div class="row">
         <div class="logo">
-          <ae-identity-avatar :address="account.address"></ae-identity-avatar>
+          <img :src="require('emoji-datasource-apple/img/apple/64/1f4f7.png')" alt="">
         </div>
         <div class="content">
           <h3>
@@ -76,23 +77,15 @@
 <script>
 import Navigation from '@/components/Navigation'
 import {AeIdentityAvatar, AeIcon} from '@aeternity/aepp-components'
-
 export default {
   components: {
     Navigation,
     AeIdentityAvatar,
     AeIcon
   },
-  props: {
-    account: {
-      type: Object,
-      default: function () {
-        return {
-          name: 'Main Account',
-          balance: 20.65,
-          unit: 'AE'
-        }
-      }
+  computed: {
+    account: function () {
+      return this.$store.getters.activeAcc
     }
   }
 }
