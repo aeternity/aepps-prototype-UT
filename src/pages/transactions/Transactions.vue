@@ -3,18 +3,35 @@
     <div class="fixed">
       <Header>
       <template slot="page-name">
-        {{this.$route.name}}
+        <ae-identity-avatar :address="account.address"></ae-identity-avatar>
+        <div class="item">{{account.name}}</div>
+      </template>
+      <template slot="page-content">
+        <div class="item">{{account.balance}} {{account.unit}}</div>
       </template>
       <template slot="nav">
-        <router-link to="transactions-filter">
+        <div class="icon">
+          <img src="@/assets/icn/questionMark-light.png" alt="question mark">
+        </div>
+        <!-- <router-link to="transactions-filter">
           <img src="@/assets/icn/filter.svg" alt="">
         </router-link>
         <router-link to="/">
           <img src="@/assets/icn/list.svg" alt="">
-        </router-link>
+        </router-link> -->
       </template>
     </Header>
-    <div class="filter-nav">
+    <div class="row">
+      <div class="item">
+        Recent Transactions
+      </div>
+      <div class="link">
+        <router-link to="transactions-filter">
+          <img src="@/assets/icn/filter.svg" alt="">
+        </router-link>
+      </div>
+    </div>
+    <!-- <div class="filter-nav">
       <div class="container">
         <div class="item" :class="{ active: selectedType === 'all'}">
           <p class="title" @click="selectedType = 'all'">
@@ -32,7 +49,7 @@
           </p>
         </div>
       </div>
-    </div>
+    </div> -->
     </div>
     <div class="container">
       <div class="trx-list">
@@ -54,7 +71,17 @@ export default {
   },
   data () {
     return {
-      selectedType: 'all'
+      selectedType: 'all',
+      account: {
+        name: 'Main Account',
+        address: 'ak$G2CCeMjQffK5K21lIun3GzAuN13vhAfcKBrUPSKhSQ8RcgHP1e',
+        words: 'alive fussy bluetonguelizard',
+        balance: '20.65',
+        unit: 'AE',
+        prior: 'main',
+        id: 0,
+        active: true
+      }
     }
   },
   computed: {
@@ -82,6 +109,26 @@ export default {
   box-sizing: border-box;
 }
 .transactions {
+  .header {
+    display: flex;
+    justify-content: flex-end;
+    background-color: #ff0d6a;
+    .avatar {
+      width: 32px;
+      height: 32px;
+      box-shadow: 0 0 8px 0 rgba(0, 33, 87, 0.15);
+      margin-right: 5px;
+    }
+    .item {
+      font-size: 17px;
+      font-weight: 500;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: 1.41;
+      letter-spacing: normal;
+      color: #ffffff;
+    }
+  }
   .filter-nav {
     width: 100vw;
     left: 0;
@@ -97,6 +144,22 @@ export default {
         flex: 1;
         text-align: center;
       }
+    }
+  }
+  .row {
+    display: flex;
+    align-items: center;
+    height: 3em;
+    justify-content: space-around;
+    background-color: #fff;
+    .item {
+      font-size: 15px;
+      font-weight: 500;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: 1.33;
+      letter-spacing: normal;
+      color: #203040;
     }
   }
   .filter-nav .item.active {
