@@ -1,5 +1,5 @@
 <template>
-  <div class="header">
+  <div class="header" :class={reverse}>
     <div class="page-name">
       <slot name="page-name" />
     </div>
@@ -11,6 +11,13 @@
     </div>
   </div>
 </template>
+<script>
+export default {
+  props: {
+    reverse: false
+  }
+}
+</script>
 
 <style lang="scss" scoped>
   .header {
@@ -23,20 +30,30 @@
       display: flex;
     }
     .page-name {
-      display: flex;
-      align-items: center;
-      flex-grow: .7;
-    }
-    .page-content {
-      flex-grow: .2;
+      flex:1;
+      font-size: 17px;
+      text-transform: capitalize;
+      align-items: baseline;
+      justify-content: flex-start;
+      h3 {
+        margin: 0;
+      }
     }
     .nav {
+      width: 15vw;
       display: flex;
       align-items: center;
       justify-content: space-between;
       a {
         display: flex;
+        img {
+          width: 20px;
+          height: 20px;
+        }
       }
     }
   }
+  .header.reverse .nav {
+      flex-direction: row-reverse;
+    }
 </style>

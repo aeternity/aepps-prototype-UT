@@ -40,10 +40,9 @@ export default new Router({
       component: Accounts
     },
     {
-      path: '/account/:account',
+      path: '/account',
       name: 'account',
-      component: Account,
-      props: true
+      component: Account
     },
     {
       path: '/settings',
