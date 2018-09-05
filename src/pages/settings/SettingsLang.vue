@@ -1,25 +1,8 @@
 <template>
   <div class="settings-lang">
-    <Header>
-      <template slot="back-arrow">
-        <router-link to="settings">
-          <img src="@/assets/icn/back.svg" alt="">
-        </router-link>
-      </template>
-      <template slot="page-name">
-        {{this.$route.name}}
-      </template>
-      <template slot="nav">
-        <router-link to="settings">
-          <img src="@/assets/icn/settings.svg" alt="">
-        </router-link>
-        <router-link to="/">
-          <img src="@/assets/icn/list.svg" alt="">
-        </router-link>
-      </template>
-    </Header>
-    <div class="container">
-      <div class="row">
+    <Settings>
+      <template slot="box">
+        <div class="row">
         <div class="content">
           <h3>
             English
@@ -79,6 +62,11 @@
           <radio name="lang"></radio>
         </div>
       </div>
+      </template>
+    </Settings>
+    <Navigation />
+    <div class="container">
+      
     </div>
   </div>
 </template>
@@ -86,20 +74,19 @@
 <script>
 import radio from '@/components/Radio'
 import Header from '@/components/Header'
+import Navigation from '@/components/Navigation'
+import Settings from '@/layouts/settings'
 
 export default {
   components: {
     radio,
-    Header
+    Navigation,
+    Settings
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.settings-lang .container {
-  width: 85vw;
-  margin: 0 auto;
-}
 .settings-lang {
   .row {
     display: flex;

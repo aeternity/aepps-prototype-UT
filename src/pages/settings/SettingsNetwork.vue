@@ -1,25 +1,8 @@
 <template>
   <div class="settings-network">
-    <Header>
-      <template slot="back-arrow">
-        <router-link to="settings">
-          <img src="@/assets/icn/back.svg" alt="">
-        </router-link>
-      </template>
-      <template slot="page-name">
-        {{this.$route.name}}
-      </template>
-      <template slot="nav">
-        <router-link to="settings">
-          <img src="@/assets/icn/settings.svg" alt="">
-        </router-link>
-        <router-link to="/">
-          <img src="@/assets/icn/list.svg" alt="">
-        </router-link>
-      </template>
-    </Header>
-    <div class="container">
-      <div class="row">
+    <Settings>
+      <template slot="box">
+        <div class="row">
         <div class="content">
           <h3>
             Main Net
@@ -44,27 +27,27 @@
         <div class="radio">
           <radio name="network"></radio>
         </div>
-      </div>
-    </div>
+      </div>  
+      </template>
+    </Settings>
+    <Navigation />
   </div>
 </template>
 
 <script>
 import radio from '@/components/Radio'
-import Header from '@/components/Header'
+import Settings from '@/layouts/settings'
+import Navigation from '@/components/Navigation'
 export default {
   components: {
     radio,
-    Header
+    Settings,
+    Navigation
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.settings-network .container {
-  width: 85vw;
-  margin: 0 auto;
-}
 .settings-network {
   .row {
     display: flex;

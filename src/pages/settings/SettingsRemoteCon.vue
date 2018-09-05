@@ -1,71 +1,53 @@
 <template>
   <div class="settings-network">
-    <Header>
-      <template slot="back-arrow">
-        <router-link to="settings">
-          <img src="@/assets/icn/back.svg" alt="">
-        </router-link>
+    <Settings>
+      <template slot="box">
+        <div class="row">
+          <div class="content">
+            <h3>
+              MacBook Pro
+            </h3>
+            <p>
+              Last activity: yesterday
+            </p>
+          </div>
+          <div class="revoke">
+            revoke
+          </div>
+        </div>
+        <div class="row">
+          <div class="content">
+            <h3>
+              ThinkPad X
+            </h3>
+            <p>
+              Last activity: one week ago
+            </p>
+          </div>
+          <div class="revoke">
+            revoke
+          </div>
+        </div>
       </template>
-      <template slot="page-name">
-        {{this.$route.name}}
-      </template>
-      <template slot="nav">
-        <router-link to="settings">
-          <img src="@/assets/icn/settings.svg" alt="">
-        </router-link>
-        <router-link to="/">
-          <img src="@/assets/icn/list.svg" alt="">
-        </router-link>
-      </template>
-    </Header>
-    <div class="container">
-      <div class="row">
-        <div class="content">
-          <h3>
-            MacBook Pro
-          </h3>
-          <p>
-            Last activity: yesterday
-          </p>
-        </div>
-        <div class="revoke">
-          revoke
-        </div>
-      </div>
-      <div class="row">
-        <div class="content">
-          <h3>
-            ThinkPad X
-          </h3>
-          <p>
-            Last activity: one week ago
-          </p>
-        </div>
-        <div class="revoke">
-          revoke
-        </div>
-      </div>
-    </div>
+    </Settings>
+    <Navigation />
   </div>
 </template>
 
 <script>
 import radio from '@/components/Radio'
-import Header from '@/components/Header'
-
+import Navigation from '@/components/Navigation'
+import Settings from '@/layouts/settings'
 export default {
   components: {
     radio,
-    Header
+    Navigation,
+    Settings
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.settings-network .container {
-  width: 85vw;
-  margin: 0 auto;
-}
 .settings-network {
   .row {
     display: flex;
@@ -83,9 +65,9 @@ export default {
       }
     }
     .revoke {
-        color: #ff0070;
-        text-transform: uppercase;
-      }
+      color: #ff0070;
+      text-transform: uppercase;
+    }
   }
   .row:last-child {
     border-bottom: 0;

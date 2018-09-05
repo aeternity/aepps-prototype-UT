@@ -1,14 +1,8 @@
 <template>
   <div class="settings">
-    <div class="container">
-      <Header>
-        <template slot="page-name">
-          <h3>
-          {{this.$route.name}}
-          </h3>  
-        </template>
-      </Header>
-      <div class="options">
+    <Settings>
+      <template slot="box">
+        <div class="options">
         <div class="row">
           <router-link to="network">
             <div class="icn">
@@ -55,10 +49,13 @@
           </router-link>
         </div>
       </div>
-    </div>
-    <P class="fixed-button" style="opacity:.5;">
-      SIGN OUT ON THIS DEVICE
-    </P>
+      </template>
+      <template slot="bottom">
+        <P class="fixed-button" style="opacity:.5;">
+          SIGN OUT ON THIS DEVICE
+        </P>
+      </template>
+    </Settings>
     <Navigation />
   </div>
 </template>
@@ -66,34 +63,18 @@
 <script>
 import Header from '@/components/Header'
 import Navigation from '@/components/Navigation'
+import Settings from '@/layouts/settings'
 export default {
   components: {
     Header,
-    Navigation
+    Navigation,
+    Settings
   }
 }
 </script>
 
 <style lang="scss" scoped>
 .settings {
-  height: 100vh;
-  text-align: left;
-  background-color: #d3dce6;
-  .container {
-    width: 85vw;
-    margin: 0 auto;
-    height: 100%;
-    h3 {
-      text-transform: capitalize;
-      text-align: left;
-    }
-    .options {
-      margin-top: 10vh;
-      background-color: #fff;
-      padding: 0 6vw;
-      border-radius: 8px;
-    }
-  }
   .row {
     text-align: left;
     border-bottom: 1px solid #edf3f7;
@@ -141,11 +122,6 @@ export default {
     background-color: #14ccb7;
   }
   .fixed-button {
-    position: fixed;
-    bottom: 13vh;
-    left: 0;
-    width: 100%;
-    text-align: center;
     color: #ff0070;
     font-weight: 700;
   }
