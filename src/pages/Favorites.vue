@@ -1,9 +1,6 @@
 <template>
-  <div class="walletFav">
+  <div class="wallet">
     <Header>
-      <template slot="page-name">
-        <div v-bind:class="{'is-scrolled' : scroll }"> {{this.$route.name}}</div>
-       </template>
       <template slot="nav">
          <div v-if="!isBrowserMin && isBrowseEnable" @click="minimaze">
           <img src="@/assets/icn/list.svg" alt="">
@@ -29,7 +26,8 @@
             <p>Share</p>
           </div>
         </div>
-        <div v-if="!isBrowseEnable" class="icon"> ?
+        <div v-if="!isBrowseEnable" class="icon">
+          <img src="@/assets/icn/questionMark.png" alt="question mark">
         </div>
         <div v-if="isBrowserMin" @click="isBrowserMin = false">
           <img src="@/assets/icn/arrow-up.svg" alt="">
@@ -37,45 +35,86 @@
       </template>
     </Header>
     <div class="container">
-      <div class="item">
-        <div class="row favourites">
-          <input type="url" v-model="urlAddress" placeholder="Search or Type URL …" @keyup.enter="isBrowseEnable = true">
+      <div class="row">
+        <div class="icn">
+          ↪
         </div>
+        <h1 class="text">
+          Browse aepps
+        </h1>
       </div>
-      <div class="item">
-        <div class="row">
-          <div class="icn">
-            ↪
+      <div class="row">
+        <input type="url" v-model="urlAddress" placeholder="Search or Type URL …" @keyup.enter="isBrowseEnable = true" class="input">
+      </div>
+      <div class="row">
+        <div class="item">
+          <img src="@/assets/icn/angles.png" alt="">
+          <div class="text">
+            Beer Aepp
           </div>
-          <h1 class="text">
-            Aeternity aepps
-          </h1>
+        </div>
+        <div class="item">
+          <img src="@/assets/icn/radial.png" alt="">
+          <div class="text">
+            Proof
+          </div>
+        </div>
+        <div class="item">
+          <img src="@/assets/icn/shapes.png" alt="">
+          <div class="text">
+            Explorer
+          </div>
         </div>
       </div>
-      <div class="bottom">
-        <div class="item"  v-for="bookmark in Bookmarks" :key="bookmark.name">
+      <div class="row">
+        <div class="icn">
+          ↪
+        </div>
+        <h1 class="text">
+          Aeternity aepps
+        </h1>
+      </div>
+      <div class="rectangle">
+        <div class="item" v-for="bookmark in Bookmarks" :key="bookmark.name">
           <div class="row">
             <div class="logo">
               <div class="cirle" :class="bookmark.name">
               </div>
             </div>
             <div class="content">
-              <p class="title">
+              <div class="title">
                 {{bookmark.name}}
-              </p>
-              <p class="url">
+              </div>
+              <div class="url">
                 {{bookmark.url}}
-              </p>
-            </div>
-            <div class="options">
-              <div class="optionsIcn">
-                <img src="@/assets/icn/expandList.svg" alt="">
               </div>
             </div>
+        <div class="options" @click="toggleOption(bookmark)">
+          <div class="optionsIcn">
+            <img src="@/assets/icn/expandList.svg" alt="">
           </div>
-          <p>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Impedit, quod dolorum. Minima quas hic aut modi! Omnis, impedit eius? Eum!
-          </p>
+          <div class="optionsDrop" v-if="bookmark.drop === true">
+            <div class="option" @clipboard:copy="bookmark.url" @click="doCopy(bookmark.url)">
+              <img src="@/assets/icn/copy.svg" alt="">
+              <p>Copy URL</p>
+              <input type="hidden" v-model="bookmark.url">
+            </div>
+            <div class="option">
+              <img src="@/assets/icn/delete.svg" alt="">
+              <p>Delete</p>
+            </div>
+            <div class="option">
+              <img src="@/assets/icn/share.svg" alt="">
+              <p>Share</p>
+            </div>
+          </div>
+        </div>
+          </div>
+          <div class="rowText">
+            <p class="text">
+              Governance allows the community to participate in important decisions concerning the æternity blockchain.
+            </p>
+          </div>
         </div>
       </div>
     </div>
@@ -97,12 +136,17 @@ export default {
   },
   data () {
     return {
-      scroll: false,
       urlAddress: '',
       isBrowseEnable: false,
       dropNav: false,
       isBrowserMin: false,
       Bookmarks: [
+        {
+          iconPath: '',
+          name: 'Governance',
+          url: 'governance.aepps.com',
+          drop: false
+        },
         {
           iconPath: '',
           name: 'Contacts',
@@ -125,9 +169,6 @@ export default {
     }
   },
   methods: {
-    handleScroll (event) {
-      this.scroll = true
-    },
     toggleOption: function (el) {
       el.drop = !el.drop
       this.bookmark = el
@@ -157,12 +198,6 @@ export default {
     urlChange: function () {
       return `http://${this.urlAddress}`
     }
-  },
-  created () {
-    window.addEventListener('scroll', this.handleScroll)
-  },
-  destroyed () {
-    window.removeEventListener('scroll', this.handleScroll)
   }
 }
 </script>
@@ -170,39 +205,30 @@ export default {
 .nav {
   height: 11%;
 }
-.is-scrolled {
-  display: none;
-}
-.icon {
-  width:40%;
-}
-.walletFav {
+.wallet {
   background-color: #edf3f7;
   .header {
-    width: 85vw;
     margin: 0 auto;
     justify-content: space-between;
   }
   .container {
-   height: 85vh;
-  //  height: auto;
-  display: inline-block;
-  overflow: auto;
-    .item {
-        margin: 5vh 0;
-      .row {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height:100vh;
+    .row {
         display: flex;
         align-items: flex-start;
         justify-content: space-evenly;
+        align-items: center;
         .icn {
             width: 17px;
             height: 24px;
             object-fit: contain;
             font-size: 17px;
             font-weight: bold;
-            line-height: 1.41;
+            line-height: 1.5em;
             letter-spacing: normal;
-            color: #ff0070;
           }
           .text {
             width: 90%;
@@ -210,36 +236,59 @@ export default {
             font-weight: 500;
             line-height: 1.22;
             letter-spacing: -0.5px;
-            color: #ff0070;
             text-align: left;
-            margin: 0;
+            color: #203040;
           }
-        input {
-          background: transparent;
-          box-shadow: none;
-          border:0;
-          color: #203040;
-          font-size: 17px;
-          margin-left: 10px;
-        }
-      }
-      .favourites {
+      .input {
+          width:85vw;
           background-color: #f7fafc;
           height: 10vh;
+          margin-left: 10px;
           display: flex;
           align-items: center;
-          border-radius: 5px;
+          line-height: 1.41;
+          color: #929ca6;
+          font-size: 17px;
+          box-shadow: none;
+          border:0;
+      }
+      input[type=url] {
+        padding-left: 1.2em;
+      }
+      .item {
+        .text {
+          font-size: 15px;
+          font-weight: 500;
+          font-style: normal;
+          font-stretch: normal;
+          line-height: 1.07;
+          letter-spacing: normal;
+          text-align: center;
+          color: #203040;
+          width: auto;
+        }
       }
     }
-    .bottom {
+    .row:first-child {
+        .icn {
+          color: #ff0d6a;
+        }
+        .text {
+          color: #ff0070;
+        }
+    }
+    .rectangle {
       background-color: #fff;
-      border-radius: 10px;
+      border-radius: 8px;
+      box-shadow: 0 0 8px 0 rgba(27, 68, 121, 0.1);
+      width:95%;
+      margin: 0 auto;
       .item {
-        margin: 5vw;
+        margin: 2vh;
+        border-bottom: 2px solid #edf3f7;
         .row {
           display: flex;
           align-items: center;
-          border-top: 1px solid #edf3f7;
           .logo,
           .options {
             flex: .35;
@@ -260,10 +309,8 @@ export default {
             height: 32px;
           }
           .cirle {
-            &.Transactions {
-              background: #e72b6e url('../assets/icn/reload.svg') no-repeat 50% 50%;
-              padding: 2px;
-              background-size: 50%;
+            &.Governance {
+              background: url('../assets/icn/diamond.png') no-repeat 50% 50%;
             }
             &.Contacts {
               background: #6948a0 url('../assets/icn/contacts.svg') no-repeat 50% 50%;
@@ -322,27 +369,41 @@ export default {
           .content {
             text-align: left;
             text-indent: 10px;
-            padding: 16px 0;
+            line-height: .33;
+            // padding: 16px 0;
             flex: 3;
-              p {
-              margin: 0;
-              font-size: 13px;
+            .title {
+              font-size: 15px;
+              font-weight: 500;
+              font-style: normal;
+              font-stretch: normal;
+              line-height: 1.33;
+              letter-spacing: normal;
+              color: #203040;
             }
-          }
-          .content .title {
-            font-size: 15px;
-          }
-          .url {
-            font-size: 13px;
-          }
+            .url {
+              font-size: 13px;
+              font-weight: normal;
+              font-style: normal;
+              font-stretch: normal;
+              line-height: 1.23;
+              letter-spacing: normal;
+              color: #76818c;
+            }
+
         }
-        p {
-          text-align: left;
+      }
+        .rowText {
+          .text {
+            text-align: left;
+            font-size: 15px;
+            line-height: 1.33;
+            color: #203040;
+          }
         }
       }
     }
   }
-}
 .container {
     width: 85vw;
     margin: 0 auto;
@@ -393,6 +454,7 @@ export default {
       width: 24px;
       height: 24px;
     }
+  }
   }
 }
 </style>

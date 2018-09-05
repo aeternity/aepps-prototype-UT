@@ -23,7 +23,6 @@
       align-items: baseline;
     }
     .nav {
-      width:10vw;
       display: flex;
       align-items: center;
       justify-content: space-between;

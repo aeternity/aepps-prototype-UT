@@ -31,7 +31,7 @@ export default new Router({
     },
     {
       path: '/',
-      name: 'favorites',
+      name: 'Browse Aepps',
       component: Favorites
     },
     {
