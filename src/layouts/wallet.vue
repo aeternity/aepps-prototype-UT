@@ -53,6 +53,13 @@ export default {
         span {
           color: #ff0d6a;
         }
+        img {
+          height: 24px;
+        }
+        .avatar {
+          height: 24px;
+          width: 24px;
+        }
       }
       h1:nth-child(1) {
         flex:1;
@@ -82,9 +89,21 @@ export default {
 .color {
   .half:nth-child(1) {
     background-color: #ff0d6a;
+    h1 {
+      color: #ffbfd7 !important;
+      strong {
+        color: #fff;
+      }
+      span {
+        color: #fff;
+      }
+    }
   }
   .half:nth-child(2) {
     background-color: #fff;
+    .container {
+      padding-top: 5vh;
+    }
   }
   .title {
     color: #fff;

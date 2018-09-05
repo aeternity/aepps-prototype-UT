@@ -1,87 +1,172 @@
 <template>
   <div class="walletAccounts">
-    <div class="container">
-      <div class="row">
-        <div class="logo">
-          <ae-identity-avatar class="avatar" :address="account.address">
-          </ae-identity-avatar>
-        </div>
-        <div class="content">
-          <span>{{account.name}}</span>
-        </div>
-        <div class="arrow">
-          ?
-        </div>
-      </div>
-      <div class="row heading">
+    <Wallet color=true>
+      <template slot="header">
+        <Header reverse=true>
+          <template slot="nav">
+            <router-link to="" v-if="!scan">
+              <img src="@/assets/icn/help-light.svg" alt="">
+            </router-link>
+            <div v-else  @click="scan = false">
+              <ae-icon name="close" type="dramatic" invert />
+            </div>
+          </template>
+        </Header>
+      </template>
+      <template slot="title">
+        <h1>
+          <span>
+            ↪
+          </span>
+        </h1>
+        <h1 v-if="!scan">
+          Send and recive
+          <strong>
+            æternity tokens
+          </strong>
+          with
+          your active account
+        </h1>
+        <h1 v-else>
+          Let others
+          <img :src="require('emoji-datasource-apple/img/apple/64/1f933.png')" alt="">
+          scan
+          the address of your <br>
+          <ae-identity-avatar :address="account.address" />
+          <strong>
+            {{account.name}}
+          </strong>
+        </h1>
+      </template>
+      <template slot="swipers">
+        <cardFront v-if="!scan" :account="account" />
+        <cardBack v-else :account="account" />
+      </template>
+      <template slot="content" v-if="!scan">
         <div class="item">
-          {{`${account.balance} ${account.unit}`}}
+          <div class="logo">
+            <img :src="require('emoji-datasource-apple/img/apple/64/1f4b8.png')" alt="">
+          </div>
+          <div class="content">
+            <h3>
+              Send
+            </h3>
+            <p>
+              Transfer founds
+            </p>
+          </div>
+          <div class="action">
+            <ae-icon name="chevron" />
+          </div>
         </div>
-      </div>
-    </div>
-    <div class="container">
-      <div class="row">
-        <div class="logo">
-          <img :src="require('emoji-datasource-apple/img/apple/64/1f4b8.png')" alt="">
+        <div class="item">
+          <div class="logo">
+            <img :src="require('emoji-datasource-apple/img/apple/64/1f468-200d-1f527.png')" alt="">
+          </div>
+          <div class="content">
+            <h3>
+              Recive
+            </h3>
+            <p>
+              Share your address
+            </p>
+          </div>
+          <div class="action">
+            <ae-icon name="chevron" />
+          </div>
         </div>
-        <div class="content">
-          <h3>
-            Send
-          </h3>
-          <p>
-            Transfer founds
-          </p>
+        <div class="item">
+          <div class="logo">
+            <img :src="require('emoji-datasource-apple/img/apple/64/1f933.png')" alt="">
+          </div>
+          <div class="content">
+            <h3>
+              Scan
+            </h3>
+            <p>
+              Prefill by scanning a QR code
+            </p>
+          </div>
+          <div class="action" @click="scan = true">
+            <ae-icon name="chevron" />
+          </div>
         </div>
-        <div class="arrow">
-          <ae-icon name="chevron" />
+      </template>
+      <template slot="content" v-else>
+        <div class="item">
+          <div class="logo">
+            <img :src="require('emoji-datasource-apple/img/apple/64/270d-fe0f.png')" alt="">
+          </div>
+          <div class="content">
+            <h3>
+              Copy address
+            </h3>
+            <p>
+              Save to clipboard
+            </p>
+          </div>
+          <div class="action">
+            <ae-icon name="chevron" />
+          </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="logo">
-          <img :src="require('emoji-datasource-apple/img/apple/64/1f4b8.png')" alt="">
+        <div class="item">
+          <div class="logo">
+            <img :src="require('emoji-datasource-apple/img/apple/64/2709-fe0f.png')" alt="">
+          </div>
+          <div class="content">
+            <h3>
+              Share address
+            </h3>
+            <p>
+              Send to your contacts
+            </p>
+          </div>
+          <div class="action">
+            <ae-icon name="chevron" />
+          </div>
         </div>
-        <div class="content">
-          <h3>
-            Recive
-            <!-- <img :src="require('emoji-datasource-apple/img/apple/64/1f446.png')" alt=""> -->
-          </h3>
-          <p>
-            Share your address
-          </p>
+        <div class="item">
+          <div class="logo">
+            <img :src="require('emoji-datasource-apple/img/apple/64/1f4ab.png')" alt="">
+          </div>
+          <div class="content">
+            <h3>
+              Transfer request
+            </h3>
+            <p>
+              Request with a specific amount
+            </p>
+          </div>
+          <div class="action">
+            <ae-icon name="chevron" />
+          </div>
         </div>
-        <div class="arrow">
-          <ae-icon name="chevron" />
-        </div>
-      </div>
-      <div class="row">
-        <div class="logo">
-          <img :src="require('emoji-datasource-apple/img/apple/64/1f4f7.png')" alt="">
-        </div>
-        <div class="content">
-          <h3>
-            Scan
-          </h3>
-          <p>
-            Pay by scanning a QR code
-          </p>
-        </div>
-        <div class="arrow">
-          <ae-icon name="chevron" />
-        </div>
-      </div>
-    </div>
-    <Navigation>
-    </Navigation>
+      </template>
+    </Wallet>
+    <Navigation />
   </div>
 </template>
 <script>
 import Navigation from '@/components/Navigation'
+import cardFront from '@/components/cardFront'
+import cardBack from '@/components/cardBack'
+import Wallet from '@/layouts/wallet'
+import Header from '@/components/Header'
 import {AeIdentityAvatar, AeIcon} from '@aeternity/aepp-components'
 export default {
   components: {
     Navigation,
     AeIdentityAvatar,
-    AeIcon
+    AeIcon,
+    Wallet,
+    Header,
+    cardFront,
+    cardBack
+  },
+  data () {
+    return {
+      scan: false
+    }
   },
   computed: {
     account: function () {
@@ -92,84 +177,42 @@ export default {
 </script>
 <style lang="scss" scoped>
 .walletAccounts {
-  background-color: #edf3f7;
-  height: 100vh;
-  .container:first-child {
-    margin: 0 auto;
-    width: 100%;
-    background: #ff0d6a;
-    color: #ffffff;
-    height: 50vh;
+  .container .item {
+    padding: 17px 0;
+    border-bottom: 2px solid #d3dce6;
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    .row:first-child {
-      width: 90vw;
-      margin: 0 auto;
-      margin-top: 5vh;
+    align-items: center;
+    text-align: left;
+     div {
+       flex:1;
+       line-height: 1.33em;
+       h3,p {
+         margin: 0;
+       }
+       h3 {
+         font-size: 15px;
+       }
+       p{
+         font-size: 13px;
+       }
+    }
+    div:nth-child(1) {
+      flex-grow: .5;
+    }
+    div:nth-child(2) {
+      flex:2;
+    }
+    div:nth-child(3) {
+      flex-grow: 0;
+    }
+    .logo {
+      img {
+        height: 34px;
+      }
     }
   }
-  .container {
-    width: 85vw;
-    margin: 0 auto;
-    .row.heading {
-        display: flex;
-        align-items: center;
-        font-size: 17px;
-        justify-content: flex-end;
-        border: none;
-      .item:first-child {
-        flex: .7;
-        font-size: 3em;
-        margin-bottom: 0.5em;
-      }
-      .item:nth-child(2) {
-        text-align: left;
-        font-weight: 500;
-      }
-      .item {
-        flex: 2;
-        padding: 5px 0 0;
-        .avatar {
-          width: 32px;
-          height: 32px;
-        }
-      }
-    }
-    .row:first-child {
-      border:none;
-    }
-      .row {
-        display: flex;
-        align-items: center;
-        font-size: 17px;
-        border-top: 1px solid #315872;
-          .icn {
-            width: 32px;
-            height: 32px;
-          }
-          .logo > div {
-            width: 32px;
-            height: 32px;
-          }
-            .content {
-              text-indent: 10px;
-              padding: 16px 0;
-              flex: 3;
-              text-align: left;
-              h3,
-              p {
-                margin: 0;
-              }
-              p {
-                font-size: 13px;
-              }
-            }
-            .arrow {
-              flex: 1;
-              text-align: right;
-            }
-      }
+  .item:last-child {
+    border-bottom: 0;
   }
 }
 </style>
