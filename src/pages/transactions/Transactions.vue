@@ -2,60 +2,36 @@
   <div class="transactions">
     <div class="fixed">
       <Header>
-      <template slot="page-name">
-        <ae-identity-avatar :address="account.address"></ae-identity-avatar>
-        <div class="item">{{account.name}}</div>
-      </template>
-      <template slot="page-content">
-        <div class="item">{{account.balance}} {{account.unit}}</div>
-      </template>
-      <template slot="nav">
-        <div class="icon">
-          <img src="@/assets/icn/questionMark-light.png" alt="question mark">
+        <template slot="page-name">
+          <ae-identity-avatar :address="account.address"></ae-identity-avatar>
+          <div class="item">{{account.name}}</div>
+        </template>
+        <template slot="page-content">
+          <div class="item">{{account.balance}} {{account.unit}}</div>
+        </template>
+        <template slot="nav">
+          <div class="icon">
+            <img src="@/assets/icn/questionMark-light.png" alt="question mark">
+          </div>
+        </template>
+      </Header>
+      <div class="row">
+        <div class="item">
+          Recent Transactions
         </div>
-        <!-- <router-link to="transactions-filter">
-          <img src="@/assets/icn/filter.svg" alt="">
-        </router-link>
-        <router-link to="/">
-          <img src="@/assets/icn/list.svg" alt="">
-        </router-link> -->
-      </template>
-    </Header>
-    <div class="row">
-      <div class="item">
-        Recent Transactions
-      </div>
-      <div class="link">
-        <router-link to="transactions-filter">
-          <img src="@/assets/icn/filter.svg" alt="">
-        </router-link>
-      </div>
-    </div>
-    <!-- <div class="filter-nav">
-      <div class="container">
-        <div class="item" :class="{ active: selectedType === 'all'}">
-          <p class="title" @click="selectedType = 'all'">
-            All
-          </p>
-        </div>
-        <div class="item" :class="{ active: selectedType === 'in'}">
-          <p class="title" @click="selectedType = 'in'">
-            Incoming
-          </p>
-        </div>
-        <div class="item" :class="{ active: selectedType === 'out'}">
-          <p class="title" @click="selectedType = 'out'">
-            Outgoing
-          </p>
+        <div class="link">
+          <router-link to="transactions-filter">
+            <img src="@/assets/icn/filter.svg" alt="">
+          </router-link>
         </div>
       </div>
-    </div> -->
     </div>
     <div class="container">
       <div class="trx-list">
         <tx :tx="tx" v-for="(tx, index) in txs" :key="index"></tx>
       </div>
     </div>
+    <Navigation />
   </div>
 </template>
 
@@ -63,11 +39,13 @@
 import Header from '@/components/Header'
 import { AeIdentityAvatar } from '@aeternity/aepp-components'
 import tx from '@/components/tx'
+import Navigation from '@/components/Navigation'
 export default {
   components: {
     Header,
     AeIdentityAvatar,
-    tx
+    tx,
+    Navigation
   },
   data () {
     return {
