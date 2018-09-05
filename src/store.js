@@ -230,7 +230,6 @@ export const store = new Vuex.Store({
       return state.accounts.map(acc => { acc.active = false })
     },
     activateAcc (state, id) {
-      console.log(id)
       let active = state.accounts.find(acc => {
         return acc.id === id
       })

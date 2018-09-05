@@ -23,12 +23,17 @@
       align-items: baseline;
     }
     .nav {
-      width:10vw;
+      width: 15vw;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      justify-items: self-end;
       a {
         display: flex;
+        img {
+          width: 20px;
+          height: 20px;
+        }
       }
     }
   }

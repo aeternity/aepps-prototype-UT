@@ -3,7 +3,7 @@
     <div class="half">
       <div class="container">
         <div class="top-actions-bar">
-          <Header></Header>
+          <slot name="header" />
         </div>
         <div class="title">
           <slot name="title" />
@@ -72,7 +72,11 @@ export default {
   }
   .half:nth-child(2) {
     background-color: #fff;
-    padding-top: 12vh;
+    .container {
+      padding-top: 12vh;
+      width: 80vw;
+      margin: 0 auto;
+    }
   }
 }
 .color {
