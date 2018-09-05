@@ -35,7 +35,10 @@
         Balance
       </div>
       <div class="item">
-       {{`${account.balance} ${account.unit}`}}
+       {{account.balance}}
+       <span>
+         {{account.unit}}
+       </span>
       </div>
     </div>
   </div>
@@ -99,10 +102,10 @@ export default {
   .row {
     display: flex;
     align-items: center;
-    font-size: 17px;
     &.heading {
       .item {
         flex: 0.3;
+        font-size: 17px;
         input {
           font-size: 17px;
           display: inline-block;
@@ -130,9 +133,20 @@ export default {
     &.actions {
       .item {
         display: flex;
+        font-size: 13px;
+        align-items: flex-start;
       }
       .item:first-child {
         flex:3;
+      }
+      .item:nth-child(2) {
+        font-family: 'aeternity mono';
+        font-size: 17px;
+        display: flex;
+        align-items: flex-end;
+        span {
+          font-size: 13px;
+        }
       }
     }
     &.address {
@@ -159,14 +173,26 @@ export default {
     }
     &.actions {
       background: rgba(0,0,0,.2);
-      padding: 9px;
-      font-size: 11px;
+      padding: 2px 9px 6px;
       letter-spacing: 1.1px;
       font-weight: 500;
+      font-size: 13px;
       img {
         height: 14px;
         width: 14px;
         margin-right: 5px;
+      }
+    }
+    .actions {
+      .item:nth-child(1) {
+        font-size: 13px;
+      }
+      .item:nth-child(2) {
+        font-family: 'aeternity mono';
+        font-size: 17px !important;
+        span {
+          font-size: 13px;
+        }
       }
     }
     .card-secure-label {
@@ -182,6 +208,11 @@ export default {
   background-color: #6948a1;
   .address .item {
     color: #442873;
+  }
+}
+@media (max-width: 340px) {
+  .row.address {
+    padding-top: 20px !important;
   }
 }
 </style>

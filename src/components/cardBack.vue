@@ -10,17 +10,7 @@
         </span>
       </div>
     </div>
-    <div class="row actions">
-      <div class="item"></div>
-      <div class="item" @click="doCopy(account.address)">
-        <img src="@/assets/icn/copy-light.svg" alt="">
-        copy
-      </div>
-      <div class="item">
-        <img src="@/assets/icn/share-light.svg" alt="">
-        share
-      </div>
-    </div>
+    <div class="row actions" />
   </div>
 </template>
 
@@ -28,15 +18,6 @@
 export default {
   props: {
     account: Object
-  },
-  methods: {
-    doCopy: function (text) {
-      this.$copyText(text).then(function (e) {
-        console.log(e)
-      }, function (e) {
-        console.log(e)
-      })
-    }
   },
   computed: {
     chunkAddress () {
@@ -80,20 +61,9 @@ export default {
   }
   .actions {
     background-color: #001833;
-    padding: 8px 0px;
-    font-size: 11px;
-    font-weight: 500;
-    text-transform: uppercase;
-    position: relative;
-    bottom: 10px;
-    border-radius: 0 0 8px 8px;
-    img {
-      height: 14px;
-      width: 14px;
-    }
-    .item:nth-child(1) {
-      flex:2;
-    }
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    height: 3vh;
   }
 }
 </style>

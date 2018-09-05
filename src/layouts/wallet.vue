@@ -109,4 +109,13 @@ export default {
     color: #fff;
   }
 }
+@media (max-width: 340px) {
+  .account-layout {
+    .half:nth-child(1) {
+      h1:nth-child(2) {
+       flex-grow: 1 !important;
+      }
+    }
+  }
+}
 </style>

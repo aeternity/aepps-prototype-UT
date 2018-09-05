@@ -105,7 +105,7 @@
               Save to clipboard
             </p>
           </div>
-          <div class="action">
+          <div class="action" @click="doCopy(account.address)">
             <ae-icon name="chevron" />
           </div>
         </div>
@@ -171,6 +171,15 @@ export default {
   computed: {
     account: function () {
       return this.$store.getters.activeAcc
+    }
+  },
+  methods: {
+    doCopy: function (text) {
+      this.$copyText(text).then(function (e) {
+        console.log(e.text)
+      }, function (e) {
+        console.log(e)
+      })
     }
   }
 }

@@ -1,8 +1,8 @@
 <template>
   <div class="wallet">
-    <Header>
+    <!-- <Header>
       <template slot="nav">
-         <div v-if="!isBrowserMin && isBrowseEnable" @click="minimaze">
+        <div v-if="!isBrowserMin && isBrowseEnable" @click="minimaze">
           <img src="@/assets/icn/list.svg" alt="">
         </div>
         <div class="contextMenu" v-if="isBrowseEnable" @click="dropNav = true">
@@ -33,7 +33,7 @@
           <img src="@/assets/icn/arrow-up.svg" alt="">
         </div>
       </template>
-    </Header>
+    </Header> -->
     <div class="container">
       <div class="row">
         <div class="icn">
@@ -44,7 +44,8 @@
         </h1>
       </div>
       <div class="row">
-        <input type="url" v-model="urlAddress" placeholder="Search or Type URL …" @keyup.enter="isBrowseEnable = true" class="input">
+        <input type="url" v-model="urlAddress" placeholder="Search or Type URL …" @keyup.enter="isBrowseEnable = true"
+          class="input">
       </div>
       <div class="row">
         <div class="item">
@@ -89,26 +90,26 @@
                 {{bookmark.url}}
               </div>
             </div>
-        <div class="options" @click="toggleOption(bookmark)">
-          <div class="optionsIcn">
-            <img src="@/assets/icn/expandList.svg" alt="">
-          </div>
-          <div class="optionsDrop" v-if="bookmark.drop === true">
-            <div class="option" @clipboard:copy="bookmark.url" @click="doCopy(bookmark.url)">
-              <img src="@/assets/icn/copy.svg" alt="">
-              <p>Copy URL</p>
-              <input type="hidden" v-model="bookmark.url">
+            <div class="options" @click="toggleOption(bookmark)">
+              <div class="optionsIcn">
+                <img src="@/assets/icn/expandList.svg" alt="">
+              </div>
+              <div class="optionsDrop" v-if="bookmark.drop === true">
+                <div class="option" @clipboard:copy="bookmark.url" @click="doCopy(bookmark.url)">
+                  <img src="@/assets/icn/copy.svg" alt="">
+                  <p>Copy URL</p>
+                  <input type="hidden" v-model="bookmark.url">
+                </div>
+                <div class="option">
+                  <img src="@/assets/icn/delete.svg" alt="">
+                  <p>Delete</p>
+                </div>
+                <div class="option">
+                  <img src="@/assets/icn/share.svg" alt="">
+                  <p>Share</p>
+                </div>
+              </div>
             </div>
-            <div class="option">
-              <img src="@/assets/icn/delete.svg" alt="">
-              <p>Delete</p>
-            </div>
-            <div class="option">
-              <img src="@/assets/icn/share.svg" alt="">
-              <p>Share</p>
-            </div>
-          </div>
-        </div>
           </div>
           <div class="rowText">
             <p class="text">
@@ -121,9 +122,7 @@
     <div :class="{minimaze: isBrowserMin}" class="iframe" id="iframe" v-if="isBrowseEnable">
       <iframe :src=urlChange frameborder="0" width="100%"></iframe>
     </div>
-<Navigation>
-
-</Navigation>
+    <Navigation />
   </div>
 </template>
 <script>
@@ -370,7 +369,6 @@ export default {
             text-align: left;
             text-indent: 10px;
             line-height: .33;
-            // padding: 16px 0;
             flex: 3;
             .title {
               font-size: 15px;
@@ -411,8 +409,8 @@ export default {
 .iframe {
   cursor: pointer;
   position: fixed;
-  top:58px;
-  height: 100vh;
+  top:0;
+  height: 89vh;
   left: 0;
   width: 100vw;
   overflow-y: scroll;
