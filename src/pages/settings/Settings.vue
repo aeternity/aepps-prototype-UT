@@ -1,76 +1,75 @@
 <template>
   <div class="settings">
-    <Header>
-      <template slot="page-name">
-        {{this.$route.name}}
-      </template>
-      <template slot="nav">
-        <router-link to="settings">
-          <img src="@/assets/icn/settings.svg" alt="">
-        </router-link>
-        <router-link to="/">
-          <img src="@/assets/icn/list.svg" alt="">
-        </router-link>
-      </template>
-    </Header>
     <div class="container">
-      <div class="row">
-        <router-link to="network">
-          <div class="icn">
-            <img src="@/assets/icn/globe.svg" alt="">
-          </div>
-          <div class="content">
-            <h3>
-              Network
-            </h3>
-            <p>
-              Test Net
-            </p>
-          </div>
-        </router-link>
-      </div>
-      <div class="row">
-        <router-link to="remote-connections">
-          <div class="icn">
-            <img src="@/assets/icn/device.svg" alt="">
-          </div>
-          <div class="content">
-            <h3>
-              Remote Connections
-            </h3>
-            <p>
-              2 devices connected
-            </p>
-          </div>
-        </router-link>
-      </div>
-      <div class="row">
-        <router-link to="language">
-          <div class="icn">
-            <img src="@/assets/icn/device.svg" alt="">
-          </div>
-          <div class="content">
-            <h3>
-              Language
-            </h3>
-            <p>
-              English
-            </p>
-          </div>
-        </router-link>
+      <Header>
+        <template slot="page-name">
+          <h3>
+          {{this.$route.name}}
+          </h3>  
+        </template>
+      </Header>
+      <div class="options">
+        <div class="row">
+          <router-link to="network">
+            <div class="icn">
+              <img src="@/assets/icn/globe.svg" alt="">
+            </div>
+            <div class="content">
+              <h3>
+                Network
+              </h3>
+              <p>
+                Test Net
+              </p>
+            </div>
+          </router-link>
+        </div>
+        <div class="row">
+          <router-link to="remote-connections">
+            <div class="icn">
+              <img src="@/assets/icn/device.svg" alt="">
+            </div>
+            <div class="content">
+              <h3>
+                Remote Connections
+              </h3>
+              <p>
+                2 devices connected
+              </p>
+            </div>
+          </router-link>
+        </div>
+        <div class="row">
+          <router-link to="language">
+            <div class="icn">
+              <img src="@/assets/icn/device.svg" alt="">
+            </div>
+            <div class="content">
+              <h3>
+                Language
+              </h3>
+              <p>
+                English
+              </p>
+            </div>
+          </router-link>
+        </div>
       </div>
     </div>
     <P class="fixed-button" style="opacity:.5;">
       SIGN OUT ON THIS DEVICE
     </P>
+    <Navigation />
   </div>
 </template>
 
 <script>
 import Header from '@/components/Header'
+import Navigation from '@/components/Navigation'
 export default {
   components: {
-    Header
+    Header,
+    Navigation
   }
 }
 </script>
@@ -78,9 +77,22 @@ export default {
 <style lang="scss" scoped>
 .settings {
   height: 100vh;
+  text-align: left;
+  background-color: #d3dce6;
   .container {
     width: 85vw;
     margin: 0 auto;
+    height: 100%;
+    h3 {
+      text-transform: capitalize;
+      text-align: left;
+    }
+    .options {
+      margin-top: 10vh;
+      background-color: #fff;
+      padding: 0 6vw;
+      border-radius: 8px;
+    }
   }
   .row {
     text-align: left;
@@ -119,19 +131,23 @@ export default {
       margin: 0;
     }
   }
-  .row:last-child {
-    border-bottom: none;
-    .icn {
-      background-color: #ff0070;
-    }
+  .row:nth-child(1) .icn {
+    background-color: #6948a0;
+  }
+  .row:nth-child(2) .icn {
+    background-color: #ff0070;
+  }
+  .row:nth-child(3) .icn {
+    background-color: #14ccb7;
   }
   .fixed-button {
     position: fixed;
-    bottom: 0;
+    bottom: 13vh;
     left: 0;
     width: 100%;
     text-align: center;
     color: #ff0070;
+    font-weight: 700;
   }
 }
 </style>

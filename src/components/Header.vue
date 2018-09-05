@@ -26,8 +26,14 @@ export default {
       display: flex;
     }
     .page-name {
-      display: flex;
+      flex:1;
+      font-size: 17px;
+      text-transform: capitalize;
       align-items: baseline;
+      justify-content: flex-start;
+      h3 {
+        margin: 0;
+      }
     }
     .nav {
       width: 15vw;
