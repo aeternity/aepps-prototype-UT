@@ -1,20 +1,20 @@
 <template>
   <div class="transactions">
     <div class="fixed">
-      <Header>
-        <template slot="page-name">
+      <div class="row-fixed">
+        <div class="item">
           <ae-identity-avatar :address="account.address"></ae-identity-avatar>
           <div class="item">{{account.name}}</div>
-        </template>
-        <template slot="page-content">
-          <div class="item">{{account.balance}} {{account.unit}}</div>
-        </template>
-        <template slot="nav">
+        </div>
+        <div class="item">
+          <div class="account-status">
+            <div class="item">{{account.balance}} {{account.unit}}</div>
+          </div>
           <div class="icon">
             <img src="@/assets/icn/questionMark-light.png" alt="question mark">
           </div>
-        </template>
-      </Header>
+        </div>
+      </div>
       <div class="row">
         <div class="item">
           Recent Transactions
@@ -151,6 +151,36 @@ export default {
     }
     .tx:last-child {
       border-bottom: 0;
+    }
+  }
+}
+.fixed {
+  .row-fixed {
+    display: flex;
+    align-items: center;
+    background-color: #ff0d6a;
+    padding: 8px;
+    justify-content: space-between;
+    color: #fff;
+    .item:nth-child(1) {
+      display: flex;
+      flex: 2;
+      flex-direction: row;
+      align-items: center;
+      .avatar {
+        margin-right: 10px;
+        margin-left: 7vw;
+        width: 32px;
+        height: 32px;
+      }
+    }
+    .item:nth-child(2) {
+      align-items: center;
+      display: flex;
+      flex:1;
+      .icon {
+        flex: 1;
+      }
     }
   }
 }
