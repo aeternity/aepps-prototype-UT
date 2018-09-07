@@ -137,12 +137,13 @@
               Request with a specific amount
             </p>
           </div>
-          <div class="action">
+          <div class="action" @click="request = true">
             <ae-icon name="chevron" />
           </div>
         </div>
       </template>
     </Wallet>
+    <Request class="request" v-if="request" />
     <Navigation />
   </div>
 </template>
@@ -152,6 +153,7 @@ import cardFront from '@/components/cardFront'
 import cardBack from '@/components/cardBack'
 import Wallet from '@/layouts/wallet'
 import Header from '@/components/Header'
+import Request from '@/components/Request'
 import {AeIdentityAvatar, AeIcon} from '@aeternity/aepp-components'
 export default {
   components: {
@@ -161,11 +163,13 @@ export default {
     Wallet,
     Header,
     cardFront,
-    cardBack
+    cardBack,
+    Request
   },
   data () {
     return {
-      scan: false
+      scan: false,
+      request: false
     }
   },
   computed: {
@@ -223,5 +227,12 @@ export default {
   .item:last-child {
     border-bottom: 0;
   }
+}
+.request {
+  z-index: 5;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
 }
 </style>

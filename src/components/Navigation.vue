@@ -55,6 +55,7 @@ export default {
 </script>
 <style lang="scss" scoped>
     .footer {
+      z-index: 5;
       display: flex;
       justify-content: space-around;
       align-items: center;

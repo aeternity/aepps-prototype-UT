@@ -17,6 +17,9 @@
       <div class="container">
         <slot name="content" />
       </div>
+      <div class="actions">
+        <slot name="actions" />
+      </div>
     </div>
   </div>
 </template>
@@ -39,6 +42,7 @@ export default {
   .half:nth-child(1) {
     background-color: #d3dce6;
     position: relative;
+    z-index: 2;
     .container {
       width: 90vw;
       margin: 0 auto;
@@ -101,12 +105,20 @@ export default {
   }
   .half:nth-child(2) {
     background-color: #fff;
+    position: relative;
+    z-index: 0;
     .container {
       padding-top: 5vh;
     }
   }
   .title {
     color: #fff;
+  }
+  .actions {
+    position: absolute;
+    bottom: 25vh;
+    left: 0;
+    width: 100%;
   }
 }
 @media (max-width: 340px) {
