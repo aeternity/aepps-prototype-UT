@@ -1,16 +1,12 @@
 <template>
   <div class="transfer-confirm">
     <Header>
-      <template slot="page-name">
-        Transfer
-      </template>
       <template slot="nav">
-        <router-link to="settings">
-          <img src="@/assets/icn/settings.svg" alt="">
-        </router-link>
-        <router-link to="/">
-          <img src="@/assets/icn/list.svg" alt="">
-        </router-link>
+        <div>
+          <router-link to="/account">
+            <ae-icon name="close" type="normal" invert />
+          </router-link>
+        </div>
       </template>
     </Header>
     <div class="container">
@@ -68,7 +64,8 @@
         </div>
         <div class="content">
           <span>
-            {{recipientAddress.slice(0,3)}} {{recipientAddress.slice(3,6)}} {{recipientAddress.slice(6,9)}} ... {{recipientAddress.slice(-6,-3)}}
+            {{recipientAddress.slice(0,3)}} {{recipientAddress.slice(3,6)}} {{recipientAddress.slice(6,9)}} ...
+            {{recipientAddress.slice(-6,-3)}}
             {{recipientAddress.slice(-9,-6)}}
           </span>
         </div>
@@ -94,13 +91,15 @@
     </div>
   </div>
 </template>
+
 <script>
 import Header from '@/components/Header'
-import { AeIdentityAvatar } from '@aeternity/aepp-components'
+import { AeIdentityAvatar, AeIcon } from '@aeternity/aepp-components'
 export default {
   components: {
     Header,
-    AeIdentityAvatar
+    AeIdentityAvatar,
+    AeIcon
   },
   computed: {
     activeAccount: function () {
@@ -119,7 +118,7 @@ export default {
   methods: {
     createTx: function () {
       this.$store.commit('createTransaction')
-      this.$router.push({name: 'favorites'})
+      this.$router.push({name: 'account'})
     }
   }
 }

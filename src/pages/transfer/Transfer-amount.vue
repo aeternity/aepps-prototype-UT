@@ -1,76 +1,91 @@
 <template>
   <div class="transfer-amount">
-    <Header>
-      <template slot="page-name">
-        Transfer
+    <Wallet color=true>
+      <template slot="header">
+        <Header reverse=true>
+          <template slot="nav">
+            <div>
+              <router-link to="/account">
+                <ae-icon name="close" type="dramatic" invert />
+              </router-link>
+            </div>
+          </template>
+        </Header>
       </template>
-      <template slot="nav">
-        <router-link to="settings">
-          <img src="@/assets/icn/settings.svg" alt="">
-        </router-link>
-        <router-link to="/">
-          <img src="@/assets/icn/list.svg" alt="">
-        </router-link>
-      </template>
-    </Header>
-    <div class="container">
-      <h1>
-        Specify the
-        <strong>amount</strong> you want to transfer.
-      </h1>
-      <h1>
-        Your active account is:
-      </h1>
-      <div class="row">
-        <div class="logo">
-          <ae-identity-avatar :address="activeAccount.address"></ae-identity-avatar>
-        </div>
-        <div class="content">
+      <template slot="title">
+        <div>
           <h1>
-            {{activeAccount.name}}
+            Specify the
+            <strong>amount</strong> you want to transfer.
           </h1>
-        </div>
-      </div>
-      <div class="input">
-        <div class="head">
-          <div class="item">
-            <label>
-              Recipient
-            </label>
-          </div>
-          <div class="item">
-            <select name="" id="">
-              <option value="">
-                Select ▾
-              </option>
-            </select>
-          </div>
-        </div>
-        <div class="address-input amount">
-          <input type="number" placeholder="0.00" v-model.number="amount">
-        </div>
-        <div class="actions">
-          <div class="item"></div>
-          <div class="item">
-            <img src="@/assets/icn/paste.svg" alt=""> paste
+          <h1>
+            Your active account is:
+          </h1>
+          <div class="row">
+            <div class="logo">
+              <ae-identity-avatar :address="activeAccount.address"></ae-identity-avatar>
+            </div>
+            <div class="content">
+              <h1>
+                <strong>
+                  {{activeAccount.name}}
+                </strong>
+              </h1>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="action">
+      </template>
+      <template slot="swipers">
+        <div class="container">
+          <div class="input">
+            <div class="head">
+              <div class="item">
+                <label>
+                  Recipient
+                </label>
+              </div>
+              <div class="item">
+                <select name="" id="">
+                  <option value="">
+                    Select ▾
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="address-input amount">
+              <input type="number" placeholder="0.00" v-model.number="amount">
+            </div>
+            <div class="input-actions">
+              <div class="item"></div>
+              <div class="item">
+                <img src="@/assets/icn/paste.svg" alt=""> paste
+              </div>
+            </div>
+          </div>
+        </div>
+      </template>
+      <template slot="actions">
         <router-link to="/transfer-confirm">
           <button @click="setAmount(amount)" :disabled="!amount">NEXT</button>
         </router-link>
-      </div>
-    </div>
+      </template>
+    </Wallet>
+    <Navigation />
   </div>
 </template>
+
 <script>
 import Header from '@/components/Header'
-import { AeIdentityAvatar } from '@aeternity/aepp-components'
+import Navigation from '@/components/Navigation'
+import Wallet from '@/layouts/wallet'
+import { AeIdentityAvatar, AeIcon } from '@aeternity/aepp-components'
 export default {
   components: {
     Header,
-    AeIdentityAvatar
+    AeIdentityAvatar,
+    Navigation,
+    Wallet,
+    AeIcon
   },
   computed: {
     activeAccount: function () {
@@ -158,7 +173,7 @@ export default {
         box-sizing: border-box;
       }
     }
-    .actions {
+    .input-actions {
       background-color: #edf3f7;
       display: flex;
       justify-content: flex-end;
@@ -177,11 +192,7 @@ export default {
       }
     }
   }
-  .action {
-    position: absolute;
-    left: 0;
-    bottom: 5vh;
-    width: 100%;
+  .actions {
     button {
       text-transform: uppercase;
       padding: 21px 0 19px 0;

@@ -1,25 +1,44 @@
 <template>
   <div class="transfer">
-    <div class="container">
-      <div class="step step1" v-if="!isEnterAmountActive">
-        <h1>
-          Choose the
-          <strong>recipient</strong> you want to transfer funds to.
-        </h1>
-        <h1>
-          Your active account is:
-        </h1>
-        <div class="row">
-          <div class="logo">
-            <ae-identity-avatar :address="activeAccount.address"></ae-identity-avatar>
-          </div>
-          <div class="content">
-            <h1>
-              {{activeAccount.name}}
-            </h1>
+    <Wallet color=true>
+      <template slot="header">
+        <Header reverse=true>
+          <template slot="nav">
+            <div>
+              <router-link to="/account">
+                <ae-icon name="close" type="dramatic" invert />
+              </router-link>
+            </div>
+          </template>
+        </Header>
+      </template>
+      <template slot="title">
+        <div class="step step1" v-if="!isEnterAmountActive">
+          <h1>
+            Choose the
+            <strong>recipient</strong> you want to transfer funds to.
+          </h1>
+          <h1>
+            Your active account is:
+          </h1>
+          <div class="row">
+            <div class="logo">
+              <ae-identity-avatar :address="activeAccount.address"></ae-identity-avatar>
+            </div>
+            <div class="content">
+              <h1>
+                <strong>
+                  {{activeAccount.name}}
+                </strong>
+              </h1>
+            </div>
           </div>
         </div>
-        <div class="bottom">
+      </template>
+      <div class="container">
+      </div>
+      <template slot="swipers">
+        <div class="container">
           <div class="input">
             <div class="head">
               <div class="item">
@@ -36,10 +55,10 @@
               </div>
             </div>
             <div class="address-input">
-              <textarea name="" id="" placeholder="Type ak$ address or AENS name, or choose one of your accounts …" v-model="recipientAddress">
-              </textarea>
+              <textarea name="" id="" placeholder="Type ak$ address or AENS name, or choose one of your accounts …"
+                v-model="recipientAddress" />
             </div>
-            <div class="actions">
+            <div class="input-actions">
               <div class="item"></div>
               <div class="item">
                 <img src="@/assets/icn/paste.svg" alt=""> paste
@@ -50,22 +69,29 @@
             </div>
           </div>
         </div>
-        <div class="action">
-          <router-link to="/transfer-amount">
-            <button @click="setAddress(recipientAddress)" :disabled="!recipientAddress">NEXT</button>
-          </router-link>
-        </div>
-      </div>
-    </div>
+      </template>
+      <template slot="actions">
+        <router-link to="/transfer-amount">
+          <button type="dramatic" @click="setAddress(recipientAddress)" :disabled="!recipientAddress">NEXT</button>
+        </router-link>
+      </template>
+    </Wallet>
+    <Navigation />
   </div>
 </template>
+
 <script>
 import Header from '@/components/Header'
-import { AeIdentityAvatar } from '@aeternity/aepp-components'
+import Navigation from '@/components/Navigation'
+import Wallet from '@/layouts/wallet'
+import { AeIdentityAvatar, AeIcon } from '@aeternity/aepp-components'
 export default {
   components: {
     Header,
-    AeIdentityAvatar
+    AeIdentityAvatar,
+    Navigation,
+    Wallet,
+    AeIcon
   },
   computed: {
     activeAccount: function () {
@@ -94,9 +120,6 @@ export default {
   margin: 0 auto;
 }
 .transfer {
-  .header {
-    text-indent: 6vw;
-  }
   h1 {
     color: #203040;
     font-size: 23px;
@@ -155,7 +178,7 @@ export default {
         padding: 25px 16px;
       }
     }
-    .actions {
+    .input-actions {
       background-color: #edf3f7;
       display: flex;
       justify-content: flex-end;
@@ -174,11 +197,7 @@ export default {
       }
     }
   }
-  .action {
-    position: absolute;
-    left: 0;
-    bottom: 5vh;
-    width: 100%;
+  .actions {
     button {
       text-transform: uppercase;
       padding: 21px 0 19px 0;
