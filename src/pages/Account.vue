@@ -56,7 +56,9 @@
             </p>
           </div>
           <div class="action">
-            <ae-icon name="chevron" />
+            <router-link to="/transfer">
+              <ae-icon name="chevron" />
+            </router-link>
           </div>
         </div>
         <div class="item">

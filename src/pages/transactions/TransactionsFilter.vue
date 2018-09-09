@@ -83,14 +83,14 @@
         </div>
         <div class="item box">
           <div class="btn">
-            <a href="#" class="btn__link">
+            <router-link to="/transactions" class="btn__link">
               Apply
-            </a>
+            </router-link>
           </div>
           <div class="btn__inactive">
-            <a href="#" class="btn__inactive__link">
+            <router-link to="/transactions" class="btn__inactive__link">
               Reset
-            </a>
+            </router-link>
           </div>
         </div>
       </div>
