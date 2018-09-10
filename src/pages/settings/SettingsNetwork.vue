@@ -27,7 +27,7 @@
         <div class="radio">
           <radio name="network"></radio>
         </div>
-      </div>  
+      </div>
       </template>
     </Settings>
     <Navigation />

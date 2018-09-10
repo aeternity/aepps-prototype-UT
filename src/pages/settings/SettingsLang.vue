@@ -66,14 +66,12 @@
     </Settings>
     <Navigation />
     <div class="container">
-      
     </div>
   </div>
 </template>
 
 <script>
 import radio from '@/components/Radio'
-import Header from '@/components/Header'
 import Navigation from '@/components/Navigation'
 import Settings from '@/layouts/settings'
 
